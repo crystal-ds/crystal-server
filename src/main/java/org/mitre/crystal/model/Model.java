@@ -1,7 +1,7 @@
 /**
  * POJO implementation of a model
  */
-package com.crystal.model;
+package org.mitre.crystal.model;
 
 import java.util.List;
 import java.util.Map;

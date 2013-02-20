@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.crystal.model;
+package org.mitre.crystal.model;
 
 import java.util.List;
 

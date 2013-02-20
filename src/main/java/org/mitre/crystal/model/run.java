@@ -1,7 +1,7 @@
 /**
  * POJO implementation of a run. A run contains the results of both the EME and the SME.
  */
-package com.crystal.model;
+package org.mitre.crystal.model;
 
 import java.util.HashMap;
 import java.util.Map;

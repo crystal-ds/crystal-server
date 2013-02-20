@@ -12,8 +12,8 @@ import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.SerializerProvider;
+import org.mitre.crystal.model.InputSpecification;
 
-import com.crystal.model.InputSpecification;
 
 /**
  * @author tmlewis
