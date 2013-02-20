@@ -6,6 +6,8 @@ package com.crystal.model;
 import java.util.List;
 import java.util.Map;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 
 
 /**
@@ -16,39 +18,51 @@ public class Model {
 	private String name;
 	private String description;
 	private Long id;
-	private List<Input> inputs;
 	
+	// input name -> input
+	@JsonIgnore
+	private Map<String, InputSpecification> inputs;
 	
-	
-	public Model(String name, String description, Long id, List<Input> inputs) {
-		super();
+	public Model() {
+	}
+
+	public Model(String name, String description, Long id,
+			Map<String, InputSpecification> inputs) {
 		this.name = name;
 		this.description = description;
 		this.id = id;
 		this.inputs = inputs;
 	}
+	
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public List getInputs() {
+
+	public Map<String, InputSpecification> getInputs() {
 		return inputs;
 	}
-	public void setInputs(List<Input> inputs) {
+
+	public void setInputs(Map<String, InputSpecification> inputs) {
 		this.inputs = inputs;
 	}
 
