@@ -14,9 +14,10 @@ import com.google.common.collect.Sets;
  */
 public enum DisplayType {
 
-	SIMPLESLIDER("min", "max", "default"),
+	SIMPLESLIDER("min", "max", "value"),
 	RADIO_BUTTON("checked", "group"),
-	CHECKBOX("checked");	
+	CHECKBOX("checked"),	
+	RANGESLIDER("min", "max", "low","high");
 	
 	private Set<String> propertyNames;
 	

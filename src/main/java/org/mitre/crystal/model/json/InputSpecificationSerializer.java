@@ -36,6 +36,7 @@ public class InputSpecificationSerializer extends JsonSerializer<InputSpecificat
 		for (String prop : properties) {
 			jgen.writeObjectField(prop, value.getProperty(prop));
 		}
+		jgen.writeEndObject();
 		
 	}
 

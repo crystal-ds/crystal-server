@@ -3,17 +3,29 @@
  */
 package org.mitre.crystal.web;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
-
+import org.mitre.crystal.model.BatchJob;
 import org.mitre.crystal.model.InputSpecification;
-import org.mitre.crystal.model.Model;
+import org.mitre.crystal.model.ModelRunInstance;
+import org.mitre.crystal.model.ModelSpecification;
+import org.mitre.crystal.model.ModelRunInputValues;
+import org.mitre.crystal.model.RunGroup;
+import org.mitre.crystal.service.ExploratoryModelEngineServices;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 
 /**
  * @author tmlewis
@@ -23,31 +35,78 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping (value = "/eme")
 public class ExploratoryModelEngine {
 
+	final Logger log = LoggerFactory.getLogger(ExploratoryModelEngine.class);
+	
+	@Autowired 
+	private ExploratoryModelEngineServices service;
 	
 	@RequestMapping(value = "/models", method=RequestMethod.GET, produces="application/json")
-	public @ResponseBody Map<String,Model> getAllModels(){
+	public @ResponseBody Map<Long,ModelSpecification> getAllModels(){
+		log.debug("Request for all Models");
+		
+		List<ModelSpecification> allModels = service.getAllModels();
+		Map<Long, ModelSpecification> nameToModel = new HashMap<Long, ModelSpecification>();
+		
+		for (ModelSpecification model : allModels) {
+			nameToModel.put(model.getId(), model);
+			
+		}
+		return nameToModel;
 		
 	}
+	
 	@RequestMapping(value = "/models/{id}", method=RequestMethod.GET, produces="application/json")
-	public @ResponseBody Model getModel(@PathVariable("id") Long id){
+	public @ResponseBody ModelSpecification getModel(@PathVariable("id") Long id){
+		log.debug("Request for model " + id);
 		
+		ModelSpecification model = service.getModel(id);
+		return model;
+
 	}
 	@RequestMapping(value = "/models/{id}/inputs", method=RequestMethod.GET, produces="application/json")
-	public @ResponseBody InputSpecification getModelInputs(@PathVariable("id")Long id){
+	public @ResponseBody Map<String,InputSpecification> getModelInputs(@PathVariable("id")Long id){
+		log.debug("Request for " + id + "inputs");
+		
+		ModelSpecification model = service.getModel(id);
+		return model.getInputs();
+				
 		
 	}
-	//Should this be getRunID?
-	@RequestMapping(value = "/models/{id}/run", method=RequestMethod.POST, produces="application/json")
-	public @ResponseBody Long startRun(@PathVariable("id") Long id){
+	@RequestMapping(value = "/models/{id}/run", method=RequestMethod.POST, produces="application/json", consumes="application/json")
+	public @ResponseBody runIDview startRun(@PathVariable("id") Long id, @RequestBody ModelRunInputValues vals, Model m){
+		log.debug("Running model " + id);
+		ModelSpecification model = service.getModel(id);
 		
+		BatchJob job = runner.createBatchJob(model, vals);		
+		
+		m.addAttribute("job", job);
+		
+		return "batchJobIdView";
 	}
-	//What does this produce?
 	@RequestMapping(value = "/resultsets/{id}", methond=RequestMethod.HEAD )
-	public HttpServletResponse getSTatus(@PathVariable("id") Long id){
+	public String getStatus(@PathVariable("id") Long id, Model m){
+		log.debug("client is checking on result status " + id);
+		//TODOcreate httpcodeview bean
 		
+		BatchJob job = runner.getBatchJob(id);
+		
+		job.getStatus(); // do something with that
+		
+		m.addAttribute("code", HttpStatus.CONTINUE);
+		
+		return "httpCodeView";
 	}
-	@RequestMapping(value = "/resultsets/{id}", methond=RequestMethod.GET, produces="application/json" )
-	public @ResponseBody RunGroup getModelResults(@PathVariable("id") Long id){
+	@RequestMapping(value = "/resultsets/{id}", method=RequestMethod.GET, produces="application/json" )
+	public @ResponseBody BatchJob getModelResults(@PathVariable("id") Long id){
+		log.debug("client is requesting result set for " + id);
+		//query databse for run ID
+		//format results
+		//respond
+		
+		BatchJob job = runner.getBatchJob(id);
+		
+		return job;
+		
 		
 	}
 	

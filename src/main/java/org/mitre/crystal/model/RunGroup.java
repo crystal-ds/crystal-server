@@ -4,6 +4,7 @@
 package org.mitre.crystal.model;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author tmlewis
@@ -12,8 +13,8 @@ import java.util.List;
 public class RunGroup {
 
 	private long id;
-	private List <run> runs;
-	public RunGroup(long id, List<run> runs) {
+	private List <ModelRunInstance> runs;
+	public RunGroup(long id, List<ModelRunInstance> runs) {
 		super();
 		this.id = id;
 		this.runs = runs;
@@ -24,10 +25,10 @@ public class RunGroup {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public List<run> getRuns() {
+	public List<ModelRunInstance> getRuns() {
 		return runs;
 	}
-	public void setRuns(List<run> runs) {
+	public void setRuns(List<ModelRunInstance> runs) {
 		this.runs = runs;
 	}
 	
