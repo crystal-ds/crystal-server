@@ -16,13 +16,13 @@ import org.mitre.crystal.model.json.InputSpecificationSerializer;
  *
  */
 @JsonSerialize (using = InputSpecificationSerializer.class)
-public class InputSpecification {
+public class ExploratoryModelingInputSpecification {
 	private Long id;
 
 	// unique identifier within a particular model
 	private String name;
 	// Type of displayed widget <slider, text, etc>
-	private InputType type;
+	private ExploratoryModellingInputType type;
 	
 	//name of an input property and it's corresponding value(s)
 	private Map<String,JsonNode> properties;
@@ -33,10 +33,10 @@ public class InputSpecification {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public InputSpecification(){
+	public ExploratoryModelingInputSpecification(){
 		
 	}
-	public InputSpecification(String name, InputType type, Map<String, JsonNode> properties) {
+	public ExploratoryModelingInputSpecification(String name, ExploratoryModellingInputType type, Map<String, JsonNode> properties) {
 		this.name = name;
 		this.type = type;
 		this.properties = properties;
@@ -47,10 +47,10 @@ public class InputSpecification {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public InputType getType() {
+	public ExploratoryModellingInputType getType() {
 		return type;
 	}
-	public void setType(InputType type) {
+	public void setType(ExploratoryModellingInputType type) {
 		this.type = type;
 	}
 

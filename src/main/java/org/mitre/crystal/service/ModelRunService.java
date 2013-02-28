@@ -11,10 +11,10 @@ import org.mitre.crystal.model.ModelRunInputValues;
  * @author tmlewis
  *
  */
-public class BatchJobService {
+public class ModelRunService {
 	
 	
-	public long  createBatchJob(ModelRunInputValues input, long ModelId){
+	public long  createModelRunInstance(ModelRunInputValues input, long ModelId){
 		//generates list of inputs for exploritory mdoeling run
 		//does error checking on inputs
 		//generates unique id for batch job
@@ -22,10 +22,10 @@ public class BatchJobService {
 		//returns Batchjob id
 	
 	}
-	public BatchJob getBatchJob(long batchJobId){
+	public BatchJob getModelRunInstance(long batchJobId){
 		
 	}
-	public BatchJobRunStatus runBatchJob(long batchJobID){
+	public BatchJobRunStatus runModelRunInstance(long batchJobID){
 		
 	}
 	public void deleteBatchJob(long batchJobId){
@@ -33,3 +33,4 @@ public class BatchJobService {
 	}
 
 }
+
