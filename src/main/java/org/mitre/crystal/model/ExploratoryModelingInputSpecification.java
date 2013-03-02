@@ -15,7 +15,7 @@ import org.mitre.crystal.model.json.InputSpecificationSerializer;
  * @author tmlewis
  *
  */
-@JsonSerialize (using = InputSpecificationSerializer.class)
+@JsonSerialize (using = ExploratoryModelingInputSpecificationSerializer.class)
 public class ExploratoryModelingInputSpecification {
 	private Long id;
 
