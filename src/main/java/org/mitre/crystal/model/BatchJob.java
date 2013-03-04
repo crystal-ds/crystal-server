@@ -11,23 +11,27 @@ import java.util.List;
  */
 public class BatchJob {
 
-		private List<ModelRunInputValues> 	inputs;
+
+		private List<ModelRunInstance> 	runs;
 		private long id;
 		BatchJobStatus status;
 		private long modelId;
 		
-		
-		public List<ModelRunInputValues> getInputs() {
-			return inputs;
+		public BatchJob() {
+			
 		}
-		public boolean add(ModelRunInputValues e) {
-			return inputs.add(e);
+
+		public List<ModelRunInstance> getRuns() {
+			return runs;
 		}
-		public ModelRunInputValues remove(int index) {
-			return inputs.remove(index);
+		public boolean addRun(ModelRunInstance e) {
+			return runs.add(e);
 		}
-		public void setInputs(List<ModelRunInputValues> inputs) {
-			this.inputs = inputs;
+		public ModelRunInstance removeRun(int index) {
+			return runs.remove(index);
+		}
+		public void setRuns(List<ModelRunInstance> list) {
+			this.runs = list;
 		}
 		public long getId() {
 			return id;
