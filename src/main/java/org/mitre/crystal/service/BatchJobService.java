@@ -11,6 +11,10 @@ import org.mitre.crystal.model.BatchJobStatus;
 import org.mitre.crystal.model.ExploratoryModelingInputSpecification;
 import org.mitre.crystal.model.ModelRunInputValues;
 import org.mitre.crystal.model.ModelRunInstance;
+import org.mitre.crystal.model.ModelSpecification;
+import org.mitre.crystal.web.ExploratoryModelEngine;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author tmlewis
@@ -18,14 +22,16 @@ import org.mitre.crystal.model.ModelRunInstance;
  */
 public class BatchJobService {
 	
-	
-	public long  createBatchJob(ExploratoryModelingInputSpecification input, long modelId){
+	final Logger log = LoggerFactory.getLogger(BatchJobService.class);
+	public long  createBatchJob(ModelSpecification model, ModelRunInputValues vals){
+		log.debug("Creating Batch Job");
 		BatchJob bj = new BatchJob();
-		bj.setModelId(modelId);
-		bj.setRuns(createInputsForBatchJob(input));
+		bj.setModelId(model.getId());
+		bj.setRuns(createInputsForBatchJob(vals));
 		bj.setStatus(BatchJobStatus.NOT_STARTED);
 		//TODO setID with automagic number from db
 		bj.setId(null);
+		log.info("batch Job created with ID" + bj.getId());
 		return bj.getId();
 	
 	}
@@ -36,26 +42,31 @@ public class BatchJobService {
 		return bj;
 	}
 	public BatchJobStatus runBatchJob(long batchJobID){
+		log.info("Checking status for batch job" + batchJobID);
 		BatchJob bj = getBatchJob(batchJobID);
 		List<ModelRunInstance> runs = bj.getRuns();
 		for (ModelRunInstance run : runs) {
-			//TODO figure out status
+			//TODO figure out how to calculate status
 		}
 
 		return BatchJobStatus.UNKNOWN;
 	}
 		
-	public BatchJobStatus createAndRunBatchJob(ExploratoryModelingInputSpecification input, long modelId){
-		return runBatchJob(createBatchJob(input, modelId));
+	public BatchJobStatus createAndRunBatchJob(ModelSpecification model, ModelRunInputValues input){
+		log.info("create And run BatchJob");
+		return runBatchJob(createBatchJob(model, input));
 		
 	
 	}
 	public void deleteBatchJob(long batchJobId){
+		log.info("removing batch job " + batchJobId); 
 		
 	}
 
-	private List<ModelRunInstance> createInputsForBatchJob(ExploratoryModelingInputSpecification input){
-		//TODO does error checking on inputs
-		//generates list of inputs for exploritory mdoeling run
+	private List<ModelRunInstance> createInputsForBatchJob(ModelRunInputValues input){
+		log.debug("Creating inputs for batch Job");
+		//TODO do error checking on inputs
+		//generates list of Model  for exploritory mdoeling run
+		log.debug("Finished creating inputs for batch job");
 	}
 }

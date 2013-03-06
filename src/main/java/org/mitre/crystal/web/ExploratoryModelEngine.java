@@ -13,6 +13,7 @@ import org.mitre.crystal.model.ModelRunInstance;
 import org.mitre.crystal.model.ModelSpecification;
 import org.mitre.crystal.model.ModelRunInputValues;
 import org.mitre.crystal.model.RunGroup;
+import org.mitre.crystal.service.BatchJobService;
 import org.mitre.crystal.service.ExploratoryModelEngineServices;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +40,9 @@ public class ExploratoryModelEngine {
 	
 	@Autowired 
 	private ExploratoryModelEngineServices service;
+	
+	@Autowired
+	private BatchJobService batchJobService;
 	
 	@RequestMapping(value = "/models", method=RequestMethod.GET, produces="application/json")
 	public @ResponseBody Map<Long,ModelSpecification> getAllModels(){
@@ -77,18 +81,18 @@ public class ExploratoryModelEngine {
 		log.debug("Running model " + id);
 		ModelSpecification model = service.getModel(id);
 		
-		BatchJob job = runner.createBatchJob(model, vals);		
+		BatchJob job = batchJobService.createBatchJob(model, vals);		
 		
 		m.addAttribute("job", job);
 		
 		return "batchJobIdView";
 	}
-	@RequestMapping(value = "/resultsets/{id}", methond=RequestMethod.HEAD )
+	@RequestMapping(value = "/resultsets/{id}", methon=RequestMethod.HEAD )
 	public String getStatus(@PathVariable("id") Long id, Model m){
 		log.debug("client is checking on result status " + id);
 		//TODOcreate httpcodeview bean
 		
-		BatchJob job = runner.getBatchJob(id);
+		BatchJob job = batchJobService.getBatchJob(id);
 		
 		job.getStatus(); // do something with that
 		
