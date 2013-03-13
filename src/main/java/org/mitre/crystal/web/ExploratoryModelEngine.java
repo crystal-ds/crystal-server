@@ -14,7 +14,8 @@ import org.mitre.crystal.model.ModelSpecification;
 import org.mitre.crystal.model.ModelRunInputValues;
 import org.mitre.crystal.model.RunGroup;
 import org.mitre.crystal.service.BatchJobService;
-import org.mitre.crystal.service.ExploratoryModelEngineServices;
+import org.mitre.crystal.service.ExploratoryModelEngineService;
+import org.mitre.crystal.service.ModelService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class ExploratoryModelEngine {
 	final Logger log = LoggerFactory.getLogger(ExploratoryModelEngine.class);
 	
 	@Autowired 
-	private ExploratoryModelEngineServices service;
+	private ModelService service;
 	
 	@Autowired
 	private BatchJobService batchJobService;
@@ -60,7 +61,7 @@ public class ExploratoryModelEngine {
 	}
 	
 	@RequestMapping(value = "/models/{id}", method=RequestMethod.GET, produces="application/json")
-	public @ResponseBody ModelSpecification getModel(@PathVariable("id") Long id){
+	public @ResponseBody ModelSpecification getModel(@PathVariable("id") long id){
 		log.debug("Request for model " + id);
 		
 		ModelSpecification model = service.getModel(id);
@@ -68,7 +69,7 @@ public class ExploratoryModelEngine {
 
 	}
 	@RequestMapping(value = "/models/{id}/inputs", method=RequestMethod.GET, produces="application/json")
-	public @ResponseBody Map<String,InputSpecification> getModelInputs(@PathVariable("id")Long id){
+	public @ResponseBody Map<String,InputSpecification> getModelInputs(@PathVariable("id")long id){
 		log.debug("Request for " + id + "inputs");
 		
 		ModelSpecification model = service.getModel(id);
@@ -77,18 +78,18 @@ public class ExploratoryModelEngine {
 		
 	}
 	@RequestMapping(value = "/models/{id}/run", method=RequestMethod.POST, produces="application/json", consumes="application/json")
-	public @ResponseBody runIDview startRun(@PathVariable("id") Long id, @RequestBody ModelRunInputValues vals, Model m){
+	public @ResponseBody runIDview startRun(@PathVariable("id") long id, @RequestBody ModelRunInputValues vals, Model m){
 		log.debug("Running model " + id);
 		ModelSpecification model = service.getModel(id);
 		
-		BatchJob job = batchJobService.createBatchJob(model, vals);		
+		long job = batchJobService.createBatchJob(model, vals);		
 		
 		m.addAttribute("job", job);
 		
 		return "batchJobIdView";
 	}
-	@RequestMapping(value = "/resultsets/{id}", methon=RequestMethod.HEAD )
-	public String getStatus(@PathVariable("id") Long id, Model m){
+	@RequestMapping(value = "/resultsets/{id}", method=RequestMethod.HEAD )
+	public String getStatus(@PathVariable("id") long id, Model m){
 		log.debug("client is checking on result status " + id);
 		//TODOcreate httpcodeview bean
 		
@@ -101,15 +102,16 @@ public class ExploratoryModelEngine {
 		return "httpCodeView";
 	}
 	@RequestMapping(value = "/resultsets/{id}", method=RequestMethod.GET, produces="application/json" )
-	public @ResponseBody BatchJob getModelResults(@PathVariable("id") Long id){
+	public @ResponseBody BatchJob getModelResults(@PathVariable("id") long id){
 		log.debug("client is requesting result set for " + id);
-		//query databse for run ID
+		//query database for run ID
 		//format results
 		//respond
 		
-		BatchJob job = runner.getBatchJob(id);
+		BatchJob job = batchJobService.getBatchJob(id);
 		
-		return job;
+		//TODO how to I convert from a batchjob status to a response?
+		//return job;
 		
 		
 	}

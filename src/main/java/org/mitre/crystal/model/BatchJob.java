@@ -11,6 +11,7 @@ import java.util.List;
  */
 public class BatchJob {
 
+		//TODO Database integration
 
 		private List<ModelRunInstance> 	runs;
 		private long id;

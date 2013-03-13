@@ -14,7 +14,10 @@ import org.codehaus.jackson.annotate.JsonIgnore;
  * @author tmlewis
  *
  */
-public class ModelSpecification {
+public abstract class ModelSpecification {
+	
+	//TODO Add Models and integrate with database
+	
 	private String name;
 	private String description;
 	private Long id;
@@ -63,6 +66,7 @@ public class ModelSpecification {
 	public void setInputs(Map<String, InputSpecification> inputs) {
 		this.inputs = inputs;
 	}
+	public abstract void run(ModelRunInstance mri);
 
 	
 }

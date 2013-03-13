@@ -10,6 +10,8 @@ package org.mitre.crystal.model;
  */
 public class ModelRunInstance {
 	
+	//TODO Database Integration
+	
 	private Long runId;
 	private Long modelid;
 	private Long batchId;

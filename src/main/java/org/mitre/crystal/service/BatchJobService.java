@@ -22,6 +22,8 @@ import org.slf4j.LoggerFactory;
  */
 public class BatchJobService {
 	
+	//TODO Database integration
+	
 	final Logger log = LoggerFactory.getLogger(BatchJobService.class);
 	public long  createBatchJob(ModelSpecification model, ModelRunInputValues vals){
 		log.debug("Creating Batch Job");
@@ -68,5 +70,6 @@ public class BatchJobService {
 		//TODO do error checking on inputs
 		//generates list of Model  for exploritory mdoeling run
 		log.debug("Finished creating inputs for batch job");
+		return null;
 	}
 }

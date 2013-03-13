@@ -19,13 +19,15 @@ import org.mitre.crystal.model.ModelSpecification;
  */
 public class ModelService {
 	
+	//TODO database integration
+	
 	public Long createModel(String name, String description, Map inputs){
 		
-		//stores in database for later reterical
+		//stores in database for later
 
 	
 	}
-	public ModelSpecification getModel(){
+	public ModelSpecification getModel(long id){
 		
 	}
 	public void removeModel(){
