@@ -3,7 +3,6 @@
  */
 package org.mitre.crystal.model;
 
-import java.util.List;
 import java.util.Map;
 
 import org.codehaus.jackson.annotate.JsonIgnore;

@@ -4,8 +4,6 @@
 package org.mitre.crystal.model.json;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.codehaus.jackson.JsonGenerator;
