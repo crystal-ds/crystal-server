@@ -43,6 +43,7 @@ public class httpCodeView extends AbstractView {
 			
 				
 		default:
+			response.setStatus(HttpStatus.NO_CONTENT.value());
 			break;
 		}
 
