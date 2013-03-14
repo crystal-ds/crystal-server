@@ -13,6 +13,7 @@ import org.mitre.crystal.model.ModelRunInputValues;
 import org.mitre.crystal.model.ModelSpecification;
 import org.mitre.crystal.service.BatchJobService;
 import org.mitre.crystal.service.ModelService;
+import org.mitre.crystal.web.view.runIDview;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,7 +82,7 @@ public class ExploratoryModelEngine {
 		
 		long job = batchJobService.createBatchJob(model, vals);		
 		
-		m.addAttribute("job", job);
+		m.addAttribute("batchjob", job);
 		
 		return "batchJobIdView";
 	}
