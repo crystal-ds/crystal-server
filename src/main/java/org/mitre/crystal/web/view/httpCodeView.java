@@ -8,14 +8,15 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.codehaus.jackson.node.JsonNodeFactory;
-import org.codehaus.jackson.node.ObjectNode;
+import org.mitre.crystal.model.BatchJobStatus;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.view.AbstractView;
+
 /**
  * @author tmlewis
  *
  */
-public class runIDview extends AbstractView{
+public class httpCodeView extends AbstractView {
 
 	/* (non-Javadoc)
 	 * @see org.springframework.web.servlet.view.AbstractView#renderMergedOutputModel(java.util.Map, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
@@ -25,10 +26,26 @@ public class runIDview extends AbstractView{
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
-		ObjectNode on = new ObjectNode(JsonNodeFactory.instance);
-		on.put("batchjob", (Long) model.get("batchJob") );
-	
-		response.getWriter().write(on.toString());
+		BatchJobStatus status = (BatchJobStatus) model.get("status");
+		switch (status) {
+		case UNKNOWN:
+			response.setStatus(HttpStatus.NOT_FOUND.value());
+			break;
+		case RUNNING:
+				response.setStatus(HttpStatus.PROCESSING.value());
+				break;
+		case COMPLETED:
+				response.setStatus(HttpStatus.OK.value());
+				break;
+		case NOT_STARTED:
+				response.setStatus(HttpStatus.FOUND.value());
+				break;
+			
+				
+		default:
+			break;
+		}
+
 	}
 
 }

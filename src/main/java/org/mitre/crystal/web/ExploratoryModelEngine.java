@@ -92,10 +92,8 @@ public class ExploratoryModelEngine {
 		//TODOcreate httpcodeview bean
 		
 		BatchJob job = batchJobService.getBatchJob(id);
-		
-		job.getStatus(); // do something with that
-		
-		m.addAttribute("code", HttpStatus.CONTINUE);
+			
+		m.addAttribute("Status", job.getStatus());
 		
 		return "httpCodeView";
 	}
@@ -108,8 +106,8 @@ public class ExploratoryModelEngine {
 		
 		BatchJob job = batchJobService.getBatchJob(id);
 		
-		//TODO how to I convert from a batchjob status to a response?
-		//return job;
+		
+		return job;
 		
 		
 	}
