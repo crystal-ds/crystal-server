@@ -12,7 +12,7 @@ import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.SerializerProvider;
-import org.mitre.crystal.model.ExploratoryModelingInputSpecification;
+import org.mitre.crystal.model.ExploratoryModelingInputNode;
 
 
 
@@ -20,13 +20,13 @@ import org.mitre.crystal.model.ExploratoryModelingInputSpecification;
  * @author tmlewis
  *
  */
-public class ExploratoryModelingInputSpecificationSerializer extends JsonSerializer<ExploratoryModelingInputSpecification>{
+public class ExploratoryModelingInputSpecificationSerializer extends JsonSerializer<ExploratoryModelingInputNode>{
 
 	/* (non-Javadoc)
 	 * @see org.codehaus.jackson.map.JsonSerializer#serialize(java.lang.Object, org.codehaus.jackson.JsonGenerator, org.codehaus.jackson.map.SerializerProvider)
 	 */
 	@Override
-	public void serialize(ExploratoryModelingInputSpecification value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonProcessingException {
+	public void serialize(ExploratoryModelingInputNode value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonProcessingException {
 		
 		jgen.writeStartObject();
 		jgen.writeStringField("name", value.getName());

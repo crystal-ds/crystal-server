@@ -8,16 +8,16 @@ import java.util.Map;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.mitre.crystal.model.json.InputSpecificationSerializer;
-import org.mitre.crystal.model.json.ExploratoryModelingInputSpecificationSerializer;
+import org.mitre.crystal.model.json.InputNodeSerializer;
+import org.mitre.crystal.model.json.ExploratoryModelingInputNodeSerializer;
 
 
 /**
  * @author tmlewis
  *
  */
-@JsonSerialize (using = ExploratoryModelingInputSpecificationSerializer.class)
-public class ExploratoryModelingInputSpecification {
+@JsonSerialize (using = ExploratoryModelingInputNodeSerializer.class)
+public class ExploratoryModelingInputNode {
 	private Long id;
 
 	// unique identifier within a particular model
@@ -34,10 +34,10 @@ public class ExploratoryModelingInputSpecification {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public ExploratoryModelingInputSpecification(){
+	public ExploratoryModelingInputNode(){
 		
 	}
-	public ExploratoryModelingInputSpecification(String name, ExploratoryModellingInputType type, Map<String, JsonNode> properties) {
+	public ExploratoryModelingInputNode(String name, ExploratoryModellingInputType type, Map<String, JsonNode> properties) {
 		this.name = name;
 		this.type = type;
 		this.properties = properties;

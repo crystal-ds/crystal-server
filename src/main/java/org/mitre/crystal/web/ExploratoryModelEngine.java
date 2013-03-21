@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.mitre.crystal.model.BatchJob;
-import org.mitre.crystal.model.InputSpecification;
+import org.mitre.crystal.model.InputNode;
 import org.mitre.crystal.model.ModelRunInputValues;
 import org.mitre.crystal.model.ModelSpecification;
 import org.mitre.crystal.service.BatchJobService;
@@ -67,7 +67,7 @@ public class ExploratoryModelEngine {
 
 	}
 	@RequestMapping(value = "/models/{id}/inputs", method=RequestMethod.GET, produces="application/json")
-	public @ResponseBody Map<String,InputSpecification> getModelInputs(@PathVariable("id")long id){
+	public @ResponseBody Map<String,InputNode> getModelInputs(@PathVariable("id")long id){
 		log.debug("Request for " + id + "inputs");
 		
 		ModelSpecification model = service.getModel(id);

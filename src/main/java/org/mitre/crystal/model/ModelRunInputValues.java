@@ -13,5 +13,13 @@ import org.codehaus.jackson.JsonNode;
  */
 public class ModelRunInputValues {
 	private Map<String, JsonNode> inputs;
+
+	public Map<String, JsonNode> getInputs() {
+		return inputs;
+	}
+
+	public void setInputs(Map<String, JsonNode> inputs) {
+		this.inputs = inputs;
+	}
 	
 }

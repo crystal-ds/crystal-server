@@ -21,16 +21,17 @@ public abstract class ModelSpecification {
 	private String description;
 	private Long id;
 	@JsonIgnore
-	private Map<String, InputSpecification> inputs;
+	private Map<String, InputNode> inputs;
 	
 	public ModelSpecification() {
 	}
 
 	public ModelSpecification(String name, String description, Long id,
-			Map<String, InputSpecification> inputs) {
+			Map<String, InputNode> inputs) {
 		this.name = name;
 		this.description = description;
 		this.id = id;
+		
 		this.inputs = inputs;
 	}
 	
@@ -58,11 +59,11 @@ public abstract class ModelSpecification {
 		this.id = id;
 	}
 
-	public Map<String, InputSpecification> getInputs() {
+	public Map<String, InputNode> getInputs() {
 		return inputs;
 	}
 
-	public void setInputs(Map<String, InputSpecification> inputs) {
+	public void setInputs(Map<String, InputNode> inputs) {
 		this.inputs = inputs;
 	}
 	public abstract void run(ModelRunInstance mri);

@@ -24,7 +24,7 @@ public class runIDview extends AbstractView{
 	protected void renderMergedOutputModel(Map<String, Object> model,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		
+		//TODO should this be it's own seriallizer?
 		ObjectNode on = new ObjectNode(JsonNodeFactory.instance);
 		on.put("batchjob", (Long) model.get("batchJob") );
 	

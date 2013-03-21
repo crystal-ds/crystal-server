@@ -17,7 +17,7 @@ import org.mitre.crystal.model.InputNode;
  * @author tmlewis
  *
  */
-public class InputSpecificationSerializer extends JsonSerializer<InputNode>{
+public class InputNodeSerializer extends JsonSerializer<InputNode>{
 
 	/* (non-Javadoc)
 	 * @see org.codehaus.jackson.map.JsonSerializer#serialize(java.lang.Object, org.codehaus.jackson.JsonGenerator, org.codehaus.jackson.map.SerializerProvider)

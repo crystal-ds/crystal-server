@@ -23,9 +23,11 @@ public class ModelService {
 	
 	}
 	public ModelSpecification getModel(long id){
+		//TODO reterive model from database
 		
 	}
 	public void removeModel(){
+		//Remove a model from 
 		
 	}
 	

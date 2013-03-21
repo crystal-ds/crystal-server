@@ -3,12 +3,13 @@
  */
 package org.mitre.crystal.model;
 
+
 /**
  * @author tmlewis
  *
  */
 public class Converter {
-	ExploratoryModelingInputSpecification InputSpecToExploratoryModelingSpec(InputSpecification is){
+	ExploratoryModelingInputNode InputSpecToExploratoryModelingSpec(InputNode is){
 		
 		//TODO Converts from EM InSpec --> InSpec
 		
@@ -20,7 +21,7 @@ public class Converter {
 	
 	
 	
-InputSpecification ExploratoryModelingSpecToInputSpec(ExploratoryModelingInputSpecification is){
+InputNode ExploratoryModelingSpecToInputSpec(ExploratoryModelingInputNode is){
 		
 		//TODO Converts from InSpec --> EM InSpec
 		
