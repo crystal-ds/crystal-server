@@ -13,7 +13,7 @@ import org.mitre.crystal.model.ModelRunInputValues;
 import org.mitre.crystal.model.ModelSpecification;
 import org.mitre.crystal.service.BatchJobService;
 import org.mitre.crystal.service.ModelService;
-import org.mitre.crystal.web.view.runIDview;
+import org.mitre.crystal.web.view.batchJobIDview;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +76,7 @@ public class ExploratoryModelEngine {
 		
 	}
 	@RequestMapping(value = "/models/{id}/run", method=RequestMethod.POST, produces="application/json", consumes="application/json")
-	public @ResponseBody runIDview startRun(@PathVariable("id") long id, @RequestBody ModelRunInputValues vals, Model m){
+	public String startRun(@PathVariable("id") long id, @RequestBody ModelRunInputValues vals, Model m){
 		log.debug("Running model " + id);
 		ModelSpecification model = service.getModel(id);
 		

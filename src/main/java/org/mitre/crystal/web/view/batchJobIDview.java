@@ -15,7 +15,7 @@ import org.springframework.web.servlet.view.AbstractView;
  * @author tmlewis
  *
  */
-public class runIDview extends AbstractView{
+public class batchJobIDview extends AbstractView{
 
 	/* (non-Javadoc)
 	 * @see org.springframework.web.servlet.view.AbstractView#renderMergedOutputModel(java.util.Map, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
