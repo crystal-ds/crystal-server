@@ -5,52 +5,82 @@ package org.mitre.crystal.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 /**
  * @author tmlewis
  *
  */
+@Entity
+@Table(name = "batch_job")
 public class BatchJob {
 
 		
-
-		private List<ModelRunInstance> 	runs;
-		private long id;
-		BatchJobStatus status;
-		private long modelId;
+	
+		private List<ModelRunInstance> 	instances;
+		private Long id;
+		private BatchJobStatus status;
+		private ModelSpecification model;
 		
 		public BatchJob() {
 			
 		}
 
-		public List<ModelRunInstance> getRuns() {
-			return runs;
+		@OneToMany(mappedBy = "batch_id")
+		public List<ModelRunInstance> getInstances() {
+			return instances;
 		}
-		public boolean addRun(ModelRunInstance e) {
-			return runs.add(e);
+
+
+		public void setInstances(List<ModelRunInstance> instances) {
+			this.instances = instances;
 		}
-		public ModelRunInstance removeRun(int index) {
-			return runs.remove(index);
-		}
-		public void setRuns(List<ModelRunInstance> list) {
-			this.runs = list;
-		}
-		public long getId() {
-			return id;
-		}
+
+
 		public void setId(Long id) {
 			this.id = id;
 		}
+
+
+		@Id
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
+		@Column (name = "id")
+		
+		public Long getId() {
+			return id;
+		}
+
+		@Enumerated (EnumType.STRING)
+		@Column(name = "status")
 		public BatchJobStatus getStatus() {
 			return status;
 		}
 		public void setStatus(BatchJobStatus status) {
 			this.status = status;
 		}
-		public long getModelId() {
-			return modelId;
+
+		@ManyToOne 
+		@JoinColumn (name = "model_id")
+		public ModelSpecification getModel() {
+			return model;
 		}
-		public void setModelId(Long modelId) {
-			this.modelId = modelId;
+
+		/**
+		 * @param model
+		 */
+		public void setModel(ModelSpecification model) {
+			this.model = model;
+			
 		}
 
 		

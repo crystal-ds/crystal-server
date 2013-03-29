@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.codehaus.jackson.node.JsonNodeFactory;
 import org.codehaus.jackson.node.ObjectNode;
+import org.mitre.crystal.model.BatchJob;
 import org.springframework.web.servlet.view.AbstractView;
 /**
  * @author tmlewis
@@ -24,9 +25,10 @@ public class batchJobIDview extends AbstractView{
 	protected void renderMergedOutputModel(Map<String, Object> model,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		//TODO should this be it's own seriallizer?
+		
 		ObjectNode on = new ObjectNode(JsonNodeFactory.instance);
-		on.put("batchjob", (Long) model.get("batchJob") );
+		BatchJob batchJob = (BatchJob) model.get("batchJob");
+		on.put("batchjob",  batchJob.getId() );
 	
 		response.getWriter().write(on.toString());
 	}

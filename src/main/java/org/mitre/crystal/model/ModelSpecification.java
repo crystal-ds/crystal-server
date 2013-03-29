@@ -5,6 +5,14 @@ package org.mitre.crystal.model;
 
 import java.util.Map;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 
@@ -13,9 +21,11 @@ import org.codehaus.jackson.annotate.JsonIgnore;
  * @author tmlewis
  *
  */
+@Entity
+@Table(name = "models")
 public abstract class ModelSpecification {
 	
-	//TODO Add Models and integrate with database
+	
 	
 	private String name;
 	private String description;
@@ -34,7 +44,7 @@ public abstract class ModelSpecification {
 		
 		this.inputs = inputs;
 	}
-	
+	@Column(name = "name")
 	public String getName() {
 		return name;
 	}
@@ -43,6 +53,7 @@ public abstract class ModelSpecification {
 		this.name = name;
 	}
 
+	@Column(name = "Description")
 	public String getDescription() {
 		return description;
 	}
@@ -51,6 +62,9 @@ public abstract class ModelSpecification {
 		this.description = description;
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column (name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -58,7 +72,8 @@ public abstract class ModelSpecification {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	@ElementCollection
+	@Column (name = "inputs")
 	public Map<String, InputNode> getInputs() {
 		return inputs;
 	}
@@ -66,6 +81,8 @@ public abstract class ModelSpecification {
 	public void setInputs(Map<String, InputNode> inputs) {
 		this.inputs = inputs;
 	}
+	
+	//TODO do I store this?
 	public abstract void run(ModelRunInstance mri);
 
 	

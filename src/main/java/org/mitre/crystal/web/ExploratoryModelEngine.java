@@ -13,11 +13,9 @@ import org.mitre.crystal.model.ModelRunInputValues;
 import org.mitre.crystal.model.ModelSpecification;
 import org.mitre.crystal.service.BatchJobService;
 import org.mitre.crystal.service.ModelService;
-import org.mitre.crystal.web.view.batchJobIDview;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -80,7 +78,7 @@ public class ExploratoryModelEngine {
 		log.debug("Running model " + id);
 		ModelSpecification model = service.getModel(id);
 		
-		long job = batchJobService.createBatchJob(model, vals);		
+		BatchJob job = batchJobService.createBatchJob(model, vals);		
 		
 		m.addAttribute("batchjob", job);
 		
