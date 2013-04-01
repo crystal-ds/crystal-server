@@ -26,15 +26,22 @@ public class ModelRunInstance {
 	
 	
 	private Long runId;
+	private Long id;
 	private ModelSpecification model;
 	
 	private ModelRunInputValues inputValues;
 	private ModelRunOutputValues outputValues;
 	
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column (name = "id")
+	@Column(name = "id")
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	@Column (name = "batch_id")
 	public Long getRunId() {
 		return runId;
 	}
@@ -64,9 +71,9 @@ public class ModelRunInstance {
 	 */
 	@ManyToOne 
 	@JoinColumn (name = "model_id")
-	public ModelSpecification getModel() {
-		return model;
-	}
+//	public ModelSpecification getModel() {
+//		return model;
+//	}
 	/**
 	 * @param model the model to set
 	 */
