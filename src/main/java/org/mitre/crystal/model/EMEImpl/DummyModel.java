@@ -16,6 +16,7 @@ import org.mitre.crystal.model.InputType;
 import org.mitre.crystal.model.ModelRunInstance;
 import org.mitre.crystal.model.ModelRunOutputValues;
 import org.mitre.crystal.model.ModelSpecification;
+import org.mitre.crystal.model.ModelSpecificationData;
 
 /**
  * @author tmlewis
@@ -24,33 +25,26 @@ import org.mitre.crystal.model.ModelSpecification;
 public class DummyModel extends ModelSpecification {
 
 	/* (non-Javadoc)
-	 * @see org.mitre.crystal.model.ModelSpecification#run(org.mitre.crystal.model.ModelRunInstance)
+	 * @see org.mitre.crystal.model.ModelSpecificationData#run(org.mitre.crystal.model.ModelRunInstance)
 	 */
 	
 	public DummyModel(){
-		init();
+	//	init();
 		
 	}
 	
 	
 	@Override
-	public  void run(ModelRunInstance mri) {
+	public  void runModel(ModelRunInstance mri) {
 		ModelRunOutputValues outputValues = new ModelRunOutputValues();
 		ObjectMapper mapper = new ObjectMapper();
 		ObjectNode on = mapper.createObjectNode();
 		for(int i = 0; i< 100; i++){
 			on.put("Value" + i , i);
 		}
-		HashMap<String, JsonNode> outputs = new HashMap<String, JsonNode>();
-		try {
-			outputs.put("Outputs", mapper.readTree(on.toString()));
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		HashMap<String, String> outputs = new HashMap<String, String>();
+			outputs.put("Outputs", on.toString());
+	
 		outputValues.setOutputs(outputs);
 	}
 

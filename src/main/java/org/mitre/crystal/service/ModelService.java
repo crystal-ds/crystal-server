@@ -6,6 +6,7 @@ package org.mitre.crystal.service;
 import java.util.List;
 
 import org.mitre.crystal.model.ModelSpecification;
+import org.mitre.crystal.model.ModelSpecificationData;
 
 /**
  * @author tmlewis

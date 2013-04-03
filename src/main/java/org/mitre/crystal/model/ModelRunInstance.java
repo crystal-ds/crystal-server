@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -20,12 +21,12 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "model_runs")
+@Table(name = "model_run_instance")
 public class ModelRunInstance {
 	
 	
 	
-	private Long runId;
+	//private Long runId;
 	private Long id;
 	private ModelSpecification model;
 	
@@ -41,25 +42,24 @@ public class ModelRunInstance {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	@Column (name = "batch_id")
-	public Long getRunId() {
-		return runId;
-	}
-	public void setRunId(Long runId) {
-		this.runId = runId;
-	}
-	@Basic
-	@Column(name = "input_values")
-	@JoinColumn(name = "id")
+//	@Column (name = "batch_id")
+//	public Long getRunId() {
+//		return runId;
+//	}
+//	public void setRunId(Long runId) {
+//		this.runId = runId;
+//	}
+	@OneToOne
+	@JoinColumn(name = "input_value_id")
 	public ModelRunInputValues getInputValues() {
 		return inputValues;
 	}
 	public void setInputValues(ModelRunInputValues inputValues) {
 		this.inputValues = inputValues;
 	}
-	@Basic
-	@Column(name = "output_values")
-	@JoinColumn(name = "id")
+
+	@OneToOne
+	@JoinColumn(name = "output_value_id")
 	public ModelRunOutputValues getOutputValues() {
 		return outputValues;
 	}
@@ -69,11 +69,12 @@ public class ModelRunInstance {
 	/**
 	 * @return the model
 	 */
-	@ManyToOne 
-	@JoinColumn (name = "model_id")
-//	public ModelSpecification getModel() {
-//		return model;
-//	}
+	//TODO figure out how to link the model
+//	@ManyToOne 
+//	@JoinColumn (name = "model_id")
+////	public ModelSpecificationData getModel() {
+////		return model;
+////	}
 	/**
 	 * @param model the model to set
 	 */

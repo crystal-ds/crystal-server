@@ -11,6 +11,7 @@ import org.mitre.crystal.model.BatchJobStatus;
 import org.mitre.crystal.model.ModelRunInputValues;
 import org.mitre.crystal.model.ModelRunInstance;
 import org.mitre.crystal.model.ModelSpecification;
+import org.mitre.crystal.model.ModelSpecificationData;
 import org.mitre.crystal.repository.BatchJobRepository;
 import org.mitre.crystal.service.BatchJobService;
 import org.mitre.crystal.service.ModelService;
@@ -37,7 +38,7 @@ public class BatchJobServiceImpl implements BatchJobService {
 	
 	final Logger log = LoggerFactory.getLogger(BatchJobServiceImpl.class);
 	/* (non-Javadoc)
-	 * @see org.mitre.crystal.service.BatchJobInterface#createBatchJob(org.mitre.crystal.model.ModelSpecification, org.mitre.crystal.model.ModelRunInputValues)
+	 * @see org.mitre.crystal.service.BatchJobInterface#createBatchJob(org.mitre.crystal.model.ModelSpecificationData, org.mitre.crystal.model.ModelRunInputValues)
 	 */
 	@Override
 	public BatchJob createBatchJob(ModelSpecification model, ModelRunInputValues vals){
@@ -82,7 +83,7 @@ public class BatchJobServiceImpl implements BatchJobService {
 		for (ModelRunInstance run : runs) {
 			//TODO figure out how to calculate status
 			ModelSpecification m = bj.getModel();
-			m.run(run);
+			m.runModel(run);
 		
 		}
 		//TODO figure out status
@@ -90,7 +91,7 @@ public class BatchJobServiceImpl implements BatchJobService {
 	}
 		
 	/* (non-Javadoc)
-	 * @see org.mitre.crystal.service.BatchJobInterface#createAndRunBatchJob(org.mitre.crystal.model.ModelSpecification, org.mitre.crystal.model.ModelRunInputValues)
+	 * @see org.mitre.crystal.service.BatchJobInterface#createAndRunBatchJob(org.mitre.crystal.model.ModelSpecificationData, org.mitre.crystal.model.ModelRunInputValues)
 	 */
 	@Override
 	public BatchJobStatus createAndRunBatchJob(ModelSpecification model, ModelRunInputValues input){

@@ -7,8 +7,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.mitre.crystal.model.ModelSpecification;
+import org.mitre.crystal.model.ModelSpecificationData;
 import org.mitre.crystal.service.ModelService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,8 +58,7 @@ public class JPAModelRepository implements ModelService {
 	 */
 	@Override
 	public List<ModelSpecification> getAllModels() {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<ModelSpecification> query = manager.createNamedQuery("ModelSpecification.getAll", ModelSpecification.class);
+		return query.getResultList();
 	}
-
 }

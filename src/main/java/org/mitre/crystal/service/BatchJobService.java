@@ -7,6 +7,7 @@ import org.mitre.crystal.model.BatchJob;
 import org.mitre.crystal.model.BatchJobStatus;
 import org.mitre.crystal.model.ModelRunInputValues;
 import org.mitre.crystal.model.ModelSpecification;
+import org.mitre.crystal.model.ModelSpecificationData;
 
 /**
  * @author tmlewis

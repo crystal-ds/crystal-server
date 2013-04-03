@@ -4,10 +4,9 @@
 package org.mitre.crystal.service.impl;
 
 import java.util.List;
-import java.util.Map;
 
-import org.mitre.crystal.model.InputNode;
 import org.mitre.crystal.model.ModelSpecification;
+import org.mitre.crystal.model.ModelSpecificationData;
 import org.mitre.crystal.repository.ModelRepository;
 import org.mitre.crystal.service.ModelService;
 
@@ -37,7 +36,7 @@ public class ModelServiceImpl implements ModelService {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.mitre.crystal.service.ModelService#removeModel(org.mitre.crystal.model.ModelSpecification)
+	 * @see org.mitre.crystal.service.ModelService#removeModel(org.mitre.crystal.model.ModelSpecificationData)
 	 */
 	@Override
 	public void removeModel(ModelSpecification modelSpec) {

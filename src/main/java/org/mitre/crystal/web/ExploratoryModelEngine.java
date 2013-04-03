@@ -11,6 +11,7 @@ import org.mitre.crystal.model.BatchJob;
 import org.mitre.crystal.model.InputNode;
 import org.mitre.crystal.model.ModelRunInputValues;
 import org.mitre.crystal.model.ModelSpecification;
+import org.mitre.crystal.model.ModelSpecificationData;
 import org.mitre.crystal.service.BatchJobService;
 import org.mitre.crystal.service.ModelService;
 import org.slf4j.Logger;
@@ -65,7 +66,7 @@ public class ExploratoryModelEngine {
 
 	}
 	@RequestMapping(value = "/models/{id}/inputs", method=RequestMethod.GET, produces="application/json")
-	public @ResponseBody Map<String,InputNode> getModelInputs(@PathVariable("id")long id){
+	public @ResponseBody List<InputNode> getModelInputs(@PathVariable("id")long id){
 		log.debug("Request for " + id + "inputs");
 		
 		ModelSpecification model = service.getModel(id);
