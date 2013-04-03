@@ -8,7 +8,6 @@ import java.util.Map;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.mitre.crystal.model.json.InputNodeSerializer;
 import org.mitre.crystal.model.json.ExploratoryModelingInputNodeSerializer;
 
 

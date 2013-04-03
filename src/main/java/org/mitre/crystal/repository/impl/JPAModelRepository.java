@@ -10,7 +10,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import org.mitre.crystal.model.ModelSpecification;
-import org.mitre.crystal.model.ModelSpecificationData;
 import org.mitre.crystal.service.ModelService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

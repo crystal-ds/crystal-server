@@ -11,9 +11,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.node.ObjectNode;
 import org.mitre.crystal.model.InputNode;
 import org.mitre.crystal.model.ModelRunInputValues;
 import org.mitre.crystal.model.ModelSpecification;
@@ -38,15 +35,15 @@ public class DummyDiversifier implements InputDiversifier {
 		List<InputNode> inputs = model.getInputs();
 		//go over all the inputs
 		for (Iterator<InputNode> iterator = inputs.iterator(); iterator.hasNext();) {
-			InputNode inputNode = (InputNode) iterator.next();
+			InputNode inputNode = iterator.next();
 			Map<String, String> prop = inputNode.getProperties();
 			Set<Entry<String,String>> s = prop.entrySet();
 			//go over all the properties for each input
-			Map m = new HashMap();
+			Map<String, String> m = new HashMap<String, String>();
 			for (Iterator<Entry<String, String>> iterator2 = s.iterator(); iterator2.hasNext();) {
-				Entry<String, String> entry = (Entry<String, String>) iterator2
+				Entry<String, String> entry = iterator2
 						.next();
-				m.put(entry.getKey(), entry.getValue() +1);
+				m.put(entry.getKey(), entry.getValue() +i);
 
 				
 			}

@@ -16,8 +16,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.JsonNode;
-
 /**
  * @author tmlewis
  *

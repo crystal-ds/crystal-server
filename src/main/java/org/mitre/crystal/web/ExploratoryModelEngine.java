@@ -11,7 +11,6 @@ import org.mitre.crystal.model.BatchJob;
 import org.mitre.crystal.model.InputNode;
 import org.mitre.crystal.model.ModelRunInputValues;
 import org.mitre.crystal.model.ModelSpecification;
-import org.mitre.crystal.model.ModelSpecificationData;
 import org.mitre.crystal.service.BatchJobService;
 import org.mitre.crystal.service.ModelService;
 import org.slf4j.Logger;

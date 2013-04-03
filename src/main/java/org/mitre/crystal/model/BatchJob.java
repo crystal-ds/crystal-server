@@ -26,7 +26,6 @@ import javax.persistence.Table;
 public class BatchJob {
 
 		
-	
 		private List<ModelRunInstance> 	instances;
 		private Long id;
 		private BatchJobStatus status;

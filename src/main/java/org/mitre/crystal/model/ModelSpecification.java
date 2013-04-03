@@ -5,9 +5,7 @@ package org.mitre.crystal.model;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
-import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 

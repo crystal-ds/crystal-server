@@ -15,13 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapKey;
 import javax.persistence.MapKeyColumn;
-import javax.persistence.OneToMany;
 
-import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.mitre.crystal.model.json.InputNodeSerializer;
 

@@ -11,7 +11,6 @@ import org.mitre.crystal.model.BatchJobStatus;
 import org.mitre.crystal.model.ModelRunInputValues;
 import org.mitre.crystal.model.ModelRunInstance;
 import org.mitre.crystal.model.ModelSpecification;
-import org.mitre.crystal.model.ModelSpecificationData;
 import org.mitre.crystal.repository.BatchJobRepository;
 import org.mitre.crystal.service.BatchJobService;
 import org.mitre.crystal.service.ModelService;
