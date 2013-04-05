@@ -28,7 +28,7 @@ import javax.persistence.Table;
 @NamedQueries({
 	@NamedQuery(name = "ModelSpecificationData.getAll", query="select m from ModelSpecificationData m")
 })
-public abstract class ModelSpecificationData {
+public class ModelSpecificationData {
 	
 	
 	

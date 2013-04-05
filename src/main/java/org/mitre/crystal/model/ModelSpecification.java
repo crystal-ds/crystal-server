@@ -55,8 +55,6 @@ public abstract class ModelSpecification implements Serializable{
 		modelSpec.setInputs(inputs);
 	}
 
-	public void runModel(ModelRunInstance mri){
-		
-	}
+	public abstract void runModel(ModelRunInstance mri);
 
 }
