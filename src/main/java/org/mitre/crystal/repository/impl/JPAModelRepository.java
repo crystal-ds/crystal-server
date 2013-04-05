@@ -5,6 +5,7 @@ package org.mitre.crystal.repository.impl;
 
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Repository;
  * @author tmlewis
  *
  */
+@Entity
 @Repository("jpaModelRepository")
 public class JPAModelRepository implements ModelRepository{
 

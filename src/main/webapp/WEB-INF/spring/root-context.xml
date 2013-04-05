@@ -48,6 +48,7 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+<!-- 		<property name="url" value="jdbc:hsqldb:mem:crystal" /> -->
 		<property name="url" value="jdbc:hsqldb:mem:crystal;sql.syntax_mys=true" />
 		<!-- <property name="url" value="jdbc:hsqldb:file:/tmp/oic;sql.syntax_mys=true" 
 			/> -->
