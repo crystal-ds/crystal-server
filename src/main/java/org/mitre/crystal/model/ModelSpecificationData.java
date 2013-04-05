@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 
@@ -23,6 +25,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "models")
+@NamedQueries({
+	@NamedQuery(name = "ModelSpecificationData.getAll", query="select m from ModelSpecificationData m")
+})
 public abstract class ModelSpecificationData {
 	
 	

@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
  * @author tmlewis
  *
  */
-@Service
+@Service("batchJobService")
 public class BatchJobServiceImpl implements BatchJobService {
 	
 	//TODO Database integration

@@ -8,11 +8,13 @@ import java.util.List;
 import org.mitre.crystal.model.ModelSpecification;
 import org.mitre.crystal.repository.ModelRepository;
 import org.mitre.crystal.service.ModelService;
+import org.springframework.stereotype.Service;
 
 /**
  * @author tmlewis
  *
  */
+@Service("modelService")
 public class ModelServiceImpl implements ModelService {
 
 	private ModelRepository modelRepo;

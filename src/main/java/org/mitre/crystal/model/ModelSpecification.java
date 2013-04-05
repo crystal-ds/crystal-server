@@ -13,9 +13,7 @@ import javax.persistence.NamedQuery;
  * @author tmlewis
  *
  */
-@NamedQueries({
-	@NamedQuery(name = "ModelSpecification.getAll", query="select m from ModelSpecification m")
-})
+
 
 public abstract class ModelSpecification implements Serializable{
 	

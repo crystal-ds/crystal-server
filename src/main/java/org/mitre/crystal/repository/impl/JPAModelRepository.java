@@ -13,11 +13,13 @@ import org.mitre.crystal.model.ModelSpecification;
 import org.mitre.crystal.service.ModelService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author tmlewis
  *
  */
+@Repository("jpaModelRepository")
 public class JPAModelRepository implements ModelService {
 
 	final Logger log = LoggerFactory.getLogger(JPABatchJobRepository.class);
