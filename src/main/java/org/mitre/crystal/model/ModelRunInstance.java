@@ -3,12 +3,15 @@
  */
 package org.mitre.crystal.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,13 +22,17 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "model_run_instance")
-public class ModelRunInstance {
+public class ModelRunInstance implements Serializable{
 	
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8422227697572962705L;
 	//private Long runId;
 	private Long id;
-	private ModelSpecification model;
+	private ModelSpecificationData model;
 	
 	private ModelRunInputValues inputValues;
 	private ModelRunOutputValues outputValues;
@@ -39,6 +46,7 @@ public class ModelRunInstance {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 //	@Column (name = "batch_id")
 //	public Long getRunId() {
 //		return runId;
@@ -73,11 +81,12 @@ public class ModelRunInstance {
 ////		return model;
 ////	}
 	/**
-	 * @param model the model to set
+	 * @param model2 the model to set
 	 */
-	public void setModel(ModelSpecification model) {
-		this.model = model;
+	public void setModel(ModelSpecificationData model2) {
+		this.model = model2;
 	}
+
 	
 	
 }

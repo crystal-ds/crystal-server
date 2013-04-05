@@ -15,6 +15,11 @@ public class NoOpModelRunner extends ModelSpecification {
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = -6138254372343440725L;
+
+	/**
+	 * 
+	 */
 	public NoOpModelRunner() {
 		// TODO Auto-generated constructor stub
 	}

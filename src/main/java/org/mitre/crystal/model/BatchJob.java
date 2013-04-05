@@ -5,17 +5,21 @@ package org.mitre.crystal.model;
 
 import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+
 
 /**
  * @author tmlewis
@@ -29,13 +33,16 @@ public class BatchJob {
 		private List<ModelRunInstance> 	instances;
 		private Long id;
 		private BatchJobStatus status;
-		private ModelSpecification model;
+		private ModelSpecificationData model;
 		
 		public BatchJob() {
 			
 		}
 
-		@OneToMany(mappedBy = "batch_id")
+		@ElementCollection(fetch=FetchType.EAGER)
+		@CollectionTable(
+				name = "model_run_instance",
+				joinColumns=@JoinColumn(name="batch_id"))
 		public List<ModelRunInstance> getInstances() {
 			return instances;
 		}
@@ -69,14 +76,14 @@ public class BatchJob {
 
 		@ManyToOne 
 		@JoinColumn (name = "model_id")
-		public ModelSpecification getModel() {
+		public ModelSpecificationData getModel() {
 			return model;
 		}
 
 		/**
 		 * @param model
 		 */
-		public void setModel(ModelSpecification model) {
+		public void setModel(ModelSpecificationData model) {
 			this.model = model;
 			
 		}

@@ -4,6 +4,7 @@
 package org.mitre.crystal.model;
  
 
+import java.io.Serializable;
 import java.util.Map;
 
 import javax.persistence.CollectionTable;
@@ -26,8 +27,13 @@ import org.mitre.crystal.model.json.InputNodeSerializer;
  *
  */
 @JsonSerialize (using = InputNodeSerializer.class)
-public class InputNode {
+public class InputNode  implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1368198376643190742L;
+
 	private Long id;
 
 	// unique identifier within a particular model

@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import org.mitre.crystal.model.ModelSpecification;
+import org.mitre.crystal.model.ModelSpecificationData;
 import org.mitre.crystal.service.ModelService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,14 +20,13 @@ import org.springframework.stereotype.Repository;
  *
  */
 @Repository("jpaModelRepository")
-public class JPAModelRepository implements ModelService {
+public class JPAModelRepository {
 
 	final Logger log = LoggerFactory.getLogger(JPABatchJobRepository.class);
 	@PersistenceContext
 	private EntityManager manager;
 
-	@Override
-	public ModelSpecification saveModel(ModelSpecification model) {
+	public ModelSpecificationData saveModel(ModelSpecificationData model) {
 		if(getModel(model.getId()) != null){
 			manager.persist(model);
 			manager.flush();
@@ -40,14 +39,14 @@ public class JPAModelRepository implements ModelService {
 	}
 
 
-	@Override
-	public ModelSpecification getModel(long id) {
-		return manager.find(ModelSpecification.class, id);
+
+	public ModelSpecificationData getModel(long id) {
+		return manager.find(ModelSpecificationData.class, id);
 	}
 
-	@Override
-	public void removeModel(ModelSpecification modelSpec) {
-		ModelSpecification model = getModel(modelSpec.getId());
+
+	public void removeModel(ModelSpecificationData modelSpec) {
+		ModelSpecificationData model = getModel(modelSpec.getId());
 		if(model != null){
 			manager.remove(model);
 		}
@@ -57,9 +56,9 @@ public class JPAModelRepository implements ModelService {
 	/* (non-Javadoc)
 	 * @see org.mitre.crystal.service.ModelService#getAllModels()
 	 */
-	@Override
-	public List<ModelSpecification> getAllModels() {
-		TypedQuery<ModelSpecification> query = manager.createNamedQuery("ModelSpecification.getAll", ModelSpecification.class);
+
+	public List<ModelSpecificationData> getAllModels() {
+		TypedQuery<ModelSpecificationData> query = manager.createNamedQuery("ModelSpecificationData.getAll", ModelSpecificationData.class);
 		return query.getResultList();
 	}
 }

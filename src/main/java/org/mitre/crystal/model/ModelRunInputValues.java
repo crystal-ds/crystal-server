@@ -3,6 +3,7 @@
  */
 package org.mitre.crystal.model;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import javax.persistence.CollectionTable;
@@ -22,7 +23,11 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "model_run_inputs")
-public class ModelRunInputValues {
+public class ModelRunInputValues implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4479869752110301867L;
 	private Map<String, String> inputs;
 	private long id;
 

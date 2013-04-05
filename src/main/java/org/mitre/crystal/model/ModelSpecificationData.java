@@ -3,6 +3,7 @@
  */
 package org.mitre.crystal.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CollectionTable;
@@ -28,10 +29,14 @@ import javax.persistence.Table;
 @NamedQueries({
 	@NamedQuery(name = "ModelSpecificationData.getAll", query="select m from ModelSpecificationData m")
 })
-public class ModelSpecificationData {
+public class ModelSpecificationData implements Serializable{
 	
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4888634159958204979L;
 	private String name;
 	private String description;	
 	private Long id;
