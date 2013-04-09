@@ -64,15 +64,26 @@ public class ExploratoryModelEngine {
 		return model;
 
 	}
+//	@RequestMapping(value = "/models/{id}/inputs", method=RequestMethod.GET, produces="application/json")
+//	public @ResponseBody List<InputNode> getModelInputs(@PathVariable("id")long id){
+//		log.info("Request for " + id + "inputs");
+//		
+//		ModelSpecificationData model = service.getModel(id);
+//		return model.getInputs();
+//				
+//		
+//	}
 	@RequestMapping(value = "/models/{id}/inputs", method=RequestMethod.GET, produces="application/json")
-	public @ResponseBody List<InputNode> getModelInputs(@PathVariable("id")long id){
-		log.debug("Request for " + id + "inputs");
+	public String getModelInputs(@PathVariable("id") long id,  Model m){
+		log.info("Request for " + id + " inputs");
 		
 		ModelSpecificationData model = service.getModel(id);
-		return model.getInputs();
-				
+		m.addAttribute("model", model);
 		
+		return "modelInputView";
 	}
+	
+	
 	@RequestMapping(value = "/models/{id}/run", method=RequestMethod.POST, produces="application/json", consumes="application/json")
 	public String startRun(@PathVariable("id") long id, @RequestBody ModelRunInputValues vals, Model m){
 		log.debug("Running model " + id);
