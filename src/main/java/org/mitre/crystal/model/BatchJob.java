@@ -33,7 +33,8 @@ public class BatchJob {
 		private List<ModelRunInstance> 	instances;
 		private Long id;
 		private BatchJobStatus status;
-		private ModelSpecificationData model;
+		//private ModelSpecification model;
+		private Long modelID;
 		
 		public BatchJob() {
 			
@@ -74,18 +75,20 @@ public class BatchJob {
 			this.status = status;
 		}
 
-		@ManyToOne 
-		@JoinColumn (name = "model_id")
-		public ModelSpecificationData getModel() {
-			return model;
+
+		/**
+		 * @return the modelID
+		 */
+		@Column(name="model_id")
+		public Long getModelID() {
+			return modelID;
 		}
 
 		/**
-		 * @param model
+		 * @param modelID the modelID to set
 		 */
-		public void setModel(ModelSpecificationData model) {
-			this.model = model;
-			
+		public void setModelID(Long modelID) {
+			this.modelID = modelID;
 		}
 
 		

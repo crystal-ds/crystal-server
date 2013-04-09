@@ -10,7 +10,8 @@ import org.mitre.crystal.model.BatchJob;
 import org.mitre.crystal.model.BatchJobStatus;
 import org.mitre.crystal.model.ModelRunInputValues;
 import org.mitre.crystal.model.ModelRunInstance;
-import org.mitre.crystal.model.ModelSpecificationData;
+import org.mitre.crystal.model.ModelSpecification;
+import org.mitre.crystal.model.RunnableModel;
 import org.mitre.crystal.repository.BatchJobRepository;
 import org.mitre.crystal.service.BatchJobService;
 import org.mitre.crystal.service.ModelService;
@@ -37,13 +38,13 @@ public class BatchJobServiceImpl implements BatchJobService {
 	
 	final Logger log = LoggerFactory.getLogger(BatchJobServiceImpl.class);
 	/* (non-Javadoc)
-	 * @see org.mitre.crystal.service.BatchJobInterface#createBatchJob(org.mitre.crystal.model.ModelSpecificationData, org.mitre.crystal.model.ModelRunInputValues)
+	 * @see org.mitre.crystal.service.BatchJobInterface#createBatchJob(org.mitre.crystal.model.ModelSpecification, org.mitre.crystal.model.ModelRunInputValues)
 	 */
 	@Override
-	public BatchJob createBatchJob(ModelSpecificationData model, ModelRunInputValues vals){
+	public BatchJob createBatchJob(RunnableModel model, ModelRunInputValues vals){
 		log.debug("Creating Batch Job");
 		BatchJob bj = new BatchJob();
-		bj.setModel(model);
+		bj.setModelID(model.getId());
 		
 		List <ModelRunInputValues> variations = idv.diversify(model, vals);
 		List <ModelRunInstance> instances = new ArrayList<ModelRunInstance>();
@@ -80,8 +81,9 @@ public class BatchJobServiceImpl implements BatchJobService {
 		BatchJob bj = getBatchJob(batchJobID);
 		List<ModelRunInstance> runs = bj.getInstances();
 		for (ModelRunInstance run : runs) {
-			//TODO figure out how to calculate status
-			ModelSpecificationData m = bj.getModel();
+			
+			//TODO getModelservice 
+			//RunnableModel m = bj.getModelID();
 			
 			//TODO HOW DO WE RUN MODELS
 			//m.runModel(run);
@@ -92,10 +94,10 @@ public class BatchJobServiceImpl implements BatchJobService {
 	}
 		
 	/* (non-Javadoc)
-	 * @see org.mitre.crystal.service.BatchJobInterface#createAndRunBatchJob(org.mitre.crystal.model.ModelSpecificationData, org.mitre.crystal.model.ModelRunInputValues)
+	 * @see org.mitre.crystal.service.BatchJobInterface#createAndRunBatchJob(org.mitre.crystal.model.ModelSpecification, org.mitre.crystal.model.ModelRunInputValues)
 	 */
 	@Override
-	public BatchJobStatus createAndRunBatchJob(ModelSpecificationData model, ModelRunInputValues input){
+	public BatchJobStatus createAndRunBatchJob(RunnableModel model, ModelRunInputValues input){
 		log.info("create And run BatchJob");
 		BatchJob batchjob = createBatchJob(model, input);
 		return runBatchJob(batchjob.getId());

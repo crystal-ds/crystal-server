@@ -4,13 +4,13 @@
 package org.mitre.crystal.model.instance;
 
 import org.mitre.crystal.model.ModelRunInstance;
-import org.mitre.crystal.model.ModelSpecification;
+import org.mitre.crystal.model.RunnableModel;
 
 /**
  * @author tmlewis
  *
  */
-public class NoOpModelRunner extends ModelSpecification {
+public class NoOpModelRunner extends RunnableModel {
 
 	/**
 	 * 
@@ -25,7 +25,7 @@ public class NoOpModelRunner extends ModelSpecification {
 	}
 
 	/* (non-Javadoc)
-	 * @see org.mitre.crystal.model.ModelSpecification#runModel(org.mitre.crystal.model.ModelRunInstance)
+	 * @see org.mitre.crystal.model.RunnableModel#runModel(org.mitre.crystal.model.ModelRunInstance)
 	 */
 	@Override
 	public void runModel(ModelRunInstance mri) {

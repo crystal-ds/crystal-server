@@ -5,7 +5,7 @@ package org.mitre.crystal.service.impl;
 
 import java.util.List;
 
-import org.mitre.crystal.model.ModelSpecificationData;
+import org.mitre.crystal.model.RunnableModel;
 import org.mitre.crystal.repository.ModelRepository;
 import org.mitre.crystal.service.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class ModelServiceImpl implements ModelService {
 	 * @see org.mitre.crystal.service.ModelService#createModel(java.lang.String, java.lang.String, java.util.Map)
 	 */
 	@Override
-	public ModelSpecificationData saveModel(ModelSpecificationData model) {
+	public RunnableModel saveModel(RunnableModel model) {
 		
 		return modelRepo.saveModel(model);
 	}
@@ -33,16 +33,16 @@ public class ModelServiceImpl implements ModelService {
 	 * @see org.mitre.crystal.service.ModelService#getModel(long)
 	 */
 	@Override
-	public ModelSpecificationData getModel(long id) {
+	public RunnableModel getModel(long id) {
 		// TODO Auto-generated method stub
 		return modelRepo.getModel(id);
 	}
 
 	/* (non-Javadoc)
-	 * @see org.mitre.crystal.service.ModelService#removeModel(org.mitre.crystal.model.ModelSpecificationData)
+	 * @see org.mitre.crystal.service.ModelService#removeModel(org.mitre.crystal.model.RunnableModel)
 	 */
 	@Override
-	public void removeModel(ModelSpecificationData modelSpec) {
+	public void removeModel(RunnableModel modelSpec) {
 		modelRepo.removeModel(modelSpec);
 
 	}
@@ -51,7 +51,7 @@ public class ModelServiceImpl implements ModelService {
 	 * @see org.mitre.crystal.service.ModelService#getAllModels()
 	 */
 	@Override
-	public List<ModelSpecificationData> getAllModels() {
+	public List<RunnableModel> getAllModels() {
 		// TODO Auto-generated method stub
 		return modelRepo.getAllModels();
 	}

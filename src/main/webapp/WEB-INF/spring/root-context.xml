@@ -28,29 +28,30 @@
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<property name="order" value="1" />
 	</bean>
-	
+
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
-		<property name="order" value = "2"/>
+		<property name="order" value="2" />
 
-	</bean> 
-	
+	</bean>
+
+
 
 	<context:component-scan base-package="org.mitre.crystal" />
-	
-	
-<!-- 	<bean class="org.mitre.crystal.model.instance.NoOpModelRunner"> -->
-<!-- 		<property name=""></property> -->
-<!-- 	</bean> -->
+
+
+	<!-- <bean class="org.mitre.crystal.model.instance.NoOpModelRunner"> -->
+	<!-- <property name=""></property> -->
+	<!-- </bean> -->
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="org.hsqldb.jdbcDriver" />
-<!-- 		<property name="url" value="jdbc:hsqldb:mem:crystal" /> -->
+		<!-- <property name="url" value="jdbc:hsqldb:mem:crystal" /> -->
 		<property name="url" value="jdbc:hsqldb:mem:crystal;sql.syntax_mys=true" />
 		<!-- <property name="url" value="jdbc:hsqldb:file:/tmp/oic;sql.syntax_mys=true" 
 			/> -->
@@ -58,24 +59,28 @@
 		<property name="password" value="crystal" />
 	</bean>
 
-	<!-- Use the following to set up the OIC tables in the in-memory DB
-		   If you are using a file based HSQLDB you should not run this every time. -->
+	<!-- Use the following to set up the OIC tables in the in-memory DB If you 
+		are using a file based HSQLDB you should not run this every time. -->
 	<jdbc:initialize-database data-source="dataSource">
-		<jdbc:script location="classpath:/db/tables/hsql_database_tables.sql"/>
+		<jdbc:script location="classpath:/db/tables/hsql_database_tables.sql" />
 	</jdbc:initialize-database>
 
-	<bean id="jpaAdapter" class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter">
- 		<property name="databasePlatform" value="org.eclipse.persistence.platform.database.HSQLPlatform" />
+	<bean id="jpaAdapter"
+		class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter">
+		<property name="databasePlatform"
+			value="org.eclipse.persistence.platform.database.HSQLPlatform" />
 		<property name="showSql" value="true" />
 	</bean>
-	
+
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 
-	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="packagesToScan" value="org.mitre.crystal.model" />
-		<property name="persistenceProviderClass" value="org.eclipse.persistence.jpa.PersistenceProvider" />
+		<property name="persistenceProviderClass"
+			value="org.eclipse.persistence.jpa.PersistenceProvider" />
 		<property name="dataSource" ref="dataSource" />
 		<property name="jpaVendorAdapter" ref="jpaAdapter" />
 		<property name="jpaPropertyMap">
@@ -87,5 +92,22 @@
 			</map>
 		</property>
 	</bean>
+
+	<bean id="inMemoryModelRepository"
+		class="org.mitre.crystal.repository.impl.InMemoryModelRepository">
+		<property name="mapOfModels">
+			<map>
+				<entry>
+					<key>
+						<value>1</value>
+					</key>
+					<ref bean="dummyModel" />
+				</entry>
+			</map>
+		</property>
+	</bean>
 	
+	<bean id="dummyModel"
+		class="org.mitre.crystal.model.EMEImpl.DummyModel">
+	</bean>
 </beans>

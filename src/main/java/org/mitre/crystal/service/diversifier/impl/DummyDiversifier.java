@@ -13,7 +13,8 @@ import java.util.Set;
 
 import org.mitre.crystal.model.InputNode;
 import org.mitre.crystal.model.ModelRunInputValues;
-import org.mitre.crystal.model.ModelSpecificationData;
+import org.mitre.crystal.model.ModelSpecification;
+import org.mitre.crystal.model.RunnableModel;
 import org.mitre.crystal.service.diversifier.InputDiversifier;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +26,10 @@ import org.springframework.stereotype.Service;
 public class DummyDiversifier implements InputDiversifier {
 
 	/* (non-Javadoc)
-	 * @see org.mitre.crystal.service.diversifier.InputDiversifier#diversify(org.mitre.crystal.model.ModelSpecificationData, org.mitre.crystal.model.ModelRunInputValues)
+	 * @see org.mitre.crystal.service.diversifier.InputDiversifier#diversify(org.mitre.crystal.model.ModelSpecification, org.mitre.crystal.model.ModelRunInputValues)
 	 */
 	@Override
-	public List<ModelRunInputValues> diversify(ModelSpecificationData model,
+	public List<ModelRunInputValues> diversify(RunnableModel model,
 			ModelRunInputValues vals) {
 		
 		

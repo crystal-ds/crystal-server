@@ -10,7 +10,7 @@ import java.util.Map;
 import org.mitre.crystal.model.BatchJob;
 import org.mitre.crystal.model.InputNode;
 import org.mitre.crystal.model.ModelRunInputValues;
-import org.mitre.crystal.model.ModelSpecificationData;
+import org.mitre.crystal.model.RunnableModel;
 import org.mitre.crystal.service.BatchJobService;
 import org.mitre.crystal.service.ModelService;
 import org.slf4j.Logger;
@@ -42,13 +42,13 @@ public class ExploratoryModelEngine {
 	private BatchJobService batchJobService;
 	
 	@RequestMapping(value = "/models", method=RequestMethod.GET, produces="application/json")
-	public @ResponseBody Map<Long,ModelSpecificationData> getAllModels(){
+	public @ResponseBody Map<Long,RunnableModel> getAllModels(){
 		log.debug("Request for all Models");
 		
-		List<ModelSpecificationData> allModels = service.getAllModels();
-		Map<Long, ModelSpecificationData> nameToModel = new HashMap<Long, ModelSpecificationData>();
+		List<RunnableModel> allModels = service.getAllModels();
+		Map<Long, RunnableModel> nameToModel = new HashMap<Long, RunnableModel>();
 		
-		for (ModelSpecificationData model : allModels) {
+		for (RunnableModel model : allModels) {
 			nameToModel.put(model.getId(), model);
 			
 		}
@@ -57,10 +57,10 @@ public class ExploratoryModelEngine {
 	}
 	
 	@RequestMapping(value = "/models/{id}", method=RequestMethod.GET, produces="application/json")
-	public @ResponseBody ModelSpecificationData getModel(@PathVariable("id") long id){
+	public @ResponseBody RunnableModel getModel(@PathVariable("id") long id){
 		log.debug("Request for model " + id);
 		
-		ModelSpecificationData model = service.getModel(id);
+		RunnableModel model = service.getModel(id);
 		return model;
 
 	}
@@ -68,7 +68,7 @@ public class ExploratoryModelEngine {
 //	public @ResponseBody List<InputNode> getModelInputs(@PathVariable("id")long id){
 //		log.info("Request for " + id + "inputs");
 //		
-//		ModelSpecificationData model = service.getModel(id);
+//		RunnableModel model = service.getModel(id);
 //		return model.getInputs();
 //				
 //		
@@ -77,7 +77,7 @@ public class ExploratoryModelEngine {
 	public String getModelInputs(@PathVariable("id") long id,  Model m){
 		log.info("Request for " + id + " inputs");
 		
-		ModelSpecificationData model = service.getModel(id);
+		RunnableModel model = service.getModel(id);
 		m.addAttribute("model", model);
 		
 		return "modelInputView";
@@ -87,7 +87,7 @@ public class ExploratoryModelEngine {
 	@RequestMapping(value = "/models/{id}/run", method=RequestMethod.POST, produces="application/json", consumes="application/json")
 	public String startRun(@PathVariable("id") long id, @RequestBody ModelRunInputValues vals, Model m){
 		log.debug("Running model " + id);
-		ModelSpecificationData model = service.getModel(id);
+		RunnableModel model = service.getModel(id);
 		
 		BatchJob job = batchJobService.createBatchJob(model, vals);		
 		

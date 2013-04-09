@@ -3,8 +3,11 @@
  */
 package org.mitre.crystal.model.EMEImpl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.annotation.PostConstruct;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
@@ -13,15 +16,18 @@ import org.mitre.crystal.model.InputType;
 import org.mitre.crystal.model.ModelRunInstance;
 import org.mitre.crystal.model.ModelRunOutputValues;
 import org.mitre.crystal.model.ModelSpecification;
+import org.mitre.crystal.model.RunnableModel;
+
+import com.sun.tools.javac.util.List;
 
 /**
  * @author tmlewis
  *
  */
-public class DummyModel extends ModelSpecification {
+public class DummyModel extends RunnableModel {
 
 	/* (non-Javadoc)
-	 * @see org.mitre.crystal.model.ModelSpecificationData#run(org.mitre.crystal.model.ModelRunInstance)
+	 * @see org.mitre.crystal.model.ModelSpecification#run(org.mitre.crystal.model.ModelRunInstance)
 	 */
 	
 	/**
@@ -30,8 +36,7 @@ public class DummyModel extends ModelSpecification {
 	private static final long serialVersionUID = 63069295459169859L;
 
 	public DummyModel(){
-		init();
-		
+		this.setModelSpec(new ModelSpecification());		
 	}
 	
 	
@@ -52,30 +57,41 @@ public class DummyModel extends ModelSpecification {
 	/**
 	 * 
 	 */
-	private void init() {
+	@PostConstruct
+	public void init() {
+		
 		this.setName("ImABigDummy");
 		this.setDescription("This is a dummy model since the real model doesn't exist yet. PLEAES DONT' USE");
 		this.setId((long)8675309);
-		
 		InputNode ipn1 = new InputNode();
 		ipn1.setName("Lawyers");
 		ipn1.setType(InputType.CHECKBOX);
-		
+		Map<String,String> m = new HashMap<String, String>();
+		m.put("key1", "Value1");
+		ipn1.setProperties(m);
+
 		InputNode ipn2 = new InputNode();
-		ipn1.setName("Guns");
-		ipn1.setType(InputType.SIMPLE);
+		ipn2.setName("Guns");
+		ipn2.setType(InputType.SIMPLE);
+		Map<String,String> m2 = new HashMap<String, String>();
+		m.put("key2", "Value2");
+		ipn2.setProperties(m);
+		
 		
 		InputNode ipn3 = new InputNode();
-		ipn1.setName("Money");
-		ipn1.setType(InputType.RANGESLIDER);
+		ipn3.setName("Money");
+		ipn3.setType(InputType.RANGESLIDER);
+		Map<String,String> m3 = new HashMap<String, String>();
+		m.put("key3", "Value3");
+		ipn3.setProperties(m);
 		
 		
 		
-		Map<String,InputNode> stringToInputpuNode = new HashMap<String, InputNode>();
-		
-		stringToInputpuNode.put("Warren", ipn1);
-		stringToInputpuNode.put("Zevon", ipn2);
-		stringToInputpuNode.put("needs", ipn3);
+		ArrayList<InputNode> inputList = new ArrayList<InputNode>();
+		inputList.add(ipn1);
+		inputList.add(ipn2);
+		inputList.add(ipn3);
+		this.setInputs(inputList);
 		
 	}
 

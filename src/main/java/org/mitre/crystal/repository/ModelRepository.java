@@ -5,7 +5,8 @@ package org.mitre.crystal.repository;
 
 import java.util.List;
 
-import org.mitre.crystal.model.ModelSpecificationData;
+import org.mitre.crystal.model.ModelSpecification;
+import org.mitre.crystal.model.RunnableModel;
 
 /**
  * @author tmlewis
@@ -13,22 +14,22 @@ import org.mitre.crystal.model.ModelSpecificationData;
  */
 public interface ModelRepository {
 
-	ModelSpecificationData saveModel(ModelSpecificationData model);
+	RunnableModel saveModel(RunnableModel model);
 
 	/**
 	 * @param id
 	 * @return
 	 */
-	ModelSpecificationData getModel(long id);
+	RunnableModel getModel(long id);
 
 	/**
-	 * @param modelSpec
+	 * @param model
 	 */
-	void removeModel(ModelSpecificationData modelSpec);
+	void removeModel(RunnableModel model);
 
 	/**
 	 * @return
 	 */
-	List<ModelSpecificationData> getAllModels();
+	List<RunnableModel> getAllModels();
 
 }

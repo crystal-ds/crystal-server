@@ -6,7 +6,8 @@ package org.mitre.crystal.service;
 import org.mitre.crystal.model.BatchJob;
 import org.mitre.crystal.model.BatchJobStatus;
 import org.mitre.crystal.model.ModelRunInputValues;
-import org.mitre.crystal.model.ModelSpecificationData;
+import org.mitre.crystal.model.ModelSpecification;
+import org.mitre.crystal.model.RunnableModel;
 
 /**
  * @author tmlewis
@@ -14,7 +15,7 @@ import org.mitre.crystal.model.ModelSpecificationData;
  */
 public interface BatchJobService {
 
-	public abstract BatchJob createBatchJob(ModelSpecificationData model,
+	public abstract BatchJob createBatchJob(RunnableModel model,
 			ModelRunInputValues vals);
 
 	public abstract BatchJob getBatchJob(long batchJobId);
@@ -22,7 +23,7 @@ public interface BatchJobService {
 	public abstract BatchJobStatus runBatchJob(long batchJobID);
 
 	public abstract BatchJobStatus createAndRunBatchJob(
-			ModelSpecificationData model, ModelRunInputValues input);
+			RunnableModel model, ModelRunInputValues input);
 
 
 	/**

@@ -5,7 +5,7 @@ package org.mitre.crystal.service;
 
 import java.util.List;
 
-import org.mitre.crystal.model.ModelSpecificationData;
+import org.mitre.crystal.model.RunnableModel;
 
 /**
  * @author tmlewis
@@ -15,9 +15,9 @@ public interface  ModelService {
 	
 	//TODO database integration
 	
-	public ModelSpecificationData saveModel(ModelSpecificationData modelSpec);
-	public ModelSpecificationData getModel(long id);
-	public void removeModel(ModelSpecificationData modelSpec);
-	public List<ModelSpecificationData> getAllModels();
+	public RunnableModel saveModel(RunnableModel modelSpec);
+	public RunnableModel getModel(long id);
+	public void removeModel(RunnableModel modelSpec);
+	public List<RunnableModel> getAllModels();
 	
 }

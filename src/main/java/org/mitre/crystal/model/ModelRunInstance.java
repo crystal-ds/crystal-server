@@ -32,7 +32,7 @@ public class ModelRunInstance implements Serializable{
 	private static final long serialVersionUID = 8422227697572962705L;
 	//private Long runId;
 	private Long id;
-	private ModelSpecificationData model;
+	private RunnableModel model;
 	
 	private ModelRunInputValues inputValues;
 	private ModelRunOutputValues outputValues;
@@ -77,13 +77,13 @@ public class ModelRunInstance implements Serializable{
 	//TODO figure out how to link the model
 //	@ManyToOne 
 //	@JoinColumn (name = "model_id")
-////	public ModelSpecificationData getModel() {
+////	public ModelSpecification getModel() {
 ////		return model;
 ////	}
 	/**
 	 * @param model2 the model to set
 	 */
-	public void setModel(ModelSpecificationData model2) {
+	public void setModel(RunnableModel model2) {
 		this.model = model2;
 	}
 

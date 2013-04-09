@@ -1,57 +1,98 @@
 /**
- * 
+ * POJO implementation of a model
  */
 package org.mitre.crystal.model;
 
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+
+
 /**
  * @author tmlewis
  *
  */
-
-
-public abstract class ModelSpecification implements Serializable{
+@Entity
+@Table(name = "models")
+@NamedQueries({
+	@NamedQuery(name = "ModelSpecification.getAll", query="select m from ModelSpecification m")
+})
+public class ModelSpecification implements Serializable{
+	
+	
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2610853539172489884L;
-	private ModelSpecificationData modelSpec;
+	private static final long serialVersionUID = -4888634159958204979L;
+	private String name;
+	private String description;	
+	private Long id;
+	private List<InputNode> inputs;
+	
+	public ModelSpecification() {
+	}
 
+	public ModelSpecification(String name, String description, Long id,
+			List<InputNode> inputs) {
+		this.name = name;
+		this.description = description;
+		this.id = id;
+		
+		this.inputs = inputs;
+	}
+	@Column(name = "name")
 	public String getName() {
-		return modelSpec.getName();
-	}
-
-	public String getDescription() {
-		return modelSpec.getDescription();
-	}
-
-	public Long getId() {
-		return modelSpec.getId();
-	}
-
-	public List<InputNode> getInputs() {
-		return modelSpec.getInputs();
+		return name;
 	}
 
 	public void setName(String name) {
-		modelSpec.setName(name);
+		this.name = name;
+	}
+
+	@Column(name = "Description")
+	public String getDescription() {
+		return description;
 	}
 
 	public void setDescription(String description) {
-		modelSpec.setDescription(description);
+		this.description = description;
+	}
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column (name = "id")
+	public Long getId() {
+		return id;
 	}
 
 	public void setId(Long id) {
-		modelSpec.setId(id);
+		this.id = id;
+	}
+	
+	@ElementCollection
+	@CollectionTable(name = "model_inputs", 
+	joinColumns = @JoinColumn(name = "inputs_id"))
+	@Column(name = "inputs")
+	public List<InputNode> getInputs() {
+		return inputs;
 	}
 
 	public void setInputs(List<InputNode> inputs) {
-		modelSpec.setInputs(inputs);
+		this.inputs = inputs;
 	}
 
-	public abstract void runModel(ModelRunInstance mri);
-
+	
 }
