@@ -61,28 +61,37 @@ public class DummyModel extends RunnableModel {
 	public void init() {
 		
 		this.setName("ImABigDummy");
-		this.setDescription("This is a dummy model since the real model doesn't exist yet. PLEAES DONT' USE");
+		this.setDescription("This is a dummy model since the real model doesn't exist yet. PLEASE DON'T USE");
 		this.setId((long)8675309);
+		
 		InputNode ipn1 = new InputNode();
-		ipn1.setName("Lawyers");
+		ipn1.setName("InputNode1");
 		ipn1.setType(InputType.CHECKBOX);
+		Map<String, String> m1 = ipn1.getProperties();
+		m1.put("checked", "true");
+		ipn1.setProperties(m1);
 		Map<String,String> m = new HashMap<String, String>();
 		m.put("key1", "Value1");
 		ipn1.setProperties(m);
 
 		InputNode ipn2 = new InputNode();
-		ipn2.setName("Guns");
+		ipn2.setName("InputNode2");
 		ipn2.setType(InputType.SIMPLE);
 		Map<String,String> m2 = new HashMap<String, String>();
-		m.put("key2", "Value2");
+		m.put("min", "1");
+		m.put("max", "5");
+		m.put("value", "3");
 		ipn2.setProperties(m);
 		
 		
 		InputNode ipn3 = new InputNode();
-		ipn3.setName("Money");
+		ipn3.setName("InputNode3");
 		ipn3.setType(InputType.RANGESLIDER);
 		Map<String,String> m3 = new HashMap<String, String>();
-		m.put("key3", "Value3");
+		m.put("min", "0");
+		m.put("max","10");
+		m.put("low", "5");
+		m.put("high:", "7");
 		ipn3.setProperties(m);
 		
 		

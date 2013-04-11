@@ -5,6 +5,7 @@ package org.mitre.crystal.model;
  
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.CollectionTable;
@@ -56,6 +57,7 @@ public class InputNode  implements Serializable{
 	}
 	
 	public InputNode(){
+		properties = new HashMap<String, String>();
 		
 	}
 	public InputNode(String name, InputType type, Map<String, String> properties) {

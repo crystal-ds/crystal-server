@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.persistence.Entity;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 /**
  * @author tmlewis
  *
@@ -21,7 +23,7 @@ public abstract class RunnableModel implements Serializable{
 	 */
 	private static final long serialVersionUID = 2610853539172489884L;
 	private ModelSpecification modelSpec;
-
+	@JsonIgnore
 	public ModelSpecification getModelSpec() {
 		return modelSpec;
 	}

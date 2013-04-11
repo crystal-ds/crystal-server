@@ -42,8 +42,8 @@ public class ExploratoryModelEngine {
 	private BatchJobService batchJobService;
 	
 	@RequestMapping(value = "/models", method=RequestMethod.GET, produces="application/json")
-	public @ResponseBody Map<Long,RunnableModel> getAllModels(){
-		log.debug("Request for all Models");
+	public String getAllModels(Model m){
+		log.info("Request for all Models");
 		
 		List<RunnableModel> allModels = service.getAllModels();
 		Map<Long, RunnableModel> nameToModel = new HashMap<Long, RunnableModel>();
@@ -52,27 +52,22 @@ public class ExploratoryModelEngine {
 			nameToModel.put(model.getId(), model);
 			
 		}
-		return nameToModel;
+
+		m.addAttribute("mapOfModels", nameToModel);
+		return "mapOfModelsView";
 		
 	}
 	
 	@RequestMapping(value = "/models/{id}", method=RequestMethod.GET, produces="application/json")
-	public @ResponseBody RunnableModel getModel(@PathVariable("id") long id){
+	public String getModel(@PathVariable("id") long id, Model m){
 		log.debug("Request for model " + id);
 		
 		RunnableModel model = service.getModel(id);
-		return model;
+		m.addAttribute("model", model);
+		return "modelView";
 
 	}
-//	@RequestMapping(value = "/models/{id}/inputs", method=RequestMethod.GET, produces="application/json")
-//	public @ResponseBody List<InputNode> getModelInputs(@PathVariable("id")long id){
-//		log.info("Request for " + id + "inputs");
-//		
-//		RunnableModel model = service.getModel(id);
-//		return model.getInputs();
-//				
-//		
-//	}
+
 	@RequestMapping(value = "/models/{id}/inputs", method=RequestMethod.GET, produces="application/json")
 	public String getModelInputs(@PathVariable("id") long id,  Model m){
 		log.info("Request for " + id + " inputs");

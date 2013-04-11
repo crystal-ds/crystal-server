@@ -29,7 +29,7 @@ import org.springframework.stereotype.Repository;
 @Repository("inMemoryModelRepository")
 public class InMemoryModelRepository implements ModelRepository {
 
-	final Logger log = LoggerFactory.getLogger(JPABatchJobRepository.class);
+	final Logger log = LoggerFactory.getLogger(InMemoryModelRepository.class);
 
 	private  Map <Long,RunnableModel>mapOfModels;
 
