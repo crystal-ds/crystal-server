@@ -54,7 +54,7 @@ public class BatchJobServiceImpl implements BatchJobService {
 		//END test code
 		for (Map<String,String> inputVariation : variations) {
 			ModelRunInstance mri = new ModelRunInstance();
-			mri.setModel(model);
+			//mri.setModel(model);
 			mri.setInputValues(inputVariation);
 			instances.add(mri);
 		}

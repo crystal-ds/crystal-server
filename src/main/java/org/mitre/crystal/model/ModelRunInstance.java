@@ -6,6 +6,7 @@ package org.mitre.crystal.model;
 import java.io.Serializable;
 import java.util.Map;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -40,7 +41,6 @@ public class ModelRunInstance implements Serializable{
 	private static final long serialVersionUID = 8422227697572962705L;
 	//private Long runId;
 	private Long id;
-	private RunnableModel model;
 	
 //	private ModelRunInputValues inputValues;
 	//name to Json for model inputs
@@ -48,6 +48,8 @@ public class ModelRunInstance implements Serializable{
 //	private ModelRunOutputValues outputValues;
 	//String to json for output values; 
 	private Map<String, String> outputValues;
+	
+
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -92,13 +94,7 @@ public class ModelRunInstance implements Serializable{
 ////	public ModelSpecification getModel() {
 ////		return model;
 ////	}
-	/**
-	 * @param model2 the model to set
-	 */
-	public void setModel(RunnableModel model2) {
-		this.model = model2;
-	}
-	/**
+	/*
 	 * @return the inputValues
 	 */
 	@ElementCollection(fetch=FetchType.EAGER)
@@ -137,6 +133,15 @@ public class ModelRunInstance implements Serializable{
 		this.outputValues = outputValues;
 	}
 
-	
+	//this makes the DB work....WHY?
+	//Work around for JPA empty object creation
+	@Basic
+	@Column(name = "dummy")
+	public String getDummy(){
+		return "dummy";
+	}
+	public void setDummy(String dummy){
+	}
+
 	
 }
