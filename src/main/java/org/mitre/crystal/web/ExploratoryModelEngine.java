@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.mitre.crystal.model.BatchJob;
-import org.mitre.crystal.model.InputNode;
-import org.mitre.crystal.model.ModelRunInputValues;
 import org.mitre.crystal.model.RunnableModel;
 import org.mitre.crystal.service.BatchJobService;
 import org.mitre.crystal.service.ModelService;
@@ -78,7 +76,7 @@ public class ExploratoryModelEngine {
 	
 	
 	@RequestMapping(value = "/models/{id}/run", method=RequestMethod.POST, produces="application/json", consumes="application/json")
-	public String startRun(@PathVariable("id") long id, @RequestBody ModelRunInputValues vals, Model m){
+	public String startRun(@PathVariable("id") long id, @RequestBody Map<String,String> vals, Model m){
 		log.debug("Running model " + id);
 		RunnableModel model = service.getModel(id);
 		
@@ -94,12 +92,9 @@ public class ExploratoryModelEngine {
 		log.info("test Running model " + id);
 		RunnableModel model = service.getModel(id);
 		
-		ModelRunInputValues mriv = new ModelRunInputValues();
-		mriv.setId(23);
 		Map<String, String> inputs = new HashMap<String, String>();
 		inputs.put("thing1", "thing2");
-		mriv.setInputs(inputs);
-		BatchJob job = batchJobService.createBatchJob(model, mriv);		
+		BatchJob job = batchJobService.createBatchJob(model, inputs);		
 		
 		m.addAttribute("batchjob", job);
 		

@@ -5,12 +5,11 @@ package org.mitre.crystal.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.mitre.crystal.model.BatchJob;
 import org.mitre.crystal.model.BatchJobStatus;
-import org.mitre.crystal.model.ModelRunInputValues;
 import org.mitre.crystal.model.ModelRunInstance;
-import org.mitre.crystal.model.ModelSpecification;
 import org.mitre.crystal.model.RunnableModel;
 import org.mitre.crystal.repository.BatchJobRepository;
 import org.mitre.crystal.service.BatchJobService;
@@ -41,19 +40,19 @@ public class BatchJobServiceImpl implements BatchJobService {
 	 * @see org.mitre.crystal.service.BatchJobInterface#createBatchJob(org.mitre.crystal.model.ModelSpecification, org.mitre.crystal.model.ModelRunInputValues)
 	 */
 	@Override
-	public BatchJob createBatchJob(RunnableModel model, ModelRunInputValues vals){
+	public BatchJob createBatchJob(RunnableModel model, Map<String,String> vals){
 		log.debug("Creating Batch Job");
 		BatchJob bj = new BatchJob();
 		bj.setModelID(model.getId());
 		
-//		List <ModelRunInputValues> variations = idv.diversify(model, vals);
+		List <Map<String,String>> variations = idv.diversify(model, vals);
 		List <ModelRunInstance> instances = new ArrayList<ModelRunInstance>();
 		//TEST CODE
-		List <ModelRunInputValues> variations = new ArrayList<ModelRunInputValues>();
-		variations.add(vals);
+		//List <ModelRunInputValues> variations = new ArrayList<ModelRunInputValues>();
+		//variations.add(vals);
 
 		//END test code
-		for (ModelRunInputValues inputVariation : variations) {
+		for (Map<String,String> inputVariation : variations) {
 			ModelRunInstance mri = new ModelRunInstance();
 			mri.setModel(model);
 			mri.setInputValues(inputVariation);
@@ -102,7 +101,7 @@ public class BatchJobServiceImpl implements BatchJobService {
 	 * @see org.mitre.crystal.service.BatchJobInterface#createAndRunBatchJob(org.mitre.crystal.model.ModelSpecification, org.mitre.crystal.model.ModelRunInputValues)
 	 */
 	@Override
-	public BatchJobStatus createAndRunBatchJob(RunnableModel model, ModelRunInputValues input){
+	public BatchJobStatus createAndRunBatchJob(RunnableModel model, Map<String,String> input){
 		log.info("create And run BatchJob");
 		BatchJob batchjob = createBatchJob(model, input);
 		return runBatchJob(batchjob.getId());

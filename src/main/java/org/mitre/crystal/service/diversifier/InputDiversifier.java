@@ -4,9 +4,8 @@
 package org.mitre.crystal.service.diversifier;
 
 import java.util.List;
+import java.util.Map;
 
-import org.mitre.crystal.model.ModelRunInputValues;
-import org.mitre.crystal.model.ModelSpecification;
 import org.mitre.crystal.model.RunnableModel;
 
 /**
@@ -20,7 +19,7 @@ public interface InputDiversifier {
 	 * @param vals
 	 * @return
 	 */
-	List<ModelRunInputValues> diversify(RunnableModel model,
-			ModelRunInputValues vals);
+	List<Map<String,String>> diversify(RunnableModel model,
+			Map<String,String> vals);
 
 }

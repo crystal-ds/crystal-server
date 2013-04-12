@@ -14,11 +14,8 @@ import org.codehaus.jackson.node.ObjectNode;
 import org.mitre.crystal.model.InputNode;
 import org.mitre.crystal.model.InputType;
 import org.mitre.crystal.model.ModelRunInstance;
-import org.mitre.crystal.model.ModelRunOutputValues;
 import org.mitre.crystal.model.ModelSpecification;
 import org.mitre.crystal.model.RunnableModel;
-
-import com.sun.tools.javac.util.List;
 
 /**
  * @author tmlewis
@@ -42,17 +39,16 @@ public class DummyModel extends RunnableModel {
 	
 	@Override
 	public  void runModel(ModelRunInstance mri) {
-		ModelRunOutputValues outputValues = new ModelRunOutputValues();
+		Map<String,String> outputValues = new HashMap<String,String>();
 		ObjectMapper mapper = new ObjectMapper();
 		ObjectNode on = mapper.createObjectNode();
 		for(int i = 0; i< 100; i++){
 			on.put("Value" + i , i);
 		}
-		HashMap<String, String> outputs = new HashMap<String, String>();
-			outputs.put("Outputs", on.toString());
-	
-		outputValues.setOutputs(outputs);
-	}
+		
+		// TODO: WTF?
+		outputValues.put("Outputs", on.toString());
+		}
 
 	/**
 	 * 
