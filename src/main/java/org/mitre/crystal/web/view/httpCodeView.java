@@ -10,13 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.mitre.crystal.model.BatchJobStatus;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.AbstractView;
 
 /**
  * @author tmlewis
  *
  */
-public class httpCodeView extends AbstractView {
+@Component("httpCodeView")
+public class HttpCodeView extends AbstractView {
 
 	/* (non-Javadoc)
 	 * @see org.springframework.web.servlet.view.AbstractView#renderMergedOutputModel(java.util.Map, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)

@@ -53,6 +53,7 @@ public class JPABatchJobRepository implements BatchJobRepository {
 	 * @see org.mitre.crystal.repository.BatchJobRepository#getBatchJob(long)
 	 */
 	@Override
+	@Transactional
 	public BatchJob getBatchJob(long batchJobId) {
 		return manager.find(BatchJob.class, batchJobId);
 	}

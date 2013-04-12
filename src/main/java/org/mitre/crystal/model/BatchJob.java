@@ -5,6 +5,7 @@ package org.mitre.crystal.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -17,6 +18,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -40,10 +42,9 @@ public class BatchJob {
 			
 		}
 
-		@ElementCollection(fetch=FetchType.EAGER)
-		@CollectionTable(
-				name = "model_run_instance",
-				joinColumns=@JoinColumn(name="batch_id"))
+
+		@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+		@JoinColumn(name="batch_id", referencedColumnName="id")
 		public List<ModelRunInstance> getInstances() {
 			return instances;
 		}

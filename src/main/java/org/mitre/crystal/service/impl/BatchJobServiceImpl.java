@@ -46,8 +46,13 @@ public class BatchJobServiceImpl implements BatchJobService {
 		BatchJob bj = new BatchJob();
 		bj.setModelID(model.getId());
 		
-		List <ModelRunInputValues> variations = idv.diversify(model, vals);
+//		List <ModelRunInputValues> variations = idv.diversify(model, vals);
 		List <ModelRunInstance> instances = new ArrayList<ModelRunInstance>();
+		//TEST CODE
+		List <ModelRunInputValues> variations = new ArrayList<ModelRunInputValues>();
+		variations.add(vals);
+
+		//END test code
 		for (ModelRunInputValues inputVariation : variations) {
 			ModelRunInstance mri = new ModelRunInstance();
 			mri.setModel(model);

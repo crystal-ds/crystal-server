@@ -56,6 +56,7 @@ public class MapOfModelsView extends AbstractView {
 				jsonGenerator.writeObjectField(entry.getKey().toString(), entry.getValue());
 			}
 			jsonGenerator.writeEndObject();
+			jsonGenerator.flush();
 		}
 		
 

@@ -62,7 +62,7 @@ public class DummyModel extends RunnableModel {
 		
 		this.setName("ImABigDummy");
 		this.setDescription("This is a dummy model since the real model doesn't exist yet. PLEASE DON'T USE");
-		this.setId((long)8675309);
+		this.setId((long)1);
 		
 		InputNode ipn1 = new InputNode();
 		ipn1.setName("InputNode1");

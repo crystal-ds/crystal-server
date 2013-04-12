@@ -78,7 +78,7 @@
 
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="packagesToScan" value="org.mitre.crystal.model" />
+		<property name="packagesToScan" value="org.mitre.crystal" />
 		<property name="persistenceProviderClass"
 			value="org.eclipse.persistence.jpa.PersistenceProvider" />
 		<property name="dataSource" ref="dataSource" />
@@ -110,4 +110,5 @@
 	<bean id="dummyModel"
 		class="org.mitre.crystal.model.EMEImpl.DummyModel">
 	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
 </beans>

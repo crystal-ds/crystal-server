@@ -49,13 +49,11 @@ public class ExploratoryModelEngine {
 		Map<Long, RunnableModel> nameToModel = new HashMap<Long, RunnableModel>();
 		
 		for (RunnableModel model : allModels) {
-			nameToModel.put(model.getId(), model);
-			
+			nameToModel.put(model.getId(), model);		
 		}
 
 		m.addAttribute("mapOfModels", nameToModel);
-		return "mapOfModelsView";
-		
+		return "mapOfModelsView";		
 	}
 	
 	@RequestMapping(value = "/models/{id}", method=RequestMethod.GET, produces="application/json")
@@ -90,6 +88,25 @@ public class ExploratoryModelEngine {
 		
 		return "batchJobIdView";
 	}
+	//TEST CODE
+	@RequestMapping(value = "/models/{id}/testrun", method=RequestMethod.GET, produces="application/json")
+	public String startTestRun(@PathVariable("id") long id, Model m){
+		log.info("test Running model " + id);
+		RunnableModel model = service.getModel(id);
+		
+		ModelRunInputValues mriv = new ModelRunInputValues();
+		mriv.setId(23);
+		Map<String, String> inputs = new HashMap<String, String>();
+		inputs.put("thing1", "thing2");
+		mriv.setInputs(inputs);
+		BatchJob job = batchJobService.createBatchJob(model, mriv);		
+		
+		m.addAttribute("batchjob", job);
+		
+		return "batchJobIdView";
+	}
+	
+	
 	@RequestMapping(value = "/resultsets/{id}", method=RequestMethod.HEAD )
 	public String getStatus(@PathVariable("id") long id, Model m){
 		log.debug("client is checking on result status " + id);

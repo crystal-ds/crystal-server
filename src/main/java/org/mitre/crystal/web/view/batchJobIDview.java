@@ -11,12 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.node.JsonNodeFactory;
 import org.codehaus.jackson.node.ObjectNode;
 import org.mitre.crystal.model.BatchJob;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.AbstractView;
 /**
  * @author tmlewis
  *
  */
-public class batchJobIDview extends AbstractView{
+@Component("batchJobIDView")
+public class BatchJobIDview extends AbstractView{
 
 	/* (non-Javadoc)
 	 * @see org.springframework.web.servlet.view.AbstractView#renderMergedOutputModel(java.util.Map, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
