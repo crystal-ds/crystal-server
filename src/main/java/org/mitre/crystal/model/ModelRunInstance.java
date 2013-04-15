@@ -6,8 +6,6 @@ package org.mitre.crystal.model;
 import java.io.Serializable;
 import java.util.Map;
 
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -17,11 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapKey;
 import javax.persistence.MapKeyColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -61,39 +55,7 @@ public class ModelRunInstance implements Serializable{
 		this.id = id;
 	}
 
-//	@Column (name = "batch_id")
-//	public Long getRunId() {
-//		return runId;
-//	}
-//	public void setRunId(Long runId) {
-//		this.runId = runId;
-//	}
-//	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-//	@JoinColumn(name = "input_value_id")
-//	//public ModelRunInputValues getInputValues() {
-//		return inputValues;
-//	}
-//	public void setInputValues(ModelRunInputValues inputValues) {
-//		this.inputValues = inputValues;
-//	}
-//
-//	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-//	@JoinColumn(name = "output_value_id")
-//	public ModelRunOutputValues getOutputValues() {
-//		return outputValues;
-//	}
-//	public void setOutputValues(ModelRunOutputValues outputValues) {
-//		this.outputValues = outputValues;
-//	}
-	/**
-	 * @return the model
-	 */
-	//TODO figure out how to link the model
-//	@ManyToOne 
-//	@JoinColumn (name = "model_id")
-////	public ModelSpecification getModel() {
-////		return model;
-////	}
+
 	/*
 	 * @return the inputValues
 	 */
@@ -135,13 +97,13 @@ public class ModelRunInstance implements Serializable{
 
 	//this makes the DB work....WHY?
 	//Work around for JPA empty object creation
-	@Basic
-	@Column(name = "dummy")
-	public String getDummy(){
-		return "dummy";
-	}
-	public void setDummy(String dummy){
-	}
+//	@Basic
+//	@Column(name = "dummy")
+//	public String getDummy(){
+//		return "dummy";
+//	}
+//	public void setDummy(String dummy){
+//	}
 
 	
 }
