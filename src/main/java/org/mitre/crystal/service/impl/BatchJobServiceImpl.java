@@ -64,7 +64,7 @@ public class BatchJobServiceImpl implements BatchJobService {
 		//bj.setRuns(createInputsForBatchJob(vals));
 		bj.setStatus(BatchJobStatus.NOT_STARTED);
 		BatchJob saved = bjr.save(bj);
-		log.info("batch Job created with ID" + saved.getId());
+		log.info("batch Job created with ID " + saved.getId());
 		return saved;
 	
 	}

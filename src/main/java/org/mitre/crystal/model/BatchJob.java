@@ -51,8 +51,7 @@ public class BatchJob {
 
 
 		public void setInstances(List<ModelRunInstance> instances) {
-			this.instances = instances;
-		}
+			this.instances = instances;		}
 
 
 		public void setId(Long id) {

@@ -96,7 +96,7 @@ public class ExploratoryModelEngine {
 		inputs.put("thing1", "thing2");
 		BatchJob job = batchJobService.createBatchJob(model, inputs);		
 		
-		m.addAttribute("batchjob", job);
+		m.addAttribute("batchJob", job);
 		
 		return "batchJobIdView";
 	}
