@@ -5,7 +5,6 @@ package org.mitre.crystal.repository;
 
 import java.util.List;
 
-import org.mitre.crystal.model.ModelSpecification;
 import org.mitre.crystal.model.RunnableModel;
 
 /**

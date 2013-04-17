@@ -4,7 +4,6 @@
 package org.mitre.crystal.repository.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -12,13 +11,9 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.mitre.crystal.model.RunnableModel;
-import org.mitre.crystal.model.EMEImpl.DummyModel;
 import org.mitre.crystal.repository.ModelRepository;
-import org.mitre.crystal.service.ModelService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 
 /**

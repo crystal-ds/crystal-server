@@ -4,8 +4,6 @@
 package org.mitre.crystal.web.view;
 
 import java.io.PrintWriter;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.impl.DefaultPrettyPrinter;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.mitre.crystal.model.InputNode;
 import org.mitre.crystal.model.RunnableModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;

@@ -3,10 +3,8 @@
 <!-- Root Context: defines shared resources visible to all other web components -->
 
 <beans xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
@@ -93,6 +91,7 @@
 		</property>
 	</bean>
 
+	<import resource="modelExample.xml" />
 	<bean id="inMemoryModelRepository"
 		class="org.mitre.crystal.repository.impl.InMemoryModelRepository">
 		<property name="mapOfModels">
@@ -103,12 +102,39 @@
 					</key>
 					<ref bean="dummyModel" />
 				</entry>
+				<entry>
+					<key>
+						<value>2</value>
+					</key>
+					<ref bean="dummyModel2" />
+				</entry>
+				<entry>
+					<key>
+						<value>3</value>
+					</key>
+					<ref bean="yetAnotherModel" />
+				</entry>
 			</map>
 		</property>
 	</bean>
-	
-	<bean id="dummyModel"
-		class="org.mitre.crystal.model.EMEImpl.DummyModel">
+
+	<bean id="dummyModel" class="org.mitre.crystal.model.EMEImpl.DummyModel">
+		<property name="id">
+			<value>1</value>
+		</property>
 	</bean>
+
+	<bean class="org.mitre.crystal.model.EMEImpl.DummyModel" id="dummyModel2">
+		<property name="name">
+			<value>BigOlFakeModel</value>
+		</property>
+		<property name="description">
+			<value>This is how you set a value</value>
+		</property>
+		<property name="id">
+			<value>2</value>
+		</property>
+	</bean>
+
 	<tx:annotation-driven transaction-manager="transactionManager" />
 </beans>
