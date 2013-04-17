@@ -28,7 +28,7 @@ public class HttpCodeView extends AbstractView {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
-		BatchJobStatus status = (BatchJobStatus) model.get("status");
+		BatchJobStatus status = (BatchJobStatus) model.get("Status");
 		switch (status) {
 		case UNKNOWN:
 			response.setStatus(HttpStatus.NOT_FOUND.value());
@@ -40,7 +40,7 @@ public class HttpCodeView extends AbstractView {
 				response.setStatus(HttpStatus.OK.value());
 				break;
 		case NOT_STARTED:
-				response.setStatus(HttpStatus.FOUND.value());
+				response.setStatus(HttpStatus.ACCEPTED.value());
 				break;
 			
 				

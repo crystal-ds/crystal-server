@@ -100,6 +100,20 @@ public class ExploratoryModelEngine {
 		
 		return "batchJobIdView";
 	}
+	@RequestMapping(value = "/models/{id}/testrun2", method=RequestMethod.GET, produces="application/json")
+	public String startTestRun2(@PathVariable("id") long id, Model m){
+		log.info("test Running model " + id);
+		RunnableModel model = service.getModel(id);
+		
+		Map<String, String> inputs = new HashMap<String, String>();
+		inputs.put("thing1", "thing2");
+		BatchJob job = batchJobService.createAndRunBatchJob(model, inputs);		
+		
+		m.addAttribute("batchJob", job);
+		
+		return "batchJobIdView";
+	}
+	
 	
 	
 	@RequestMapping(value = "/resultsets/{id}", method=RequestMethod.HEAD )
@@ -115,11 +129,7 @@ public class ExploratoryModelEngine {
 	}
 	@RequestMapping(value = "/resultsets/{id}", method=RequestMethod.GET, produces="application/json" )
 	public @ResponseBody BatchJob getModelResults(@PathVariable("id") long id){
-		log.debug("client is requesting result set for " + id);
-		//query database for run ID
-		//format results
-		//respond
-		
+		log.debug("client is requesting result set for " + id);		
 		BatchJob job = batchJobService.getBatchJob(id);
 		
 		

@@ -22,7 +22,7 @@ public interface BatchJobService {
 
 	public abstract BatchJobStatus runBatchJob(long batchJobID);
 
-	public abstract BatchJobStatus createAndRunBatchJob(
+	public abstract BatchJob createAndRunBatchJob(
 			RunnableModel model, Map<String,String> input);
 
 
