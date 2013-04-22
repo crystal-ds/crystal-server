@@ -118,13 +118,13 @@
 		</property>
 	</bean>
 
-	<bean id="dummyModel" class="org.mitre.crystal.model.EMEImpl.DummyModel">
+	<bean id="dummyModel" class="org.mitre.crystal.model.instance.DummyModel">
 		<property name="id">
 			<value>1</value>
 		</property>
 	</bean>
 
-	<bean class="org.mitre.crystal.model.EMEImpl.DummyModel" id="dummyModel2">
+	<bean class="org.mitre.crystal.model.instance.DummyModel" id="dummyModel2">
 		<property name="name">
 			<value>BigOlFakeModel</value>
 		</property>
