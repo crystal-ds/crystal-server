@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.mitre.crystal.model.RunnableModel;
-import org.mitre.crystal.service.diversifier.InputDiversifier;
+import org.mitre.crystal.service.InputDiversifier;
 import org.springframework.stereotype.Service;
 
 /**

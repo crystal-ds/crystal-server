@@ -6,7 +6,7 @@
 
 
 	<bean id="yetAnotherModel" name="anotherFileExample"
-		class="org.mitre.crystal.model.instance.DummyModel">
+		class="org.mitre.crystal.model.impl.DummyModel">
 		<property name="name" value="yetAnotherBean"></property>
 		<property name="description"
 			value="Here is a another bean added in a remote file">

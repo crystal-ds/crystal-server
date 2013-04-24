@@ -37,8 +37,6 @@
 
 	</bean>
 
-
-
 	<context:component-scan base-package="org.mitre.crystal" />
 
 
@@ -93,7 +91,7 @@
 
 	<import resource="modelExample.xml" />
 	<bean id="inMemoryModelRepository"
-		class="org.mitre.crystal.repository.impl.InMemoryModelRepository">
+		class="org.mitre.crystal.repository.model.impl.InMemoryModelRepository">
 		<property name="mapOfModels">
 			<map>
 				<entry>
@@ -118,13 +116,13 @@
 		</property>
 	</bean>
 
-	<bean id="dummyModel" class="org.mitre.crystal.model.instance.DummyModel">
+	<bean id="dummyModel" class="org.mitre.crystal.model.impl.DummyModel">
 		<property name="id">
 			<value>1</value>
 		</property>
 	</bean>
 
-	<bean class="org.mitre.crystal.model.instance.DummyModel" id="dummyModel2">
+	<bean class="org.mitre.crystal.model.impl.DummyModel" id="dummyModel2">
 		<property name="name">
 			<value>BigOlFakeModel</value>
 		</property>

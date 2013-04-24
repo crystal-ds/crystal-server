@@ -16,7 +16,7 @@ import org.codehaus.jackson.impl.DefaultPrettyPrinter;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.mitre.crystal.model.InputNode;
 import org.mitre.crystal.model.RunnableModel;
-import org.mitre.crystal.repository.impl.JPABatchJobRepository;
+import org.mitre.crystal.repository.batchJob.impl.JPABatchJobRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
