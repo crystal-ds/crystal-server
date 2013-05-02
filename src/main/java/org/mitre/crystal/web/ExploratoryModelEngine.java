@@ -85,7 +85,7 @@ public class ExploratoryModelEngine {
 		
 		BatchJob job = batchJobService.createBatchJob(model, vals);		
 		
-		//m.addAttribute("batchjob", job);
+		m.addAttribute("batchjob", job);
 		
 		return "batchJobIdView";
 	}
@@ -95,9 +95,9 @@ public class ExploratoryModelEngine {
 		log.info("test Running model " + id);
 		RunnableModel model = service.getModel(id);
 
-		List<Map<String,InputNode>> l = new ArrayList<>();
-		Map<String,InputNode> m1 = new HashMap();
-		Map<String,String> prop = new HashMap();
+		List<Map<String,InputNode>> l = new ArrayList<Map<String, InputNode>>();
+		Map<String,InputNode> m1 = new HashMap<String, InputNode>();
+		Map<String,String> prop = new HashMap<String, String>();
 		InputNode i = new InputNode();
 		i.setName("Input 1");
 		i.setType(InputType.CHECKBOX);
@@ -120,9 +120,9 @@ public class ExploratoryModelEngine {
 		RunnableModel model = service.getModel(id);
 		
 		
-		List<Map<String,InputNode>> l = new ArrayList<>();
-		Map<String,InputNode> m1 = new HashMap();
-		Map<String,String> prop = new HashMap();
+		List<Map<String,InputNode>> l = new ArrayList<Map<String, InputNode>>();
+		Map<String,InputNode> m1 = new HashMap<String, InputNode>();
+		Map<String,String> prop = new HashMap<String, String>();
 		InputNode i = new InputNode();
 		i.setName("Input 1");
 		i.setType(InputType.CHECKBOX);
