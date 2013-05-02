@@ -14,9 +14,9 @@ import com.google.common.collect.ImmutableSet;
 public enum InputType {
 	//TODO Change these form UI Types to Input types (Example: RANGE("min","max","stepsize", "upper", "lower"))
 	SIMPLE("min", "max", "value"),
-	RADIO_BUTTON("checked", "group"),
-	CHECKBOX("checked"),	
-	RANGESLIDER("min", "max", "low","high");
+	RADIO_BUTTON("checked", "group","value"),
+	CHECKBOX("checked", "value"),	
+	RANGESLIDER("min", "max", "low","high", "value");
 	
 	private Set<String> propertyNames;
 	

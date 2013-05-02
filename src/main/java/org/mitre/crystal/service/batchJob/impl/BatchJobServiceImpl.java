@@ -4,11 +4,15 @@
 package org.mitre.crystal.service.batchJob.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.mitre.crystal.model.BatchJob;
 import org.mitre.crystal.model.BatchJobStatus;
+import org.mitre.crystal.model.InputNode;
 import org.mitre.crystal.model.ModelRunInstance;
 import org.mitre.crystal.model.RunnableModel;
 import org.mitre.crystal.repository.BatchJobRepository;
@@ -41,24 +45,37 @@ public class BatchJobServiceImpl implements BatchJobService {
 	 * @see org.mitre.crystal.service.BatchJobInterface#createBatchJob(org.mitre.crystal.model.ModelSpecification, org.mitre.crystal.model.ModelRunInputValues)
 	 */
 	@Override
-	public BatchJob createBatchJob(RunnableModel model, Map<String,String> vals){
+	public BatchJob createBatchJob(RunnableModel model, List<Map<String,InputNode>> vals){
 		log.debug("Creating Batch Job");
 		BatchJob bj = new BatchJob();
 		bj.setModelID(model.getId());
 		
-		List <Map<String,String>> variations = idv.diversify(model, vals);
+		//List <Map<String,String>> variations = idv.diversify(model, vals);
+		
 		List <ModelRunInstance> instances = new ArrayList<ModelRunInstance>();
 		//TEST CODE
 		//List <ModelRunInputValues> variations = new ArrayList<ModelRunInputValues>();
 		//variations.add(vals);
+		
+		Map<String,String> inputs = new HashMap<String, String>();
+		List<Map<String,InputNode>> varaitations = vals;
+		for (Map<String, InputNode> map : varaitations) {
+			for(Entry<String, InputNode> entry : map.entrySet()){
+				inputs.put(entry.getKey(), entry.getValue().getProperty("value"));
+		}
 
-		//END test code
-		for (Map<String,String> inputVariation : variations) {
 			ModelRunInstance mri = new ModelRunInstance();
-			//mri.setModel(model);
-			mri.setInputValues(inputVariation);
+			mri.setInputValues(inputs);
 			instances.add(mri);
 		}
+
+		//END test code
+//		for (Map<String,String> inputVariation : variations) {
+//			ModelRunInstance mri = new ModelRunInstance();
+//			//mri.setModel(model);
+//			mri.setInputValues(inputVariation);
+//			instances.add(mri);
+//		}
 		
 		bj.setInstances(instances);
 		
@@ -99,7 +116,7 @@ public class BatchJobServiceImpl implements BatchJobService {
 	 * @see org.mitre.crystal.service.BatchJobInterface#createAndRunBatchJob(org.mitre.crystal.model.ModelSpecification, org.mitre.crystal.model.ModelRunInputValues)
 	 */
 	@Override
-	public BatchJob createAndRunBatchJob(RunnableModel model, Map<String,String> input){
+	public BatchJob createAndRunBatchJob(RunnableModel model, List<Map<String,InputNode>> input){
 		log.info("create And run BatchJob");
 		BatchJob batchjob = createBatchJob(model, input);
 		runBatchJob(batchjob.getId());
