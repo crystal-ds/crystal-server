@@ -83,9 +83,9 @@ public class ExploratoryModelEngine {
 		log.info("Running model " + id + " using inputs: " +vals );
 		RunnableModel model = service.getModel(id);
 		
-		BatchJob job = batchJobService.createBatchJob(model, vals);		
+		BatchJob job = batchJobService.createAndRunBatchJob(model, vals);		
 		
-		m.addAttribute("batchjob", job);
+		m.addAttribute("batchJob", job);
 		
 		return "batchJobIdView";
 	}
