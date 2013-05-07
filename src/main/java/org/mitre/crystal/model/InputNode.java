@@ -27,7 +27,7 @@ import org.mitre.crystal.model.json.InputNodeSerializer;
  * @author tmlewis
  *
  */
-@JsonSerialize (using = InputNodeSerializer.class)
+//@JsonSerialize (using = InputNodeSerializer.class)
 public class InputNode  implements Serializable{
 	
 	/**

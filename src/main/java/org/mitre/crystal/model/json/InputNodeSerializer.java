@@ -30,7 +30,7 @@ public class InputNodeSerializer extends JsonSerializer<InputNode>{
 		jgen.writeStringField("type", value.getType().name().toLowerCase());
 		
 		Set<String> properties =  value.getType().getPropertyNames();
-		
+		jgen.writeFieldName("properties");
 		for (String prop : properties) {
 			jgen.writeObjectField(prop, value.getProperty(prop));
 		}

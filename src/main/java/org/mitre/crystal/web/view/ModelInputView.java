@@ -65,15 +65,17 @@ public class ModelInputView extends AbstractView {
 			
 			for (Iterator<InputNode> iterator = l.iterator(); iterator.hasNext();) {
 				InputNode inputNode = (InputNode) iterator.next();
-				//mapper.writeTree(jsonGenerator, on);
+//				jsonGenerator.writeStringField("name", inputNode.getName());
+//				jsonGenerator.writeStringField("type", inputNode.getType().toString());
+//				jsonGenerator.writeStringField("properties", inputNode.getProperties().toString());
 				jsonGenerator.writeObjectField(inputNode.getName(), inputNode);
 			
 			}
 			jsonGenerator.writeEndObject();
 			jsonGenerator.flush();
 			
-			//TODO this could be done...smoother
-			
+//			String inputs = mapper.writeValueAsString(m.getInputs());
+//			response.getWriter().write(inputs);
 			//response.getWriter().write(writer.toString());
 		}
 	}

@@ -73,7 +73,7 @@ public class BatchJobServiceImpl implements BatchJobService {
 				Object o = map.get(entry.getKey());
 				LinkedHashMap l = (LinkedHashMap) o;
 				Object o1 = l.get("name").toString();
-				Object o2 = l.get("properties");
+				Object o2 = l.get("properties").toString();
 				if (o1 != null && o2 != null) {
 					inputs.put((String) o1, (String) o2);
 

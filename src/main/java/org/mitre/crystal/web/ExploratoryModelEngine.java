@@ -74,6 +74,7 @@ public class ExploratoryModelEngine {
 		RunnableModel model = service.getModel(id);
 		m.addAttribute("model", model);
 		
+		//return model.getInputs();
 		return "modelInputView";
 	}
 	
@@ -142,9 +143,6 @@ public class ExploratoryModelEngine {
 		
 		return "batchJobIdView";
 	}
-	
-	
-	
 	@RequestMapping(value = "/resultsets/{id}", method=RequestMethod.HEAD )
 	public String getStatus(@PathVariable("id") long id, Model m){
 		log.debug("client is checking on result status " + id);
