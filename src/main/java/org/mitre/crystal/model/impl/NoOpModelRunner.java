@@ -21,7 +21,7 @@ public class NoOpModelRunner extends RunnableModel {
 	 * 
 	 */
 	public NoOpModelRunner() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	/* (non-Javadoc)

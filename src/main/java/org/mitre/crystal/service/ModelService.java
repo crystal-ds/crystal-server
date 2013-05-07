@@ -13,7 +13,7 @@ import org.mitre.crystal.model.RunnableModel;
  */
 public interface  ModelService {
 	
-	//TODO database integration
+
 	
 	public RunnableModel saveModel(RunnableModel modelSpec);
 	public RunnableModel getModel(long id);
