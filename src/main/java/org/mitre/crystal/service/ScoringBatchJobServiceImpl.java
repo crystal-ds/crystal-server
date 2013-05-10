@@ -11,11 +11,13 @@ import org.mitre.crystal.repository.ScoringBatchJobRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @author tmlewis
  *
  */
+@Service("ScoringBatchJobService")
 public class ScoringBatchJobServiceImpl implements ScoringBatchJobService {
 
 	
