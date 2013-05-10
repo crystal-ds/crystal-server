@@ -36,7 +36,7 @@ public class InMemoryScoringModelRepository implements ScoringModelRepository {
 	 */
 	@Override
 	public List<ScoringModel> getAllModels() {
-		ArrayList<ScoringModel> l = new ArrayList<>(mapOfModels.values());
+		ArrayList<ScoringModel> l = new ArrayList<ScoringModel>(mapOfModels.values());
 		return l;
 	}
 

@@ -29,11 +29,11 @@ public class DummyScoringModelImpl extends ScoringModel {
 	public SMBatchJob score(ScoringModelInput vals, BatchJob job) {
 		SMBatchJob sbj = new SMBatchJob();
 		
-		Map<String, String> m = new HashMap<>();
+		Map<String, String> m = new HashMap<String, String>();
 		m.put("Scrore1", "100");
 		m.put("Score2", "25");
 		List<ModelRunInstance> l = job.getInstances();
-		List<ModelRunInstance> scoreList = new ArrayList<>();
+		List<ModelRunInstance> scoreList = new ArrayList<ModelRunInstance>();
 		for (ModelRunInstance modelRunInstance : l) {
 			ModelRunInstance mri = new ModelRunInstance();
 			//match up the ids so they can be synced up
