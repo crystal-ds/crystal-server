@@ -5,7 +5,6 @@ package org.mitre.crystal.service;
 
 import java.util.List;
 
-import org.mitre.crystal.model.RunnableModel;
 import org.mitre.crystal.model.ScoringModel;
 
 /**

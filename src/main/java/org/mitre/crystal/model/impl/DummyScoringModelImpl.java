@@ -8,8 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+
 import org.mitre.crystal.model.BatchJob;
+import org.mitre.crystal.model.InputNode;
+import org.mitre.crystal.model.InputType;
 import org.mitre.crystal.model.ModelRunInstance;
+import org.mitre.crystal.model.ModelSpecification;
 import org.mitre.crystal.model.SMBatchJob;
 import org.mitre.crystal.model.ScoringModel;
 import org.mitre.crystal.model.ScoringModelInput;
@@ -30,7 +35,7 @@ public class DummyScoringModelImpl extends ScoringModel {
 		SMBatchJob sbj = new SMBatchJob();
 		
 		Map<String, String> m = new HashMap<String, String>();
-		m.put("Scrore1", "100");
+		m.put("Score1", "100");
 		m.put("Score2", "25");
 		List<ModelRunInstance> l = job.getInstances();
 		List<ModelRunInstance> scoreList = new ArrayList<ModelRunInstance>();
@@ -44,5 +49,51 @@ public class DummyScoringModelImpl extends ScoringModel {
 		sbj.setInstances(scoreList);
 		
 	return sbj;
+	}
+	
+	public DummyScoringModelImpl(){
+
+	}
+	
+	@PostConstruct
+	public void init(){
+
+		
+		this.setModelSpec(new ModelSpecification());
+		this.setName("ScoreThisModel");
+		this.setDescription("This is a dummy model since the real model doesn't exist yet. PLEASE DON'T USE");
+
+		InputNode ipn1 = new InputNode();
+		ipn1.setName("InputNode1");
+		ipn1.setType(InputType.CHECKBOX);
+		Map<String, String> m1 = ipn1.getProperties();
+		m1.put("checked", "true");
+		ipn1.setProperties(m1);
+		ipn1.setProperties(m1);
+
+		InputNode ipn2 = new InputNode();
+		ipn2.setName("InputNode2");
+		ipn2.setType(InputType.SIMPLE);
+		Map<String, String> m = new HashMap<String, String>();
+		m.put("min", "1");
+		m.put("max", "5");
+		m.put("value", "3");
+		ipn2.setProperties(m);
+
+		InputNode ipn3 = new InputNode();
+		ipn3.setName("InputNode3");
+		ipn3.setType(InputType.RANGESLIDER);
+		Map<String, String> m3 = new HashMap<String, String>();
+		m3.put("min", "0");
+		m3.put("max", "10");
+		m3.put("low", "5");
+		m3.put("high", "7");
+		ipn3.setProperties(m3);
+
+		ArrayList<InputNode> inputList = new ArrayList<InputNode>();
+		inputList.add(ipn1);
+		inputList.add(ipn2);
+		inputList.add(ipn3);
+		this.setInputs(inputList);
 	}
 }

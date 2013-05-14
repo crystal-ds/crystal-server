@@ -3,7 +3,6 @@
  */
 package org.mitre.crystal.repository;
 
-import org.mitre.crystal.model.BatchJob;
 import org.mitre.crystal.model.SMBatchJob;
 
 /**

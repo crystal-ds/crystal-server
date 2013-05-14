@@ -6,7 +6,6 @@ package org.mitre.crystal.repository.scoringBatchJob.impl;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.apache.log4j.Logger;
 import org.mitre.crystal.model.SMBatchJob;
 import org.mitre.crystal.repository.ScoringBatchJobRepository;
 import org.slf4j.LoggerFactory;

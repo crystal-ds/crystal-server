@@ -31,8 +31,9 @@ public class ScoringModelServiceImpl implements ScoringModelService {
 	 */
 	@Override
 	public List<ScoringModel> getAllModels() {
-		log.info("Saving model in the service layer");
+		log.info("Requst for all models sending " + modelRepo.getAllModels().size() + " models back");
 		return modelRepo.getAllModels();
+		
 	}
 
 	/* (non-Javadoc)

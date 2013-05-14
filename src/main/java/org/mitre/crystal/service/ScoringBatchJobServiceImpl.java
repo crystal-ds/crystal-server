@@ -42,7 +42,7 @@ public class ScoringBatchJobServiceImpl implements ScoringBatchJobService {
 		log.info("Scoring batchJob " + job.getId());
 		SMBatchJob score = model.score(vals,job);
 		sbjr.save(score);
-		return null;
+		return score;
 	}
 
 	/* (non-Javadoc)

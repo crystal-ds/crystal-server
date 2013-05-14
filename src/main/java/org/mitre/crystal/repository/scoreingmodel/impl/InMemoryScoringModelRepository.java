@@ -1,13 +1,16 @@
 /**
  * 
  */
-package org.mitre.crystal.repository;
+package org.mitre.crystal.repository.scoreingmodel.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.mitre.crystal.model.ScoringModel;
+import org.mitre.crystal.repository.ScoringModelRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -16,12 +19,24 @@ import org.springframework.stereotype.Repository;
  * @author tmlewis
  *
  */
-@Repository("inMemoryScoreingModelRepository")
+@Repository("inMemoryScoringModelRepository")
 public class InMemoryScoringModelRepository implements ScoringModelRepository {
 	final Logger log = LoggerFactory.getLogger(InMemoryScoringModelRepository.class);
 	private Map<Long, ScoringModel> mapOfModels;
 	
 	
+	public Map<Long, ScoringModel> getMapOfModels() {
+		return mapOfModels;
+	}
+
+	public void setMapOfModels(Map<Long, ScoringModel> mapOfModels) {
+		Set<Entry<Long, ScoringModel>> s = mapOfModels.entrySet();
+		for (Entry<Long, ScoringModel> entry : s) {
+			entry.getValue().setId(entry.getKey());
+		}
+		this.mapOfModels = mapOfModels;
+	}
+
 	/* (non-Javadoc)
 	 * @see org.mitre.crystal.repository.ScoringModelRepository#getModel(long)
 	 */

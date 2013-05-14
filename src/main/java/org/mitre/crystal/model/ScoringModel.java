@@ -6,15 +6,16 @@ package org.mitre.crystal.model;
 import java.io.Serializable;
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 /**
  * @author tmlewis
  *
  */
 public abstract class ScoringModel implements Serializable{
 
-	//TODO
+
 	private ModelSpecification modelSpec;
-	
 	public String getName() {
 		return modelSpec.getName();
 	}
@@ -44,13 +45,6 @@ public abstract class ScoringModel implements Serializable{
 	}
 
 
-
-	public int hashCode() {
-		return modelSpec.hashCode();
-	}
-
-
-
 	public void setId(Long id) {
 		modelSpec.setId(id);
 	}
@@ -65,12 +59,6 @@ public abstract class ScoringModel implements Serializable{
 
 	public void setInputs(List<InputNode> inputs) {
 		modelSpec.setInputs(inputs);
-	}
-
-
-
-	public String toString() {
-		return modelSpec.toString();
 	}
 
 
@@ -94,6 +82,7 @@ public abstract class ScoringModel implements Serializable{
 	/**
 	 * @return the modelSpec
 	 */
+	@JsonIgnore
 	public ModelSpecification getModelSpec() {
 		return modelSpec;
 	}

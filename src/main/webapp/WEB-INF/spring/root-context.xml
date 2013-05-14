@@ -122,6 +122,7 @@
 		</property>
 	</bean>
 
+
 	<bean class="org.mitre.crystal.model.impl.DummyModel" id="dummyModel2">
 		<property name="name">
 			<value>BigOlFakeModel</value>
@@ -132,7 +133,30 @@
 		<property name="id">
 			<value>2</value>
 		</property>
+
+
 	</bean>
+	<bean id="dummyScoringModel" class="org.mitre.crystal.model.impl.DummyScoringModelImpl">
+<!-- 		<property name="id">
+			<value>1</value>
+		</property> -->
+	</bean>
+
+
+	<bean id="inMemoryScoringModelRepository"
+		class="org.mitre.crystal.repository.scoreingmodel.impl.InMemoryScoringModelRepository">
+		<property name="mapOfModels">
+			<map>
+				<entry>
+					<key>
+						<value>1</value>
+					</key>
+					<ref bean="dummyScoringModel" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 </beans>

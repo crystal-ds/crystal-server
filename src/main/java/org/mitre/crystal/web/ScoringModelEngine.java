@@ -8,14 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.mitre.crystal.model.BatchJob;
-import org.mitre.crystal.model.InputNode;
-import org.mitre.crystal.model.RunnableModel;
 import org.mitre.crystal.model.SMBatchJob;
 import org.mitre.crystal.model.ScoringModel;
 import org.mitre.crystal.model.ScoringModelInput;
 import org.mitre.crystal.service.BatchJobService;
-import org.mitre.crystal.service.ScoringModelService;
 import org.mitre.crystal.service.ScoringBatchJobService;
+import org.mitre.crystal.service.ScoringModelService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,14 +87,13 @@ public class ScoringModelEngine {
 		BatchJob job = batchJobService.getBatchJob(vals.getBatchJobId());	
 		SMBatchJob scores = scoreService.score(vals,job,model);
 		
-		m.addAttribute("batchJob", scores);
+		m.addAttribute("scoreBatchJob", scores);
 		
-		return "batchJobIdView";
+		return "scoreBatchJobView";
 	}
 	@RequestMapping(value = "/resultsets/{id}", method=RequestMethod.HEAD )
 	public String getStatus(@PathVariable("id") long id, Model m){
 		log.debug("client is checking on result status " + id);
-		//TODOcreate httpcodeview bean
 		
 		SMBatchJob job = scoreService.getSMBatchJob(id);
 			
@@ -113,5 +110,15 @@ public class ScoringModelEngine {
 		return job;
 		
 		
+	}
+	
+	@RequestMapping(value = "/test1", method=RequestMethod.GET, produces="application/json" )
+	public @ResponseBody ScoringModelInput testCode(){
+		log.info("testing");
+		ScoringModel model = service.getModel(1);
+		ScoringModelInput smi = new ScoringModelInput();
+		smi.setBatchJobId((long) 1);
+		smi.setInputs(model.getInputs());
+		return smi;
 	}
 }

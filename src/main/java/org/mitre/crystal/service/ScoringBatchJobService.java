@@ -4,7 +4,6 @@
 package org.mitre.crystal.service;
 
 import org.mitre.crystal.model.BatchJob;
-import org.mitre.crystal.model.RunnableModel;
 import org.mitre.crystal.model.SMBatchJob;
 import org.mitre.crystal.model.ScoringModel;
 import org.mitre.crystal.model.ScoringModelInput;
