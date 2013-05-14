@@ -4,6 +4,7 @@
 package org.mitre.crystal.model.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.mitre.crystal.model.InputType;
 import org.mitre.crystal.model.ModelRunInstance;
 import org.mitre.crystal.model.ModelSpecification;
 import org.mitre.crystal.model.SMBatchJob;
+import org.mitre.crystal.model.ScoreRunInstance;
 import org.mitre.crystal.model.ScoringModel;
 import org.mitre.crystal.model.ScoringModelInput;
 
@@ -38,15 +40,23 @@ public class DummyScoringModelImpl extends ScoringModel {
 		m.put("Score1", "100");
 		m.put("Score2", "25");
 		List<ModelRunInstance> l = job.getInstances();
-		List<ModelRunInstance> scoreList = new ArrayList<ModelRunInstance>();
+		List<ScoreRunInstance> scoreList = new ArrayList<ScoreRunInstance>();
+		
 		for (ModelRunInstance modelRunInstance : l) {
-			ModelRunInstance mri = new ModelRunInstance();
+			//ModelRunInstance mri = new ModelRunInstance();
 			//match up the ids so they can be synced up
-			mri.setId(modelRunInstance.getId()); 
-			mri.setOutputValues(m);
-			scoreList.add(mri);
+			//mri.setId(modelRunInstance.getId());
+			//mri.);
+			//mri.setInputValues(modelRunInstance.getInputValues());
+			//mri.setOutputValues(m);
+			//scoreList.add(mri);
+			ScoreRunInstance sri = new ScoreRunInstance();
+			sri.setMriJobInstanceID(modelRunInstance.getId());
+			sri.setOutputValues(m);
+			scoreList.add(sri);
 		}
 		sbj.setInstances(scoreList);
+		sbj.setScoringModelID(this.getId());
 		
 	return sbj;
 	}

@@ -4,6 +4,7 @@
 package org.mitre.crystal.service;
 
 import org.mitre.crystal.model.BatchJob;
+import org.mitre.crystal.model.BatchJobStatus;
 import org.mitre.crystal.model.SMBatchJob;
 import org.mitre.crystal.model.ScoringModel;
 import org.mitre.crystal.model.ScoringModelInput;
@@ -41,6 +42,7 @@ public class ScoringBatchJobServiceImpl implements ScoringBatchJobService {
 	public SMBatchJob score(ScoringModelInput vals, BatchJob job, ScoringModel model) {
 		log.info("Scoring batchJob " + job.getId());
 		SMBatchJob score = model.score(vals,job);
+		score.setStatus(BatchJobStatus.COMPLETED);
 		sbjr.save(score);
 		return score;
 	}

@@ -27,32 +27,32 @@ import javax.persistence.Table;
 public class SMBatchJob {
 
 	
-	private List<ModelRunInstance> 	instances;
-	private Long id;
+	private List<ScoreRunInstance> 	instances;
+	private Long smBatchJobid;
 	private BatchJobStatus status;
 	//private ModelSpecification model;
-	private Long modelID;
+	private Long scoringModelID;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="batch_id", referencedColumnName="id")
-	public List<ModelRunInstance> getInstances() {
+	@JoinColumn(name="batch_id", referencedColumnName="sm_batch_job_id")
+	public List<ScoreRunInstance> getInstances() {
 		return instances;
 	}
 	
 	
-	public void setInstances(List<ModelRunInstance> instances) {
+	public void setInstances(List<ScoreRunInstance> instances) {
 		this.instances = instances;
 	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column (name = "id")
-	public Long getId() {
-		return id;
+	@Column (name = "sm_batch_job_id")
+	public Long getSmBatchJobid() {
+		return smBatchJobid;
 	}
 	
-	public void setId(Long id) {
-		this.id = id;
+	public void setSmBatchJobid(Long id) {
+		this.smBatchJobid = id;
 	}
 	
 	@Enumerated (EnumType.STRING)
@@ -65,11 +65,11 @@ public class SMBatchJob {
 	}
 	
 	@Column(name="model_id")
-	public Long getModelID() {
-		return modelID;
+	public Long getScoringModelID() {
+		return scoringModelID;
 	}
-	public void setModelID(Long modelID) {
-		this.modelID = modelID;
+	public void setScoringModelID(Long modelID) {
+		this.scoringModelID = modelID;
 	}
 
 

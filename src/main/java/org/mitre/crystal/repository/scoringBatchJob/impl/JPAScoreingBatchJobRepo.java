@@ -41,7 +41,7 @@ public class JPAScoreingBatchJobRepo implements ScoringBatchJobRepository {
 	@Override
 	@Transactional
 	public SMBatchJob save(SMBatchJob score) {
-		if(score.getId() == null){
+		if(score.getSmBatchJobid() == null){
 			manager.persist(score);
 			manager.flush();
 			return score;
@@ -59,7 +59,7 @@ public class JPAScoreingBatchJobRepo implements ScoringBatchJobRepository {
 	@Override
 	@Transactional
 	public void deleteBatchJob(SMBatchJob job) {
-		SMBatchJob s = getBatchJob(job.getId());
+		SMBatchJob s = getBatchJob(job.getSmBatchJobid());
 		if (s != null){
 			manager.remove(job);
 		}
