@@ -35,6 +35,10 @@ public class ScoreRunInstance {
 	private Map <String,String> outputValues;
 	private Date timestamp;
 	
+	public ScoreRunInstance() {
+		setTimestamp(new Date());
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -73,6 +77,7 @@ public class ScoreRunInstance {
 	public Date getTimestamp() {
 		return timestamp;
 	}
+	
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
 	}

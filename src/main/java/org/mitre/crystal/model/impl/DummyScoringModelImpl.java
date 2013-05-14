@@ -53,7 +53,9 @@ public class DummyScoringModelImpl extends ScoringModel {
 			ScoreRunInstance sri = new ScoreRunInstance();
 			sri.setMriJobInstanceID(modelRunInstance.getId());
 			sri.setOutputValues(m);
+			sri.setTimestamp(new Date());
 			scoreList.add(sri);
+			
 		}
 		sbj.setInstances(scoreList);
 		sbj.setScoringModelID(this.getId());
