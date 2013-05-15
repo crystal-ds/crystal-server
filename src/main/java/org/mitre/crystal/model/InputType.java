@@ -16,7 +16,17 @@ public enum InputType {
 	SIMPLE("min", "max", "value"),
 	RADIO_BUTTON("checked", "group"),
 	CHECKBOX("checked"),	
-	RANGESLIDER("min", "max", "low","high");
+	RANGESLIDER("min", "max", "low","high"),	
+	
+	RANGE("min","max","stepsize", "upper", "lower"),
+	INTEGER("min","max","value"),
+	FLOAT("min","max","value"),
+	STRING("regex", "value"),
+	DATE("format", "value"),
+	BOOLEAN("value");
+	
+	
+	
 	
 	private Set<String> propertyNames;
 	

@@ -112,6 +112,12 @@
 					</key>
 					<ref bean="yetAnotherModel" />
 				</entry>
+				<entry>
+					<key>
+						<value>4</value>
+					</key>
+					<ref bean="tailorModel" />
+				</entry>
 			</map>
 		</property>
 	</bean>
@@ -119,6 +125,12 @@
 	<bean id="dummyModel" class="org.mitre.crystal.model.impl.DummyModel">
 		<property name="id">
 			<value>1</value>
+		</property>
+	</bean>
+	
+	<bean id="tailorModel" class="org.mitre.crystal.model.impl.TailorModel">
+		<property name="id">
+			<value>4</value>
 		</property>
 	</bean>
 
