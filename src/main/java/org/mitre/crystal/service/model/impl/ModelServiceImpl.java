@@ -34,7 +34,6 @@ public class ModelServiceImpl implements ModelService {
 	 */
 	@Override
 	public RunnableModel getModel(long id) {
-		// TODO Auto-generated method stub
 		return modelRepo.getModel(id);
 	}
 
@@ -52,7 +51,7 @@ public class ModelServiceImpl implements ModelService {
 	 */
 	@Override
 	public List<RunnableModel> getAllModels() {
-		// TODO Auto-generated method stub
+		
 		return modelRepo.getAllModels();
 	}
 

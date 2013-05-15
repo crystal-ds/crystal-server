@@ -3,11 +3,14 @@
  */
 package org.mitre.crystal.web;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.mitre.crystal.model.BatchJob;
+import org.mitre.crystal.model.InputNode;
+import org.mitre.crystal.model.InputType;
 import org.mitre.crystal.model.RunnableModel;
 import org.mitre.crystal.service.BatchJobService;
 import org.mitre.crystal.service.ModelService;
@@ -71,18 +74,19 @@ public class ExploratoryModelEngine {
 		RunnableModel model = service.getModel(id);
 		m.addAttribute("model", model);
 		
+		//return model.getInputs();
 		return "modelInputView";
 	}
 	
 	
 	@RequestMapping(value = "/models/{id}/run", method=RequestMethod.POST, produces="application/json", consumes="application/json")
-	public String startRun(@PathVariable("id") long id, @RequestBody Map<String,String> vals, Model m){
-		log.debug("Running model " + id);
+	public String startRun(@PathVariable("id") long id, @RequestBody List<Map<String,InputNode>> vals, Model m){
+		log.info("Running model " + id + " using inputs: " +vals );
 		RunnableModel model = service.getModel(id);
 		
-		BatchJob job = batchJobService.createBatchJob(model, vals);		
+		BatchJob job = batchJobService.createAndRunBatchJob(model, vals);		
 		
-		m.addAttribute("batchjob", job);
+		m.addAttribute("batchJob", job);
 		
 		return "batchJobIdView";
 	}
@@ -91,10 +95,21 @@ public class ExploratoryModelEngine {
 	public String startTestRun(@PathVariable("id") long id, Model m){
 		log.info("test Running model " + id);
 		RunnableModel model = service.getModel(id);
+
+		List<Map<String,InputNode>> l = new ArrayList<Map<String, InputNode>>();
+		Map<String,InputNode> m1 = new HashMap<String, InputNode>();
+		Map<String,String> prop = new HashMap<String, String>();
+		InputNode i = new InputNode();
+		i.setName("Input 1");
+		i.setType(InputType.CHECKBOX);
+	
+		prop.put("checked", "True");
+		prop.put("value", "true");
+		i.setProperties(prop);
+		m1.put("Input 1", i);
+		l.add(m1);
 		
-		Map<String, String> inputs = new HashMap<String, String>();
-		inputs.put("thing1", "thing2");
-		BatchJob job = batchJobService.createBatchJob(model, inputs);		
+		BatchJob job = batchJobService.createBatchJob(model, l);		
 		
 		m.addAttribute("batchJob", job);
 		
@@ -105,17 +120,29 @@ public class ExploratoryModelEngine {
 		log.info("test Running model " + id);
 		RunnableModel model = service.getModel(id);
 		
+		
+		List<Map<String,InputNode>> l = new ArrayList<Map<String, InputNode>>();
+		Map<String,InputNode> m1 = new HashMap<String, InputNode>();
+		Map<String,String> prop = new HashMap<String, String>();
+		InputNode i = new InputNode();
+		i.setName("Input 1");
+		i.setType(InputType.CHECKBOX);
+	
+		prop.put("checked", "True");
+		prop.put("value", "true");
+		i.setProperties(prop);
+		m1.put("Input 1", i);
+		l.add(m1);
+		
+		
 		Map<String, String> inputs = new HashMap<String, String>();
 		inputs.put("thing1", "thing2");
-		BatchJob job = batchJobService.createAndRunBatchJob(model, inputs);		
+		BatchJob job = batchJobService.createAndRunBatchJob(model, l);		
 		
 		m.addAttribute("batchJob", job);
 		
 		return "batchJobIdView";
 	}
-	
-	
-	
 	@RequestMapping(value = "/resultsets/{id}", method=RequestMethod.HEAD )
 	public String getStatus(@PathVariable("id") long id, Model m){
 		log.debug("client is checking on result status " + id);

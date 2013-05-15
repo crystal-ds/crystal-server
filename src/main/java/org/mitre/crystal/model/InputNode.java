@@ -19,15 +19,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapKeyColumn;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.mitre.crystal.model.json.InputNodeSerializer;
-
 
 /**
  * @author tmlewis
  *
  */
-@JsonSerialize (using = InputNodeSerializer.class)
+//@JsonSerialize (using = InputNodeSerializer.class)
 public class InputNode  implements Serializable{
 	
 	/**
