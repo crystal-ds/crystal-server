@@ -58,16 +58,15 @@ public class DummyModel extends RunnableModel {
 	
 
 		InputNode ipn1 = new InputNode();
-		ipn1.setName("InputNode1");
-		ipn1.setType(InputType.CHECKBOX);
+		ipn1.setName("DummyModelInput_1");
+		ipn1.setType(InputType.BOOLEAN);
 		Map<String, String> m1 = ipn1.getProperties();
-		m1.put("checked", "true");
-		ipn1.setProperties(m1);
+		m1.put("value", "true");
 		ipn1.setProperties(m1);
 
 		InputNode ipn2 = new InputNode();
-		ipn2.setName("InputNode2");
-		ipn2.setType(InputType.SIMPLE);
+		ipn2.setName("DummyModelInput_2");
+		ipn2.setType(InputType.FLOAT);
 		Map<String, String> m = new HashMap<String, String>();
 		m.put("min", "1");
 		m.put("max", "5");
@@ -75,13 +74,14 @@ public class DummyModel extends RunnableModel {
 		ipn2.setProperties(m);
 
 		InputNode ipn3 = new InputNode();
-		ipn3.setName("InputNode3");
-		ipn3.setType(InputType.RANGESLIDER);
+		ipn3.setName("DummyModleInput_3");
+		ipn3.setType(InputType.RANGE);
 		Map<String, String> m3 = new HashMap<String, String>();
 		m3.put("min", "0");
 		m3.put("max", "10");
-		m3.put("low", "5");
-		m3.put("high", "7");
+		m3.put("upper", "5");
+		m3.put("lower", "7");
+		m3.put("value", "5");
 		ipn3.setProperties(m3);
 
 		ArrayList<InputNode> inputList = new ArrayList<InputNode>();
