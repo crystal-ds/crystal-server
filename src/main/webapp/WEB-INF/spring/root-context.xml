@@ -112,6 +112,12 @@
 					</key>
 					<ref bean="yetAnotherModel" />
 				</entry>
+				<entry>
+					<key>
+						<value>4</value>
+					</key>
+					<ref bean="tailorModel" />
+				</entry>
 			</map>
 		</property>
 	</bean>
@@ -121,6 +127,13 @@
 			<value>1</value>
 		</property>
 	</bean>
+	
+	<bean id="tailorModel" class="org.mitre.crystal.model.impl.TailorModel">
+		<property name="id">
+			<value>4</value>
+		</property>
+	</bean>
+
 
 	<bean class="org.mitre.crystal.model.impl.DummyModel" id="dummyModel2">
 		<property name="name">
@@ -132,7 +145,30 @@
 		<property name="id">
 			<value>2</value>
 		</property>
+
+
 	</bean>
+	<bean id="dummyScoringModel" class="org.mitre.crystal.model.impl.DummyScoringModelImpl">
+<!-- 		<property name="id">
+			<value>1</value>
+		</property> -->
+	</bean>
+
+
+	<bean id="inMemoryScoringModelRepository"
+		class="org.mitre.crystal.repository.scoreingmodel.impl.InMemoryScoringModelRepository">
+		<property name="mapOfModels">
+			<map>
+				<entry>
+					<key>
+						<value>1</value>
+					</key>
+					<ref bean="dummyScoringModel" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 </beans>

@@ -50,7 +50,6 @@ public class BatchJobServiceImpl implements BatchJobService {
 	 * crystal.model.ModelSpecification,
 	 * org.mitre.crystal.model.ModelRunInputValues)
 	 */
-	@Override
 	public BatchJob createBatchJob(RunnableModel model,
 			List<Map<String, InputNode>> vals) {
 		log.debug("Creating Batch Job");
@@ -100,7 +99,6 @@ public class BatchJobServiceImpl implements BatchJobService {
 	 * 
 	 * @see org.mitre.crystal.service.BatchJobInterface#getBatchJob(long)
 	 */
-	@Override
 	public BatchJob getBatchJob(long batchJobId) {
 		return bjr.getBatchJob(batchJobId);
 
@@ -111,7 +109,6 @@ public class BatchJobServiceImpl implements BatchJobService {
 	 * 
 	 * @see org.mitre.crystal.service.BatchJobInterface#runBatchJob(long)
 	 */
-	@Override
 	public BatchJobStatus runBatchJob(long batchJobID) {
 		log.info("Checking status for batch job" + batchJobID);
 		BatchJob bj = getBatchJob(batchJobID);
@@ -134,7 +131,6 @@ public class BatchJobServiceImpl implements BatchJobService {
 	 * mitre.crystal.model.ModelSpecification,
 	 * org.mitre.crystal.model.ModelRunInputValues)
 	 */
-	@Override
 	public BatchJob createAndRunBatchJob(RunnableModel model,
 			List<Map<String, InputNode>> input) {
 		log.info("create And run BatchJob");
@@ -148,7 +144,6 @@ public class BatchJobServiceImpl implements BatchJobService {
 	 * 
 	 * @see org.mitre.crystal.service.BatchJobInterface#deleteBatchJob(long)
 	 */
-	@Override
 	public void deleteBatchJob(BatchJob batchJob) {
 		log.info("removing batch job " + batchJob.getId());
 
