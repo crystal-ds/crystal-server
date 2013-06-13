@@ -64,7 +64,9 @@ public class DummyScoringModelImpl extends ScoringModel {
 	}
 	
 	public DummyScoringModelImpl(){
-
+		this.setModelSpec(new ModelSpecification());
+		this.setName("DummyScoringModel");
+		this.setDescription("Example scoring model");
 	}
 	
 	@PostConstruct
