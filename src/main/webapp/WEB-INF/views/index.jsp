@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Crystal</title>
+    <!-- Bootstrap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Bootstrap-->
+    <link rel="stylesheet" type="text/css" href="resources/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="resources/assets/css/bootstrap-responsive.css">
+	<link rel="stylesheet" type="text/less" href="resources/assets/less/responsive.less">
+	<link rel="stylesheet" type="text/css" href="resources/assets/css/font-awesome.min.css">
+	
+	<!--Jquey UI-->
+    <link rel="stylesheet" type="text/css" href="resources/css/prettify.css" >    
+    <link rel="stylesheet" type="text/css" href="resources/css/custom-theme/jquery-ui-1.10.0.custom.css" />
+
+	<!-- My Own-->
+    <link rel="stylesheet" type="text/css" href="resources/css/my.css" >    
+
+	
+	<!-- fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+
+
+  </head>
+  <body>
+    <div class='container'>		
+		<div class="span12">
+			<section id="wizard">
+			  <div class="page-header">
+	            <h1>Crystal</h1>
+	          </div>	
+				<div id="rootwizard">
+					<div class="navbar">
+					  <div class="navbar-inner hidden-phone">
+					    <div class="container">
+      					<ul>
+      					  <li><a href="#tab1" data-toggle="tab">Select Your Model</a></li>
+      						<li><a href="#tab2" data-toggle="tab">Provide Input to the Model</a></li>
+      						<li><a href="#tab3" data-toggle="tab">Third</a></li>
+      						<li><a href="#tab4" data-toggle="tab">Forth</a></li>
+      						<li><a href="#tab5" data-toggle="tab">Fifth</a></li>
+      						<li><a href="#tab6" data-toggle="tab">Sixth</a></li>
+      						<li><a href="#tab7" data-toggle="tab">Seventh</a></li>
+      					</ul>
+					     </div>
+					  </div>
+					</div>
+					<div id="bar" class="progress progress-striped active">
+		              <div class="bar"></div>
+		            </div>
+					<div class="tab-content">
+					   <div class="tab-pane" id="tab1">
+                    <h2> Select Model </h2>
+					          <div class="row-fluid">
+                      <div class="span4">
+                        <img src="resources/image/crystal.jpg" class="img-rounded" alt="ModelX">
+                      </div>
+                      <div class="span4">
+                        <img src="resources/image/crystal.jpg" class="img-rounded" alt="ModelX">
+                      </div>
+                      <div class="span4">
+                        <img src="resources/image/crystal.jpg" class="img-rounded" alt="ModelX">
+                      </div>                      
+                    </div>
+                    <hr>
+                    <div class="row-fluid">
+                      <div class="span4">
+                        <img src="resources/image/crystal.jpg" class="img-rounded" alt="ModelX">
+                      </div>
+                      <div class="span4">
+                        <img src="resources/image/crystal.jpg" class="img-rounded" alt="ModelX">
+                      </div>
+                      <div class="span4">
+                        <img src="resources/image/crystal.jpg" class="img-rounded" alt="ModelX">
+                      </div>                      
+                    </div>
+					    </div>						
+					    <div class="tab-pane container-fluid" id="tab2">
+							<div class="row-fluid">
+								<div class="span4">
+									
+				                        <img src="resources/image/crystal.jpg" class="img-rounded" alt="ModelX">
+				                    
+								</div>        
+								<div class="span8">
+									<div class="input_form">
+										<form>
+									    <fieldset>
+									    <legend>Provide Your Input to Model</legend>
+									    <label>Text Input 1</label>
+									    	<input type="text" placeholder="Type something">
+									    <span class="help-block">Hint</span>
+
+										<label>Checkbox Input 2</label>
+										<label class="checkbox">
+									    	<input type="checkbox"> A checkbox
+									    </label>
+										<span class="help-block">Hint</span>
+
+										<label>Slider Input 3</label>
+										<div id="slider"></div>
+										<span class="help-block">Hint</span>
+
+										<label>Datepicker Input 4</label>
+										<div id="datepicker"></div>
+										<span class="help-block">Hint</span>
+
+									    <button type="submit" class="btn">Submit</button>
+									    </fieldset>
+									    </form>						
+									</div>
+								</div>
+							</div>
+						
+							
+					    </div>
+						<div class="tab-pane" id="tab3">
+							3
+					    </div>
+						<div class="tab-pane" id="tab4">
+							4
+					    </div>
+						<div class="tab-pane" id="tab5">
+							5
+					    </div>
+						<div class="tab-pane" id="tab6">
+							6
+					    </div>
+						<div class="tab-pane" id="tab7">
+							7
+					    </div>
+            <hr>
+            <div id="bar" class="progress progress-striped active visible-phone">
+              <div class="bar"></div>
+            </div>
+						<ul class="pager wizard">
+							<li class="previous first" style="display:none;"><a href="#">First</a></li>
+							<li class="previous"><a href="#">Previous</a></li>
+							<li class="next last" style="display:none;"><a href="#">Last</a></li>
+						  	<li class="next"><a href="#">Next</a></li>
+						</ul>
+					</div>	
+				</div>
+				
+			</section>
+ 		</div>
+	</div>
+	
+	<!-- Components dependencies --> 
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="resources/assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="resources/assets/js/jquery-ui-1.10.0.custom.min.js"></script>
+	<script type="text/javascript" src="resources/js/jquery.bootstrap.wizard.js"></script>
+	<script type="text/javascript" src="resources/js/prettify.js"></script>	
+	
+	<!-- Custom -->
+	<script type="text/javascript" src="resources/js/my.js"></script>
+	<script type="text/javascript" src="resources/js/control.js"></script>
+
+  </body>
+</html>

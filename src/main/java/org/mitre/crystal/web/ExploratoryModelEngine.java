@@ -91,58 +91,58 @@ public class ExploratoryModelEngine {
 		return "batchJobIdView";
 	}
 	//TEST CODE
-	@RequestMapping(value = "/models/{id}/testrun", method=RequestMethod.GET, produces="application/json")
-	public String startTestRun(@PathVariable("id") long id, Model m){
-		log.info("test Running model " + id);
-		RunnableModel model = service.getModel(id);
-
-		List<Map<String,InputNode>> l = new ArrayList<Map<String, InputNode>>();
-		Map<String,InputNode> m1 = new HashMap<String, InputNode>();
-		Map<String,String> prop = new HashMap<String, String>();
-		InputNode i = new InputNode();
-		i.setName("Input 1");
-		i.setType(InputType.CHECKBOX);
-	
-		prop.put("checked", "True");
-		prop.put("value", "true");
-		i.setProperties(prop);
-		m1.put("Input 1", i);
-		l.add(m1);
-		
-		BatchJob job = batchJobService.createBatchJob(model, l);		
-		
-		m.addAttribute("batchJob", job);
-		
-		return "batchJobIdView";
-	}
-	@RequestMapping(value = "/models/{id}/testrun2", method=RequestMethod.GET, produces="application/json")
-	public String startTestRun2(@PathVariable("id") long id, Model m){
-		log.info("test Running model " + id);
-		RunnableModel model = service.getModel(id);
-		
-		
-		List<Map<String,InputNode>> l = new ArrayList<Map<String, InputNode>>();
-		Map<String,InputNode> m1 = new HashMap<String, InputNode>();
-		Map<String,String> prop = new HashMap<String, String>();
-		InputNode i = new InputNode();
-		i.setName("Input 1");
-		i.setType(InputType.CHECKBOX);
-	
-		prop.put("checked", "True");
-		prop.put("value", "true");
-		i.setProperties(prop);
-		m1.put("Input 1", i);
-		l.add(m1);
-		
-		
-		Map<String, String> inputs = new HashMap<String, String>();
-		inputs.put("thing1", "thing2");
-		BatchJob job = batchJobService.createAndRunBatchJob(model, l);		
-		
-		m.addAttribute("batchJob", job);
-		
-		return "batchJobIdView";
-	}
+//	@RequestMapping(value = "/models/{id}/testrun", method=RequestMethod.GET, produces="application/json")
+//	public String startTestRun(@PathVariable("id") long id, Model m){
+//		log.info("test Running model " + id);
+//		RunnableModel model = service.getModel(id);
+//
+//		List<Map<String,InputNode>> l = new ArrayList<Map<String, InputNode>>();
+//		Map<String,InputNode> m1 = new HashMap<String, InputNode>();
+//		Map<String,String> prop = new HashMap<String, String>();
+//		InputNode i = new InputNode();
+//		i.setName("Input 1");
+//		i.setType(InputType.CHECKBOX);
+//	
+//		prop.put("checked", "True");
+//		prop.put("value", "true");
+//		i.setProperties(prop);
+//		m1.put("Input 1", i);
+//		l.add(m1);
+//		
+//		BatchJob job = batchJobService.createBatchJob(model, l);		
+//		
+//		m.addAttribute("batchJob", job);
+//		
+//		return "batchJobIdView";
+//	}
+//	@RequestMapping(value = "/models/{id}/testrun2", method=RequestMethod.GET, produces="application/json")
+//	public String startTestRun2(@PathVariable("id") long id, Model m){
+//		log.info("test Running model " + id);
+//		RunnableModel model = service.getModel(id);
+//		
+//		
+//		List<Map<String,InputNode>> l = new ArrayList<Map<String, InputNode>>();
+//		Map<String,InputNode> m1 = new HashMap<String, InputNode>();
+//		Map<String,String> prop = new HashMap<String, String>();
+//		InputNode i = new InputNode();
+//		i.setName("Input 1");
+//		i.setType(InputType.CHECKBOX);
+//	
+//		prop.put("checked", "True");
+//		prop.put("value", "true");
+//		i.setProperties(prop);
+//		m1.put("Input 1", i);
+//		l.add(m1);
+//		
+//		
+//		Map<String, String> inputs = new HashMap<String, String>();
+//		inputs.put("thing1", "thing2");
+//		BatchJob job = batchJobService.createAndRunBatchJob(model, l);		
+//		
+//		m.addAttribute("batchJob", job);
+//		
+//		return "batchJobIdView";
+//	}
 	@RequestMapping(value = "/resultsets/{id}", method=RequestMethod.HEAD )
 	public String getStatus(@PathVariable("id") long id, Model m){
 		log.debug("client is checking on result status " + id);

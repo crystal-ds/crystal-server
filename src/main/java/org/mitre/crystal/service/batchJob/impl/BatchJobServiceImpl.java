@@ -68,7 +68,7 @@ public class BatchJobServiceImpl implements BatchJobService {
 		List<Map<String, InputNode>> varaitations = vals;
 		for (Map<String, InputNode> map : varaitations) {
 			for (Entry<String, InputNode> entry : map.entrySet()) {
-				// TODO fix this. Jackson doens't parse InputNode's nicely.
+				//FIXME make jackson parse this 
 				Object o = map.get(entry.getKey());
 				LinkedHashMap l = (LinkedHashMap) o;
 				Object o1 = l.get("name").toString();

@@ -11,13 +11,7 @@ import com.google.common.collect.ImmutableSet;
  * @author tmlewis
  *
  */
-public enum InputType {
-	//TODO Change these form UI Types to Input types (Example: RANGE("min","max","stepsize", "upper", "lower"))
-	SIMPLE("min", "max", "value"),
-	RADIO_BUTTON("checked", "group"),
-	CHECKBOX("checked"),	
-	RANGESLIDER("min", "max", "low","high"),	
-	
+public enum InputType {	
 	RANGE("min","max","stepsize", "upper", "lower"),
 	INTEGER("min","max","value"),
 	FLOAT("min","max","value"),
