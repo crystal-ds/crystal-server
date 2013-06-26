@@ -65,7 +65,7 @@ public class ScoringModelEngine {
 		
 		ScoringModel model = service.getModel(id);
 		m.addAttribute("model", model);
-		return "modelView";
+		return "scoringModelView";
 
 	}
 	@RequestMapping(value = "/models/{id}/inputs", method=RequestMethod.GET, produces="application/json")

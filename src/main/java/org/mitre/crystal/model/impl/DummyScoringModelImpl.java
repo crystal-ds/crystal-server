@@ -3,6 +3,8 @@
  */
 package org.mitre.crystal.model.impl;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -11,6 +13,9 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.mitre.crystal.model.BatchJob;
 import org.mitre.crystal.model.InputNode;
 import org.mitre.crystal.model.InputType;
@@ -20,6 +25,9 @@ import org.mitre.crystal.model.SMBatchJob;
 import org.mitre.crystal.model.ScoreRunInstance;
 import org.mitre.crystal.model.ScoringModel;
 import org.mitre.crystal.model.ScoringModelInput;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
 /**
  * @author tmlewis
@@ -34,9 +42,28 @@ public class DummyScoringModelImpl extends ScoringModel {
 
 	@Override
 	public SMBatchJob score(ScoringModelInput vals, BatchJob job) {
-		SMBatchJob sbj = new SMBatchJob();
 		
+		Resource r = new ClassPathResource("dummyData/output");
+		
+		
+		SMBatchJob sbj = new SMBatchJob();
+
+		ObjectMapper mapper = new ObjectMapper();
 		Map<String, String> m = new HashMap<String, String>();
+//		InputStream inputStream = getClass().getResourceAsStream("classpath:dummyData/output");
+//		
+//		try {
+//			m = mapper.readValue(inputStream,m.getClass());
+//		} catch (JsonParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (JsonMappingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		m.put("Score1", "100");
 		m.put("Score2", "25");
 		List<ModelRunInstance> l = job.getInstances();
