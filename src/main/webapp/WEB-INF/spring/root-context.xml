@@ -149,9 +149,9 @@
 
 	</bean>
 	<bean id="dummyScoringModel" class="org.mitre.crystal.model.impl.DummyScoringModelImpl">
-<!-- 		<property name="id">
-			<value>1</value>
-		</property> -->
+		<property name="resourceLocation">
+		<value>dummyData/output</value>
+		</property>
 	</bean>
 
 
