@@ -3,8 +3,13 @@
  */
 package org.mitre.crystal.repository.batchJob.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.mitre.crystal.model.BatchJob;
 import org.mitre.crystal.repository.BatchJobRepository;
@@ -18,6 +23,9 @@ import org.springframework.transaction.annotation.Transactional;
  *
  */
 @Repository("jpaBatchJobRepository")
+@NamedQueries({
+	@NamedQuery(name="BatchJob.findAll", query="SELECT * FROM score_batch_job")
+})
 public class JPABatchJobRepository implements BatchJobRepository {
 
 	final Logger log = LoggerFactory.getLogger(JPABatchJobRepository.class);
@@ -70,6 +78,15 @@ public class JPABatchJobRepository implements BatchJobRepository {
 		}
 		
 
+	}
+	/* (non-Javadoc)
+	 * @see org.mitre.crystal.repository.BatchJobRepository#getAllBatchJobs()
+	 */
+	@Override
+	public List<BatchJob> getAllBatchJobs() {
+	
+		Query q =  manager.createNamedQuery("BatchJob.findAll");
+		return q.getResultList();
 	}
 
 }

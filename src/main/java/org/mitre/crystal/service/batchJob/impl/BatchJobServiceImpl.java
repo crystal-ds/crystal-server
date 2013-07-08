@@ -149,4 +149,13 @@ public class BatchJobServiceImpl implements BatchJobService {
 
 		bjr.deleteBatchJob(batchJob);
 	}
+
+	/* (non-Javadoc)
+	 * @see org.mitre.crystal.service.BatchJobService#getAllBatchjobs()
+	 */
+	@Override
+	public List<BatchJob> getAllBatchjobs() {
+		log.info("get All Batchjobs");
+		return bjr.getAllBatchJobs();
+	}
 }

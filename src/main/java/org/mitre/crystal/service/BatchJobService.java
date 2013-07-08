@@ -26,6 +26,7 @@ public interface BatchJobService {
 
 	public abstract BatchJob createAndRunBatchJob(
 			RunnableModel model, List<Map<String,InputNode>> input);
+	public abstract List<BatchJob> getAllBatchjobs();
 
 
 	/**
