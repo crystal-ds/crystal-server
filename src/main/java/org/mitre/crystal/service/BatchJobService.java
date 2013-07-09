@@ -20,7 +20,7 @@ public interface BatchJobService {
 	public abstract BatchJob createBatchJob(RunnableModel model,
 			List<Map<String,InputNode>> vals);
 
-	public abstract BatchJob getBatchJob(long batchJobId);
+public abstract BatchJob getBatchJob(long batchJobId);
 
 	public abstract BatchJobStatus runBatchJob(long batchJobID);
 
