@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author tmlewis
@@ -38,12 +39,12 @@ public class UserModelEngine {
 	private ScoringBatchJobService scoringService;
 	
 	@RequestMapping(value = "/models", method=RequestMethod.GET, produces="application/json")
-	public List<BatchJob> getUserModels(Model m){
+	public @ResponseBody List<BatchJob> getUserModels(Model m){
 		return batchJobService.getAllBatchjobs();
 	}
 	
 	@RequestMapping(value = "/models/{id}", method=RequestMethod.POST, produces="application/json")
-	public Map<BatchJob,SMBatchJob> getModelData(@PathVariable("id") long id,  Model m){
+	public @ResponseBody Map<BatchJob,SMBatchJob> getModelData(@PathVariable("id") long id,  Model m){
 		HashMap<BatchJob, SMBatchJob> data = new HashMap<BatchJob, SMBatchJob>();
 		BatchJob bj = batchJobService.getBatchJob(id);
 		SMBatchJob smbj = scoringService.getScore(id);

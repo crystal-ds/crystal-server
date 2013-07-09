@@ -23,9 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
  *
  */
 @Repository("jpaBatchJobRepository")
-@NamedQueries({
-	@NamedQuery(name="BatchJob.findAll", query="SELECT * FROM score_batch_job")
-})
 public class JPABatchJobRepository implements BatchJobRepository {
 
 	final Logger log = LoggerFactory.getLogger(JPABatchJobRepository.class);
