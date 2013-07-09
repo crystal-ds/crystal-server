@@ -3,6 +3,8 @@
  */
 package org.mitre.crystal.repository;
 
+import java.util.List;
+
 import org.mitre.crystal.model.BatchJob;
 
 /**
@@ -27,5 +29,7 @@ public interface BatchJobRepository {
 	 * @param batchJob
 	 */
 	void deleteBatchJob(BatchJob batchJob);
+	
+	List<BatchJob> getAllBatchJobs();
 
 }
