@@ -4,6 +4,7 @@
 package org.mitre.crystal.model;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,34 +30,24 @@ import javax.persistence.Table;
 })
 public class WorkSpace {
 	
-	private long batchJobID;
-	private long modelID;
-	private long workSpaceID;
-	private List <ModelRunInstance> instances;
+	private Long batchJobID;
+	private Long workSpaceID;
+	private Map <ModelRunInstance,ScoreRunInstance> instances;
 
 	
 	public boolean contains(ModelRunInstance o) {
-		return instances.contains(o);
+		return instances.containsKey(o);
 	}
 
 	public boolean remove(ModelRunInstance o) {
-		return instances.remove(o);
-	}
-	
-	@Column(name="model_id")
-	public long getModelID() {
-		return modelID;
-	}
-
-	public void setModelID(long modelID) {
-		this.modelID = modelID;
+		return instances.remove(o) != null;
 	}
 
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column (name = "id")
-	public long getWorkSpaceID() {
+	@Column (name = "work_space_id")
+	public Long getWorkSpaceID() {
 		return workSpaceID;
 	}
 
@@ -65,18 +56,19 @@ public class WorkSpace {
 	}
 
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="batch_id", referencedColumnName="id")
-	public List<ModelRunInstance> getInstances() {
+	@JoinColumn(name="work_space_id", referencedColumnName="id")
+	public Map<ModelRunInstance,ScoreRunInstance> getInstances() {
 		return instances;
 	}
 
-	public void setInstances(List<ModelRunInstance> instances) {
+	public void setInstances(Map<ModelRunInstance,ScoreRunInstance> instances) {
 		this.instances = instances;
 	}
 
 	/**
 	 * @return the batchJobID
 	 */
+	@Column(name="batch_job_id")
 	public long getBatchJobID() {
 		return batchJobID;
 	}

@@ -3,9 +3,6 @@
  */
 package org.mitre.crystal.service;
 
-import java.util.List;
-
-import org.mitre.crystal.model.ModelRunInstance;
 import org.mitre.crystal.model.WorkSpace;
 
 /**
