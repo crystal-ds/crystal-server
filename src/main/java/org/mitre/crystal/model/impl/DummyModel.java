@@ -80,8 +80,8 @@ public class DummyModel extends RunnableModel {
 		m3.put("min", "0");
 		m3.put("max", "10");
 		m3.put("upper", "5");
-		m3.put("lower", "7");
-		m3.put("value", "5");
+		m3.put("lower", "5");
+		m3.put("value", "7");
 		ipn3.setProperties(m3);
 
 		ArrayList<InputNode> inputList = new ArrayList<InputNode>();
