@@ -3,10 +3,13 @@
  */
 package org.mitre.crystal.web;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.mitre.crystal.model.InputNode;
+import org.mitre.crystal.model.ModelRunInstance;
+import org.mitre.crystal.model.ScoreRunInstance;
 import org.mitre.crystal.model.WorkSpace;
 import org.mitre.crystal.service.ModelService;
 import org.mitre.crystal.service.WorkSpaceService;
@@ -68,6 +71,29 @@ public class WorkSpaceEngine {
 	
 	
 	//BELOW is some simple test code
+	
+	@RequestMapping(value = "/testupdate/", method =RequestMethod.GET, produces="application/json")
+	public @ResponseBody WorkSpace testUpdate(Model m){
+		log.info("testing update");
+		WorkSpace w = wss.getWorkSpace((long)1);
+		Map <ModelRunInstance,ScoreRunInstance> newInstances = new HashMap();
+		w.setInstances(newInstances);
+		return wss.updateWorkSpace(w);
+	}
+	@RequestMapping(value = "/testrestore/", method =RequestMethod.GET, produces="application/json")
+	public @ResponseBody WorkSpace testRestore(Model m){
+		log.info("Testing restore");
+		WorkSpace w = wss.getWorkSpace((long)1);
+		return wss.restoreWorkSpace(w);
+	}
+	@RequestMapping(value = "/testdelete/", method =RequestMethod.GET, produces="application/json")
+	public @ResponseBody WorkSpace testdelete(Model m){
+		log.info("Testing restore");
+		WorkSpace w = wss.getWorkSpace((long)1);
+		wss.deleteWorkSpace(w);
+		return wss.getWorkSpace((long)1);
+		
+	}
 	
 	
 }
