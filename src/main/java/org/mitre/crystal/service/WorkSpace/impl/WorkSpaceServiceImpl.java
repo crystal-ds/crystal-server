@@ -21,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 /**
  * @author tmlewis
@@ -49,7 +50,7 @@ public class WorkSpaceServiceImpl implements WorkSpaceService {
 		WorkSpace ws = new WorkSpace();
 		ws.setBatchJob(bj);
 		ws.setSmbj(sbj);
-		ws.setOffMask(new ArrayList<Long>());		
+		ws.setOffMask(new ArrayList<ModelRunInstance>());		
 		WorkSpace saved = wsr.save(ws);
 		return saved;
 
@@ -68,7 +69,7 @@ public class WorkSpaceServiceImpl implements WorkSpaceService {
 	 * @see org.mitre.crystal.service.WorkSpaceService#updateWorkSpace(java.util.List)
 	 */
 	@Override
-	public WorkSpace updateWorkSpace(Long workSpaceID, List<Long> mask) {
+	public WorkSpace updateWorkSpace(Long workSpaceID, List<ModelRunInstance> mask) {
 		log.info("updating workspace with id" + workSpaceID);
 		WorkSpace myWorkSpace = wsr.getWorkSpace(workSpaceID);
 		myWorkSpace.setOffMask(mask);
@@ -82,7 +83,7 @@ public class WorkSpaceServiceImpl implements WorkSpaceService {
 	@Override
 	public WorkSpace restoreWorkSpace(WorkSpace ws) {
 		WorkSpace update = wsr.getWorkSpace(ws.getWorkSpaceID());
-		update.setOffMask(new ArrayList<Long>());
+		update.setOffMask(new ArrayList<ModelRunInstance>());
 		wsr.save(ws);
 		return update;
 	}
@@ -93,6 +94,25 @@ public class WorkSpaceServiceImpl implements WorkSpaceService {
 	@Override
 	public void deleteWorkSpace(WorkSpace ws) {
 		wsr.delete(ws);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.mitre.crystal.service.WorkSpaceService#updateWorkSpaceWithLong(java.lang.Long, java.util.List)
+	 */
+	@Override
+	public WorkSpace updateWorkSpaceWithLong(Long workSpaceID, List<Long> mask) {
+		log.info("updating workspace with id" + workSpaceID);
+		WorkSpace myWorkSpace = wsr.getWorkSpace(workSpaceID);
+		ArrayList<ModelRunInstance> newMask = new ArrayList<ModelRunInstance>();
+		List<ModelRunInstance> fullList = myWorkSpace.getBatchJob().getInstances();
+		for (ModelRunInstance modelRunInstance : fullList) {
+			if(mask.contains(modelRunInstance.getId())){
+				newMask.add(modelRunInstance);
+			}
+		}
+		myWorkSpace.setOffMask(newMask);		
+		wsr.save(myWorkSpace);
+		return myWorkSpace;
 	}
 
 }

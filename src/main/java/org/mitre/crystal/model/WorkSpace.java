@@ -4,17 +4,26 @@
 package org.mitre.crystal.model;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 /**
  * @author tmlewis
@@ -28,12 +37,13 @@ import javax.persistence.Table;
 public class WorkSpace {
 	
 	private Long workSpaceID;
-	private List<Long> offMask;
-	private BatchJob bj;
+	private List<ModelRunInstance> offMask;
 	private SMBatchJob smbj;
+	private BatchJob batchJob;
 
 	
-	
+	@Basic
+	@Column(name = "sm_batch_job_id")
 	public SMBatchJob getSmbj() {
 		return smbj;
 	}
@@ -41,34 +51,9 @@ public class WorkSpace {
 	public void setSmbj(SMBatchJob smbj) {
 		this.smbj = smbj;
 	}
-
 	
-	
-	public boolean contains(Object o) {
-		return offMask.contains(o);
-	}
-
-	public boolean addAll(Collection<? extends Long> c) {
-		return offMask.addAll(c);
-	}
-
-	public boolean retainAll(Collection<?> c) {
-		return offMask.retainAll(c);
-	}
-
-	public void add(int index, Long element) {
-		offMask.add(index, element);
-	}
-
-	public Long remove(int index) {
-		return offMask.remove(index);
-	}
-
-	private BatchJob batchJob;
-
-	
-	
-	
+	@Basic
+	@Column(name = "batch_job_id")
 	public BatchJob getBatchJob() {
 		return batchJob;
 	}
@@ -77,18 +62,20 @@ public class WorkSpace {
 		this.batchJob = batchJob;
 	}
 
-	@ElementCollection
-	@CollectionTable(name="mask")
-	public List<Long> getOffMask() {
+
+	@OneToMany
+	@JoinTable(name="masks",
+			joinColumns={@JoinColumn(name="work_space_id")},
+			inverseJoinColumns={@JoinColumn(name="model_run_id")}
+	)
+	public List<ModelRunInstance> getOffMask() {
 		return offMask;
 	}
 
 	
-	public void setOffMask(List<Long> offMask) {
+	public void setOffMask(List<ModelRunInstance> offMask) {
 		this.offMask = offMask;
 	}
-
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -97,8 +84,29 @@ public class WorkSpace {
 		return workSpaceID;
 	}
 
-	public void setWorkSpaceID(long workSpaceID) {
+	public void setWorkSpaceID(Long workSpaceID) {
 		this.workSpaceID = workSpaceID;
 	}
 	
+	public Map<ModelRunInstance,ScoreRunInstance> getWorkSpaceMap(){
+		Map<ModelRunInstance, ScoreRunInstance> m = new HashMap<ModelRunInstance, ScoreRunInstance>();
+		
+		Predicate<ModelRunInstance> isMasked = new Predicate<ModelRunInstance>(){
+			@Override
+			public boolean apply(ModelRunInstance m){
+				return offMask.contains(m);	
+			}
+		};
+		
+		Iterable<ModelRunInstance> i = Iterables.filter(batchJob.getInstances(), isMasked);
+		for (ModelRunInstance modelRunInstance : i) {
+			for (ScoreRunInstance runInstance : smbj.getInstances()) {
+				if(runInstance.getMriJobInstanceID() == modelRunInstance.getId()){
+					m.put(modelRunInstance, runInstance);
+				}
+					
+			}
+		}
+		return m;
+	}
 }

@@ -39,7 +39,7 @@ public class WorkSpaceEngine {
 	
 	
 	@RequestMapping(value = "/createworkspace/{id}", method=RequestMethod.GET, produces="application/json")
-	public @ResponseBody WorkSpace testCreation(@PathVariable("id") long id, Model m){
+	public @ResponseBody WorkSpace Creation(@PathVariable("id") long id, Model m){
 		log.info("Controller for create workspace for " + id + " called");
 		return wss.createWorkSpace(id);
 		
@@ -53,7 +53,7 @@ public class WorkSpaceEngine {
 	@RequestMapping(value = "/updateworkspace/{id}", method =RequestMethod.POST, produces="application/json", consumes="application/json")
 	public @ResponseBody WorkSpace updateWorkSpace(@PathVariable("id") long workSpaceID, @RequestBody List<Long> mask, Model m){
 		log.info("Controler for updateWorkspace called for " + workSpaceID);
-		return wss.updateWorkSpace(workSpaceID, mask);
+		return wss.updateWorkSpaceWithLong(workSpaceID, mask);
 	}
 	
 	@RequestMapping(value = "/restoreworkspace/", method =RequestMethod.POST, produces="application/json", consumes="application/json")
@@ -67,6 +67,12 @@ public class WorkSpaceEngine {
 		log.info("Controler called for delete workspace " + ws.getWorkSpaceID());
 		wss.deleteWorkSpace(ws);
 	}
+	@RequestMapping(value = "/getworkspacemap/{id}", method =RequestMethod.GET, produces="application/json")
+	public @ResponseBody Map<ModelRunInstance,ScoreRunInstance> getWorkSpacemap(@PathVariable("id") long id, Model m){
+		log.info("Controller for get workspace called for " + id + id);
+		return wss.getWorkSpace(id).getWorkSpaceMap();
+	}
+	
 	
 	
 	//BELOW is some simple test code
@@ -78,7 +84,7 @@ public class WorkSpaceEngine {
 		l.add((long)1);
 		l.add((long)2);
 		l.add((long)3);
-		return wss.updateWorkSpace((long)1, l);
+		return wss.updateWorkSpaceWithLong((long)1, l);
 	}
 	@RequestMapping(value = "/testrestore/", method =RequestMethod.GET, produces="application/json")
 	public @ResponseBody WorkSpace testRestore(Model m){

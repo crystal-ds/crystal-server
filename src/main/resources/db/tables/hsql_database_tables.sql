@@ -60,6 +60,6 @@ CREATE TABLE IF NOT EXISTS work_space(
 );
 
 CREATE TABLE IF NOT EXISTS masks(
-	work_space_link BIGING,
-	
+	work_space_id BIGINT,
+	model_run_id BIGINT
 );
