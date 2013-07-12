@@ -3,15 +3,14 @@
  */
 package org.mitre.crystal.web;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.mitre.crystal.model.InputNode;
 import org.mitre.crystal.model.ModelRunInstance;
 import org.mitre.crystal.model.ScoreRunInstance;
 import org.mitre.crystal.model.WorkSpace;
-import org.mitre.crystal.service.ModelService;
 import org.mitre.crystal.service.WorkSpaceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,10 +50,10 @@ public class WorkSpaceEngine {
 		return wss.getWorkSpace(id);
 	}
 	
-	@RequestMapping(value = "/updateworkspace/", method =RequestMethod.POST, produces="application/json", consumes="application/json")
-	public @ResponseBody WorkSpace updateWorkSpace(@RequestBody  WorkSpace ws, Model m){
-		log.info("Controler for updateWorkspace called for " + ws.getWorkSpaceID());
-		return wss.updateWorkSpace(ws);
+	@RequestMapping(value = "/updateworkspace/{id}", method =RequestMethod.POST, produces="application/json", consumes="application/json")
+	public @ResponseBody WorkSpace updateWorkSpace(@PathVariable("id") long workSpaceID, @RequestBody List<Long> mask, Model m){
+		log.info("Controler for updateWorkspace called for " + workSpaceID);
+		return wss.updateWorkSpace(workSpaceID, mask);
 	}
 	
 	@RequestMapping(value = "/restoreworkspace/", method =RequestMethod.POST, produces="application/json", consumes="application/json")
@@ -75,10 +74,11 @@ public class WorkSpaceEngine {
 	@RequestMapping(value = "/testupdate/", method =RequestMethod.GET, produces="application/json")
 	public @ResponseBody WorkSpace testUpdate(Model m){
 		log.info("testing update");
-		WorkSpace w = wss.getWorkSpace((long)1);
-		Map <ModelRunInstance,ScoreRunInstance> newInstances = new HashMap();
-		w.setInstances(newInstances);
-		return wss.updateWorkSpace(w);
+		List<Long> l = new ArrayList();
+		l.add((long)1);
+		l.add((long)2);
+		l.add((long)3);
+		return wss.updateWorkSpace((long)1, l);
 	}
 	@RequestMapping(value = "/testrestore/", method =RequestMethod.GET, produces="application/json")
 	public @ResponseBody WorkSpace testRestore(Model m){
@@ -91,9 +91,6 @@ public class WorkSpaceEngine {
 		log.info("Testing restore");
 		WorkSpace w = wss.getWorkSpace((long)1);
 		wss.deleteWorkSpace(w);
-		return wss.getWorkSpace((long)1);
-		
+		return wss.getWorkSpace((long)1);	
 	}
-	
-	
 }

@@ -3,20 +3,17 @@
  */
 package org.mitre.crystal.model;
 
+import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -30,18 +27,67 @@ import javax.persistence.Table;
 })
 public class WorkSpace {
 	
-	private Long batchJobID;
 	private Long workSpaceID;
-	private Map <ModelRunInstance,ScoreRunInstance> instances;
+	private List<Long> offMask;
+	private BatchJob bj;
+	private SMBatchJob smbj;
 
 	
-	public boolean contains(ModelRunInstance o) {
-		return instances.containsKey(o);
+	
+	public SMBatchJob getSmbj() {
+		return smbj;
 	}
 
-	public boolean remove(ModelRunInstance o) {
-		return instances.remove(o) != null;
+	public void setSmbj(SMBatchJob smbj) {
+		this.smbj = smbj;
 	}
+
+	
+	
+	public boolean contains(Object o) {
+		return offMask.contains(o);
+	}
+
+	public boolean addAll(Collection<? extends Long> c) {
+		return offMask.addAll(c);
+	}
+
+	public boolean retainAll(Collection<?> c) {
+		return offMask.retainAll(c);
+	}
+
+	public void add(int index, Long element) {
+		offMask.add(index, element);
+	}
+
+	public Long remove(int index) {
+		return offMask.remove(index);
+	}
+
+	private BatchJob batchJob;
+
+	
+	
+	
+	public BatchJob getBatchJob() {
+		return batchJob;
+	}
+
+	public void setBatchJob(BatchJob batchJob) {
+		this.batchJob = batchJob;
+	}
+
+	@ElementCollection
+	@CollectionTable(name="mask")
+	public List<Long> getOffMask() {
+		return offMask;
+	}
+
+	
+	public void setOffMask(List<Long> offMask) {
+		this.offMask = offMask;
+	}
+
 
 
 	@Id
@@ -53,31 +99,6 @@ public class WorkSpace {
 
 	public void setWorkSpaceID(long workSpaceID) {
 		this.workSpaceID = workSpaceID;
-	}
-
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="work_space_id", referencedColumnName="id")
-	public Map<ModelRunInstance,ScoreRunInstance> getInstances() {
-		return instances;
-	}
-
-	public void setInstances(Map<ModelRunInstance,ScoreRunInstance> instances) {
-		this.instances = instances;
-	}
-
-	/**
-	 * @return the batchJobID
-	 */
-	@Column(name="batch_job_id")
-	public long getBatchJobID() {
-		return batchJobID;
-	}
-
-	/**
-	 * @param batchJobID the batchJobID to set
-	 */
-	public void setBatchJobID(long batchJobID) {
-		this.batchJobID = batchJobID;
 	}
 	
 }

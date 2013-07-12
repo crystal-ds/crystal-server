@@ -3,6 +3,7 @@
  */
 package org.mitre.crystal.service.WorkSpace.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,14 +34,10 @@ public class WorkSpaceServiceImpl implements WorkSpaceService {
 	 */
 	@Autowired
 	private BatchJobService bjs;
-	
 	@Autowired
 	private ScoringBatchJobService sbs;
-	
 	@Autowired
 	private WorkSpaceRepository wsr;
-	
-	
 	final Logger log = LoggerFactory.getLogger(WorkSpaceServiceImpl.class);
 	
 	
@@ -50,22 +47,9 @@ public class WorkSpaceServiceImpl implements WorkSpaceService {
 		BatchJob bj = bjs.getBatchJob(batchJobID);
 		SMBatchJob sbj = sbs.getScore(batchJobID);
 		WorkSpace ws = new WorkSpace();
-		ws.setBatchJobID(bj.getId());
-		
-		Map<ModelRunInstance, ScoreRunInstance> m = new HashMap<ModelRunInstance, ScoreRunInstance>();
-		List<ModelRunInstance> batchJobList = bj.getInstances();
-		List<ScoreRunInstance> scoreList = sbj.getInstances();
-		//TODO redo data structurs so this is more elegant
-		for (ModelRunInstance modelRunInstance : batchJobList) {
-			for (ScoreRunInstance scoreRunInstance : scoreList) {
-				if (scoreRunInstance.getMriJobInstanceID() == modelRunInstance.getId()){
-					m.put(modelRunInstance, scoreRunInstance);
-				}
-			}
-		}
-		ws.setInstances(m);
-
-		
+		ws.setBatchJob(bj);
+		ws.setSmbj(sbj);
+		ws.setOffMask(new ArrayList<Long>());		
 		WorkSpace saved = wsr.save(ws);
 		return saved;
 
@@ -84,10 +68,10 @@ public class WorkSpaceServiceImpl implements WorkSpaceService {
 	 * @see org.mitre.crystal.service.WorkSpaceService#updateWorkSpace(java.util.List)
 	 */
 	@Override
-	public WorkSpace updateWorkSpace(WorkSpace ws) {
-		log.info("updating workspace with id" + ws.getWorkSpaceID());
-		WorkSpace myWorkSpace = wsr.getWorkSpace(ws.getWorkSpaceID());
-		myWorkSpace.setInstances(ws.getInstances());
+	public WorkSpace updateWorkSpace(Long workSpaceID, List<Long> mask) {
+		log.info("updating workspace with id" + workSpaceID);
+		WorkSpace myWorkSpace = wsr.getWorkSpace(workSpaceID);
+		myWorkSpace.setOffMask(mask);
 		wsr.save(myWorkSpace);
 		return myWorkSpace;
 	}
@@ -97,10 +81,10 @@ public class WorkSpaceServiceImpl implements WorkSpaceService {
 	 */
 	@Override
 	public WorkSpace restoreWorkSpace(WorkSpace ws) {
-		createWorkSpace(ws.getBatchJobID());
-		WorkSpace saved = wsr.save(ws);
-		return saved;
-		
+		WorkSpace update = wsr.getWorkSpace(ws.getWorkSpaceID());
+		update.setOffMask(new ArrayList<Long>());
+		wsr.save(ws);
+		return update;
 	}
 
 	/* (non-Javadoc)
