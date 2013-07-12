@@ -80,7 +80,7 @@ public class WorkSpaceEngine {
 	@RequestMapping(value = "/testupdate/", method =RequestMethod.GET, produces="application/json")
 	public @ResponseBody WorkSpace testUpdate(Model m){
 		log.info("testing update");
-		List<Long> l = new ArrayList();
+		List<Long> l = new ArrayList<Long>();
 		l.add((long)1);
 		l.add((long)2);
 		l.add((long)3);
