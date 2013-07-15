@@ -36,7 +36,7 @@ public class DummyModel extends RunnableModel {
 
 	public DummyModel() {
 		this.setModelSpec(new ModelSpecification());
-		this.setName("ImABigDummy");
+		this.setName("Personnel Recovery");
 		this.setDescription("This is a dummy model since the real model doesn't exist yet. PLEASE DON'T USE");
 	}
 
@@ -80,7 +80,7 @@ public class DummyModel extends RunnableModel {
 		m3.put("min", "0");
 		m3.put("max", "10");
 		m3.put("upper", "5");
-		m3.put("lower", "5");
+		m3.put("lower", "3");
 		m3.put("value", "7");
 		ipn3.setProperties(m3);
 
