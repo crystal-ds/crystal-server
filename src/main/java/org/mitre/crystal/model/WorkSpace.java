@@ -89,22 +89,36 @@ public class WorkSpace{
 	
 	@Transient
 	public Map<ModelRunInstance,ScoreRunInstance> getWorkSpaceMap(){
+//		Map<ModelRunInstance, ScoreRunInstance> m = new HashMap<ModelRunInstance, ScoreRunInstance>();
+//		
+//		Predicate<ModelRunInstance> isMasked = new Predicate<ModelRunInstance>(){
+//			@Override
+//			public boolean apply(ModelRunInstance m){
+//				return !offMask.contains(m);	
+//			}
+//		};
+//		
+//		Iterable<ModelRunInstance> i = Iterables.filter(batchJob.getInstances(), isMasked);
+//		for (ModelRunInstance modelRunInstance : i) {
+//			for (ScoreRunInstance runInstance : smbj.getInstances()) {
+//				if(runInstance.getMriJobInstanceID() == modelRunInstance.getId()){
+//					m.put(modelRunInstance, runInstance);
+//				}
+//					
+//			}
+//		}
+//		return m;
+		
+		
 		Map<ModelRunInstance, ScoreRunInstance> m = new HashMap<ModelRunInstance, ScoreRunInstance>();
-		
-		Predicate<ModelRunInstance> isMasked = new Predicate<ModelRunInstance>(){
-			@Override
-			public boolean apply(ModelRunInstance m){
-				return offMask.contains(m);	
-			}
-		};
-		
-		Iterable<ModelRunInstance> i = Iterables.filter(batchJob.getInstances(), isMasked);
-		for (ModelRunInstance modelRunInstance : i) {
-			for (ScoreRunInstance runInstance : smbj.getInstances()) {
-				if(runInstance.getMriJobInstanceID() == modelRunInstance.getId()){
-					m.put(modelRunInstance, runInstance);
-				}
-					
+		List<ModelRunInstance> l = batchJob.getInstances();
+		for (ModelRunInstance modelRunInstance : l) {
+			List<ScoreRunInstance> l2 = smbj.getInstances();
+			for (ScoreRunInstance scoreRunInstance : l2) {
+				if(modelRunInstance.getId() == scoreRunInstance.getMriJobInstanceID())
+					if(!offMask.contains(modelRunInstance)){
+						m.put(modelRunInstance, scoreRunInstance);
+					}
 			}
 		}
 		return m;

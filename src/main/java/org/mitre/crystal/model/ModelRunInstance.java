@@ -3,6 +3,7 @@
  */
 package org.mitre.crystal.model;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
@@ -22,6 +23,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+
 
 /**
  * @author tmlewis
@@ -29,14 +34,14 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "model_run_instance")
-public class ModelRunInstance implements Serializable{
+public class ModelRunInstance {
 	
 	
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 8422227697572962705L;
+	
 	//private Long runId;
 	private Long id;
 	
