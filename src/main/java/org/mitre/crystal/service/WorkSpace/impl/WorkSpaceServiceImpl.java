@@ -4,14 +4,11 @@
 package org.mitre.crystal.service.WorkSpace.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.mitre.crystal.model.BatchJob;
 import org.mitre.crystal.model.ModelRunInstance;
 import org.mitre.crystal.model.SMBatchJob;
-import org.mitre.crystal.model.ScoreRunInstance;
 import org.mitre.crystal.model.WorkSpace;
 import org.mitre.crystal.repository.WorkSpaceRepository;
 import org.mitre.crystal.service.BatchJobService;
@@ -21,7 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 /**
  * @author tmlewis

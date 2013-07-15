@@ -3,22 +3,18 @@
  */
 package org.mitre.crystal.model;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -31,9 +27,6 @@ import com.google.common.collect.Iterables;
  */
 @Entity
 @Table(name = "work_space")
-@NamedQueries({
-	@NamedQuery(name="workspace.findAll", query="SELECT w FROM workspace w")
-})
 public class WorkSpace {
 	
 	private Long workSpaceID;
