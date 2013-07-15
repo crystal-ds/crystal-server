@@ -67,9 +67,13 @@ public class WorkSpaceEngine {
 		wss.deleteWorkSpace(ws);
 	}
 	@RequestMapping(value = "/getworkspacemap/{id}", method =RequestMethod.GET, produces="application/json")
-	public @ResponseBody Map<ModelRunInstance,ScoreRunInstance> getWorkSpacemap(@PathVariable("id") long id, Model m){
+	public String getWorkSpacemap(@PathVariable("id") long id, Model m){
 		log.info("Controller for get workspace called for " + id + id);
-		return wss.getWorkSpace(id).getWorkSpaceMap();
+		WorkSpace w =wss.getWorkSpace(id);
+		//return w.getWorkSpaceMap();
+		Map<ModelRunInstance, ScoreRunInstance> m2 = w.getWorkSpaceMap();
+		m.addAttribute("map", m2);
+		return "mapView";
 	}
 	
 	
