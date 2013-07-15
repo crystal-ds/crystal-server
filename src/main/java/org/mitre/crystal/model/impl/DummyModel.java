@@ -64,6 +64,7 @@ public class DummyModel extends RunnableModel {
 		m1.put("value", "true");
 		ipn1.setProperties(m1);
 
+
 		InputNode ipn2 = new InputNode();
 		ipn2.setName("DummyModelInput_2");
 		ipn2.setType(InputType.FLOAT);

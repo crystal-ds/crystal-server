@@ -25,12 +25,17 @@ import javax.persistence.MapKeyColumn;
  *
  */
 //@JsonSerialize (using = InputNodeSerializer.class)
-public class InputNode  implements Serializable{
+public class InputNode implements Serializable{
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1368198376643190742L;
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * 
+	 */
+	
 
 	private Long id;
 

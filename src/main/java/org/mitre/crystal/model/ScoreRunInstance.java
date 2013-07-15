@@ -3,6 +3,7 @@
  */
 package org.mitre.crystal.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 
@@ -29,6 +30,10 @@ import javax.persistence.TemporalType;
 @Table(name="scoring_run_instance")
 public class ScoreRunInstance {
 
+	
+	/**
+	 * 
+	 */
 	
 	private long scoreRunInstanceID;
 	private long mriJobInstanceID;
