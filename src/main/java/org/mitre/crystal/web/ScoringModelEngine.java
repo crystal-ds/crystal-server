@@ -79,18 +79,32 @@ public class ScoringModelEngine {
 		return "modelInputView";
 	}
 	
+//	@RequestMapping(value = "/models/{id}/run", method=RequestMethod.POST, produces="application/json", consumes="application/json")
+//	public String startRun(@PathVariable("id") long id, @RequestBody ScoringModelInput vals, Model m){
+//		log.info("Running model " + id + " using inputs: " +vals );
+//		ScoringModel model = service.getModel(id);
+//		
+//		BatchJob job = batchJobService.getBatchJob(vals.getBatchJobId());	
+//		SMBatchJob scores = scoreService.score(vals,job,model);
+//		
+//		m.addAttribute("scoreBatchJob", scores);
+//		
+//		return "scoreBatchJobView";
+//	}
+	//CODE FOR A2C2 DEMO
 	@RequestMapping(value = "/models/{id}/run", method=RequestMethod.POST, produces="application/json", consumes="application/json")
-	public String startRun(@PathVariable("id") long id, @RequestBody ScoringModelInput vals, Model m){
-		log.info("Running model " + id + " using inputs: " +vals );
-		ScoringModel model = service.getModel(id);
-		
-		BatchJob job = batchJobService.getBatchJob(vals.getBatchJobId());	
-		SMBatchJob scores = scoreService.score(vals,job,model);
-		
-		m.addAttribute("scoreBatchJob", scores);
-		
+	public String startRun(@PathVariable("id") long id, Model m){
+		ScoringModel sm = service.getModel(id);
+		BatchJob job = batchJobService.getBatchJob(id);
+		ScoringModelInput vals = new ScoringModelInput();
+	
+		SMBatchJob smbj = scoreService.score(vals, job, sm);
+		m.addAttribute("scoreBatchJob", smbj);
 		return "scoreBatchJobView";
+		
 	}
+
+	
 	@RequestMapping(value = "/resultsets/{id}", method=RequestMethod.HEAD )
 	public String getStatus(@PathVariable("id") long id, Model m){
 		log.debug("client is checking on result status " + id);

@@ -98,7 +98,7 @@
 					<key>
 						<value>1</value>
 					</key>
-					<ref bean="dummyModel" />
+					<ref bean="Syrian Civil War" />
 				</entry>
 				<entry>
 					<key>
@@ -109,12 +109,6 @@
 				<entry>
 					<key>
 						<value>3</value>
-					</key>
-					<ref bean="yetAnotherModel" />
-				</entry>
-				<entry>
-					<key>
-						<value>4</value>
 					</key>
 					<ref bean="tailorModel" />
 				</entry>
@@ -140,13 +134,13 @@
 
 
 	</bean>
-	<bean id="dummyScoringModel" class="org.mitre.crystal.model.impl.DummyScoringModelImpl">
+<!-- 	<bean id="dummyScoringModel" class="org.mitre.crystal.model.impl.DummyScoringModelImpl">
 		<property name="resourceLocation">
 		<value>dummyData/output</value>
 		</property>
-	</bean>
+	</bean> -->
 
-
+	<bean id="dummyModel" class="org.mitre.crystal.model.impl.NormalDistributionModel"></bean>
 	<bean id="inMemoryScoringModelRepository"
 		class="org.mitre.crystal.repository.scoreingmodel.impl.InMemoryScoringModelRepository">
 		<property name="mapOfModels">
@@ -155,7 +149,7 @@
 					<key>
 						<value>1</value>
 					</key>
-					<ref bean="dummyScoringModel" />
+					<ref bean="dummyModel" />
 				</entry>
 			</map>
 		</property>
