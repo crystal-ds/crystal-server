@@ -122,11 +122,6 @@
 		</property>
 	</bean>
 
-	<bean id="dummyModel" class="org.mitre.crystal.model.impl.DummyModel">
-		<property name="id">
-			<value>1</value>
-		</property>
-	</bean>
 	
 	<bean id="tailorModel" class="org.mitre.crystal.model.impl.TailorModel">
 		<property name="id">
@@ -136,9 +131,6 @@
 
 
 	<bean class="org.mitre.crystal.model.impl.DummyModel" id="dummyModel2">
-		<property name="name">
-			<value>BigOlFakeModel</value>
-		</property>
 		<property name="description">
 			<value>This is how you set a value</value>
 		</property>

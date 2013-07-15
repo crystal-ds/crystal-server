@@ -5,7 +5,7 @@
 
 
 
-	<bean id="yetAnotherModel" name="anotherFileExample"
+	<bean id="Syrian Civil War" name="anotherFileExample"
 		class="org.mitre.crystal.model.impl.DummyModel">
 		<property name="name" value="yetAnotherBean"></property>
 		<property name="description"
