@@ -66,7 +66,7 @@ public class WorkSpaceEngine {
 		log.info("Controler called for delete workspace " + ws.getWorkSpaceID());
 		wss.deleteWorkSpace(ws);
 	}
-	@RequestMapping(value = "/getworkspacemap/{id}", method =RequestMethod.GET, produces="application/json")
+	@RequestMapping(value = "/getworkspacemap/{id}", method = RequestMethod.GET, produces="application/json")
 	public String getWorkSpacemap(@PathVariable("id") long id, Model m){
 		log.info("Controller for get workspace called for " + id + id);
 		WorkSpace w =wss.getWorkSpace(id);
@@ -74,6 +74,13 @@ public class WorkSpaceEngine {
 		Map<ModelRunInstance, ScoreRunInstance> m2 = w.getWorkSpaceMap();
 		m.addAttribute("map", m2);
 		return "mapView";
+	}
+	@RequestMapping(value = "getcsv/{id}", method = RequestMethod.POST, produces = "application/text")
+	public String generateCSVFile(@PathVariable("id") long id, Model m){
+		WorkSpace ws = wss.getWorkSpace(id);
+		Map<ModelRunInstance, ScoreRunInstance> m2 = ws.getWorkSpaceMap();
+		m.addAttribute("map", m2);
+		return "csvView";
 	}
 	
 	

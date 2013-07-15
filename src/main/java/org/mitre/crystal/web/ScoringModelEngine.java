@@ -11,9 +11,11 @@ import org.mitre.crystal.model.BatchJob;
 import org.mitre.crystal.model.SMBatchJob;
 import org.mitre.crystal.model.ScoringModel;
 import org.mitre.crystal.model.ScoringModelInput;
+import org.mitre.crystal.model.WorkSpace;
 import org.mitre.crystal.service.BatchJobService;
 import org.mitre.crystal.service.ScoringBatchJobService;
 import org.mitre.crystal.service.ScoringModelService;
+import org.mitre.crystal.service.WorkSpaceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,9 @@ public class ScoringModelEngine {
 	
 	@Autowired
 	private ScoringBatchJobService scoreService;
+	
+	@Autowired
+	private WorkSpaceService wss;
 	
 	
 	@RequestMapping(value = "/models", method=RequestMethod.GET, produces="application/json")
@@ -100,6 +105,7 @@ public class ScoringModelEngine {
 	
 		SMBatchJob smbj = scoreService.score(vals, job, sm);
 		m.addAttribute("scoreBatchJob", smbj);
+		WorkSpace ws = wss.createWorkSpace(id);
 		return "scoreBatchJobView";
 		
 	}
