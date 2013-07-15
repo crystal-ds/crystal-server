@@ -56,10 +56,11 @@ public class JPAWorkSpaceRepositoryImpl implements WorkSpaceRepository {
 	 * @see org.mitre.crystal.repository.WorkSpaceRepository#delete(org.mitre.crystal.model.WorkSpace)
 	 */
 	@Override
+	@Transactional
 	public void delete(WorkSpace ws) {
 		WorkSpace check = getWorkSpace(ws.getWorkSpaceID());
-				if(check != null){
-					manager.remove(ws);
+				if(check != null){     					
+					manager.remove(check);
 				}
 	}
 }

@@ -7,16 +7,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -27,7 +32,7 @@ import com.google.common.collect.Iterables;
  */
 @Entity
 @Table(name = "work_space")
-public class WorkSpace {
+public class WorkSpace{
 	
 	private Long workSpaceID;
 	private List<ModelRunInstance> offMask;
@@ -35,8 +40,9 @@ public class WorkSpace {
 	private BatchJob batchJob;
 
 	
-	@Basic
-	@Column(name = "sm_batch_job_id")
+	
+	@ManyToOne
+	@JoinColumn(name = "sm_batch_job_id", referencedColumnName = "sm_batch_job_id")
 	public SMBatchJob getSmbj() {
 		return smbj;
 	}
@@ -45,8 +51,8 @@ public class WorkSpace {
 		this.smbj = smbj;
 	}
 	
-	@Basic
-	@Column(name = "batch_job_id")
+	@ManyToOne
+	@JoinColumn(name = "batch_job_id", referencedColumnName = "id")
 	public BatchJob getBatchJob() {
 		return batchJob;
 	}
@@ -81,6 +87,7 @@ public class WorkSpace {
 		this.workSpaceID = workSpaceID;
 	}
 	
+	@Transient
 	public Map<ModelRunInstance,ScoreRunInstance> getWorkSpaceMap(){
 		Map<ModelRunInstance, ScoreRunInstance> m = new HashMap<ModelRunInstance, ScoreRunInstance>();
 		

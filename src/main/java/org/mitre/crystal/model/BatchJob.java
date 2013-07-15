@@ -3,6 +3,7 @@
  */
 package org.mitre.crystal.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -31,9 +32,13 @@ import javax.persistence.Table;
 @NamedQueries({
 	@NamedQuery(name="BatchJob.findAll", query="SELECT b FROM BatchJob b")
 })
-public class BatchJob {
+public class BatchJob{
 
 		
+		/**
+	 * 
+	 */
+	
 		private List<ModelRunInstance> 	instances;
 		private Long id;
 		private BatchJobStatus status;
