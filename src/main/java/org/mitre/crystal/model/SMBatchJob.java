@@ -3,6 +3,7 @@
  */
 package org.mitre.crystal.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -24,7 +25,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "score_batch_job")
-public class SMBatchJob {
+public class SMBatchJob{
 
 	
 	private List<ScoreRunInstance> 	instances;

@@ -3,6 +3,7 @@
  */
 package org.mitre.crystal.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
