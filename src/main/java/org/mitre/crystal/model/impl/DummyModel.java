@@ -58,30 +58,30 @@ public class DummyModel extends RunnableModel {
 	
 
 		InputNode ipn1 = new InputNode();
-		ipn1.setName("DummyModelInput_1");
-		ipn1.setType(InputType.BOOLEAN);
+		ipn1.setName("Number of isolated personnel");
+		ipn1.setType(InputType.INTEGER);
 		Map<String, String> m1 = ipn1.getProperties();
-		m1.put("value", "true");
+		m1.put("min", "1");
+		m1.put("max", "100");
+		m1.put("value", "3");
 		ipn1.setProperties(m1);
 
 
 		InputNode ipn2 = new InputNode();
-		ipn2.setName("DummyModelInput_2");
-		ipn2.setType(InputType.FLOAT);
+		ipn2.setName("Number of assets available");
+		ipn2.setType(InputType.INTEGER);
 		Map<String, String> m = new HashMap<String, String>();
 		m.put("min", "1");
-		m.put("max", "5");
+		m.put("max", "100");
 		m.put("value", "3");
 		ipn2.setProperties(m);
 
 		InputNode ipn3 = new InputNode();
-		ipn3.setName("DummyModleInput_3");
-		ipn3.setType(InputType.RANGE);
+		ipn3.setName("Number of beacons with locations");
+		ipn3.setType(InputType.INTEGER);
 		Map<String, String> m3 = new HashMap<String, String>();
 		m3.put("min", "0");
 		m3.put("max", "10");
-		m3.put("upper", "5");
-		m3.put("lower", "3");
 		m3.put("value", "7");
 		ipn3.setProperties(m3);
 

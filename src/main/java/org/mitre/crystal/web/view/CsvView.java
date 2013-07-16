@@ -48,23 +48,21 @@ public class CsvView extends AbstractView {
 			response.setStatus(HttpStatus.OK.value());
 			response.setContentType("application/json");
 
-			CSVWriter writer = new CSVWriter(response.getWriter());
+			CSVWriter writer = new CSVWriter(response.getWriter(),',',CSVWriter.NO_QUOTE_CHARACTER);
+			
 			List<String[]> csvFile = new ArrayList<String[]>();
-
+			csvFile.add(new String[]{"Option", "Score"});
 			Set<ModelRunInstance> s = m.keySet();
 			Collection<ScoreRunInstance> c = m.values();
 			for (ModelRunInstance modelRunInstance : s) {
 				for (ScoreRunInstance scoreRunInstance : c) {
 					if (modelRunInstance.getId() == scoreRunInstance
 							.getMriJobInstanceID()) {
-						Set<String> inputs = modelRunInstance.getInputValues()
-								.keySet();
-						List l = new ArrayList(inputs);
-						Collections.sort(l);
-						String id = (String) l.get(0);
+						long id = modelRunInstance.getId() %5;
+						
 						String score = scoreRunInstance.getOutputValues().get(
 								"Score");
-						csvFile.add(new String[] { id, score });
+						csvFile.add(new String[] { Double.toString(id) , score });
 
 					}
 				}

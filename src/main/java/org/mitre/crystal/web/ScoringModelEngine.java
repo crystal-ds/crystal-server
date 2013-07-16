@@ -97,10 +97,10 @@ public class ScoringModelEngine {
 //		return "scoreBatchJobView";
 //	}
 	//CODE FOR A2C2 DEMO
-	@RequestMapping(value = "/models/{id}/run", method=RequestMethod.POST, produces="application/json", consumes="application/json")
-	public String startRun(@PathVariable("id") long id, Model m){
+	@RequestMapping(value = "/models/{id}/run/{batch}", method=RequestMethod.POST, produces="application/json", consumes="application/json")
+	public String startRun(@PathVariable("id") long id, @PathVariable("batch") long batch, Model m){
 		ScoringModel sm = service.getModel(id);
-		BatchJob job = batchJobService.getBatchJob(id);
+		BatchJob job = batchJobService.getBatchJob(batch);
 		ScoringModelInput vals = new ScoringModelInput();
 	
 		SMBatchJob smbj = scoreService.score(vals, job, sm);

@@ -44,14 +44,14 @@ public class NormalDistributionModel extends ScoringModel{
 		SMBatchJob sbj = new SMBatchJob();
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, List> myList = new HashMap<String, List>();
-		Map<String, String> m = new HashMap<String, String>();
 
 		List<ModelRunInstance> l = job.getInstances();
 		List<ScoreRunInstance> scoreList = new ArrayList<ScoreRunInstance>();
 		
 		for (ModelRunInstance modelRunInstance : l) {
 
-			m.put("Score", Double.toString(rand.nextGaussian()));
+			Map<String, String> m = new HashMap<String, String>();
+			m.put("Score", Double.toString(Math.abs(rand.nextGaussian()*100)));
 			ScoreRunInstance sri = new ScoreRunInstance();
 			sri.setMriJobInstanceID(modelRunInstance.getId());
 			sri.setOutputValues(m);

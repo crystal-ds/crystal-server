@@ -75,7 +75,7 @@ public class WorkSpaceEngine {
 		m.addAttribute("map", m2);
 		return "mapView";
 	}
-	@RequestMapping(value = "getcsv/{id}", method = RequestMethod.POST, produces = "application/text")
+	@RequestMapping(value = "getcsv/{id}", method = RequestMethod.GET, produces = "application/text")
 	public String generateCSVFile(@PathVariable("id") long id, Model m){
 		WorkSpace ws = wss.getWorkSpace(id);
 		Map<ModelRunInstance, ScoreRunInstance> m2 = ws.getWorkSpaceMap();

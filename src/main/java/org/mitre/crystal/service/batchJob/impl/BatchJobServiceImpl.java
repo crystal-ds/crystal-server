@@ -66,23 +66,27 @@ public class BatchJobServiceImpl implements BatchJobService {
 
 		Map<String, String> inputs = new HashMap<String, String>();
 		List<Map<String, InputNode>> varaitations = vals;
+			
+		
 		for (Map<String, InputNode> map : varaitations) {
 			for (Entry<String, InputNode> entry : map.entrySet()) {
 				//FIXME make jackson parse this 
 				Object o = map.get(entry.getKey());
-				LinkedHashMap l = (LinkedHashMap) o;
-				Object o1 = l.get("name").toString();
-				Object o2 = l.get("properties").toString();
-				if (o1 != null && o2 != null) {
-					inputs.put((String) o1, (String) o2);
+//				Integer l = (Integer) o;
+//				Object o1 = l.get("name").toString();
+//				Object o2 = l.get("properties").toString();
+//				if (o1 != null && o2 != null) {
+//					inputs.put((String) o1, (String) o2);
 
-				}
+				inputs.put(entry.getKey(), o.toString());
+//				}
 			}
+			ModelRunInstance mri = new ModelRunInstance();
+			mri.setInputValues(inputs);
+			instances.add(mri);
+		
 		}
 
-		ModelRunInstance mri = new ModelRunInstance();
-		mri.setInputValues(inputs);
-		instances.add(mri);
 
 		bj.setInstances(instances);
 
