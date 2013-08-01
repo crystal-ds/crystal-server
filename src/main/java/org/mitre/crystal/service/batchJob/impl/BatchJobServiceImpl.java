@@ -58,21 +58,21 @@ public class BatchJobServiceImpl implements BatchJobService {
 		List<ModelRunInstance> instances = new ArrayList<ModelRunInstance>();
 
 
-		Map<String, String> inputs = new HashMap<String, String>();
-		ObjectMapper mapper = new ObjectMapper();
 		int count = 0;
+		Map<String, String> inputs = new HashMap<String, String>();
 
 		for (Map<String, String> map : vals) {
 			Set<Entry<String, String>> s = map.entrySet();
 			for (Entry<String, String> entry : s) {
 				inputs.put(entry.getKey(), entry.getValue());
 			}
+			ModelRunInstance mri = new ModelRunInstance();
+			mri.setInputValues(inputs);
+			instances.add(mri);
+			inputs =  new HashMap<String, String>();
 			count ++;
 		}
 
-		ModelRunInstance mri = new ModelRunInstance();
-		mri.setInputValues(inputs);
-		instances.add(mri);
 		bj.setInstances(instances);
 
 		// bj.setRuns(createInputsForBatchJob(vals));
