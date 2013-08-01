@@ -5,14 +5,14 @@ package org.mitre.crystal.service.batchJob.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.mitre.crystal.model.BatchJob;
 import org.mitre.crystal.model.BatchJobStatus;
-import org.mitre.crystal.model.InputNode;
 import org.mitre.crystal.model.ModelRunInstance;
 import org.mitre.crystal.model.RunnableModel;
 import org.mitre.crystal.repository.BatchJobRepository;
@@ -51,49 +51,34 @@ public class BatchJobServiceImpl implements BatchJobService {
 	 * org.mitre.crystal.model.ModelRunInputValues)
 	 */
 	public BatchJob createBatchJob(RunnableModel model,
-			List<Map<String, InputNode>> vals) {
+			List<Map<String, String>> vals) {
 		log.debug("Creating Batch Job");
 		BatchJob bj = new BatchJob();
 		bj.setModelID(model.getId());
-
-		// List <Map<String,String>> variations = idv.diversify(model, vals);
-
 		List<ModelRunInstance> instances = new ArrayList<ModelRunInstance>();
-		// TEST CODE
-		// List <ModelRunInputValues> variations = new
-		// ArrayList<ModelRunInputValues>();
-		// variations.add(vals);
+
 
 		Map<String, String> inputs = new HashMap<String, String>();
-		List<Map<String, InputNode>> varaitations = vals;
-			
-		
-		for (Map<String, InputNode> map : varaitations) {
-			for (Entry<String, InputNode> entry : map.entrySet()) {
-				//FIXME make jackson parse this 
-				Object o = map.get(entry.getKey());
-//				Integer l = (Integer) o;
-//				Object o1 = l.get("name").toString();
-//				Object o2 = l.get("properties").toString();
-//				if (o1 != null && o2 != null) {
-//					inputs.put((String) o1, (String) o2);
+		ObjectMapper mapper = new ObjectMapper();
+		int count = 0;
 
-				inputs.put(entry.getKey(), o.toString());
-//				}
+		for (Map<String, String> map : vals) {
+			Set<Entry<String, String>> s = map.entrySet();
+			for (Entry<String, String> entry : s) {
+				inputs.put(entry.getKey(), entry.getValue());
 			}
-			ModelRunInstance mri = new ModelRunInstance();
-			mri.setInputValues(inputs);
-			instances.add(mri);
-		
+			count ++;
 		}
 
-
+		ModelRunInstance mri = new ModelRunInstance();
+		mri.setInputValues(inputs);
+		instances.add(mri);
 		bj.setInstances(instances);
 
 		// bj.setRuns(createInputsForBatchJob(vals));
 		bj.setStatus(BatchJobStatus.NOT_STARTED);
 		BatchJob saved = bjr.save(bj);
-		log.info("batch Job created with ID " + saved.getId());
+		log.info("batch Job created with ID " + saved.getId() + " with " + count + "runs");
 		return saved;
 
 	}
@@ -136,7 +121,7 @@ public class BatchJobServiceImpl implements BatchJobService {
 	 * org.mitre.crystal.model.ModelRunInputValues)
 	 */
 	public BatchJob createAndRunBatchJob(RunnableModel model,
-			List<Map<String, InputNode>> input) {
+			List<Map<String, String >> input) {
 		log.info("create And run BatchJob");
 		BatchJob batchjob = createBatchJob(model, input);
 		runBatchJob(batchjob.getId());

@@ -18,14 +18,14 @@ import org.mitre.crystal.model.RunnableModel;
 public interface BatchJobService {
 
 	public abstract BatchJob createBatchJob(RunnableModel model,
-			List<Map<String,InputNode>> vals);
+			List<Map<String,String>> vals);
 
 public abstract BatchJob getBatchJob(long batchJobId);
 
 	public abstract BatchJobStatus runBatchJob(long batchJobID);
 
 	public abstract BatchJob createAndRunBatchJob(
-			RunnableModel model, List<Map<String,InputNode>> input);
+			RunnableModel model, List<Map<String,String>> input);
 	public abstract List<BatchJob> getAllBatchjobs();
 
 

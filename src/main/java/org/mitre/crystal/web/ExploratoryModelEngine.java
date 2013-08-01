@@ -3,14 +3,16 @@
  */
 package org.mitre.crystal.web;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.mitre.crystal.model.BatchJob;
-import org.mitre.crystal.model.InputNode;
-import org.mitre.crystal.model.InputType;
 import org.mitre.crystal.model.RunnableModel;
 import org.mitre.crystal.service.BatchJobService;
 import org.mitre.crystal.service.ModelService;
@@ -80,11 +82,30 @@ public class ExploratoryModelEngine {
 	
 	
 	@RequestMapping(value = "/models/{id}/run", method=RequestMethod.POST, produces="application/json", consumes="application/json")
-	public String startRun(@PathVariable("id") long id, @RequestBody List<Map<String,InputNode>> vals, Model m){
+	public String startRun(@PathVariable("id") long id, @RequestBody String vals, Model m){
 		log.info("Running model " + id + " using inputs: " +vals );
 		RunnableModel model = service.getModel(id);
 		
-		BatchJob job = batchJobService.createAndRunBatchJob(model, vals);		
+		//BatchJob job = batchJobService.createAndRunBatchJob(model, vals);		
+		List<Map<String,String>> vals2 = new ArrayList<Map<String,String>>();
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			vals2 = mapper.readValue(vals, vals2.getClass());
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+		
+		
+		BatchJob job= batchJobService.createAndRunBatchJob(model, vals2);
 		
 		m.addAttribute("batchJob", job);
 		
