@@ -79,7 +79,7 @@ public class TailorModel extends RunnableModel {
 		ipn1a.setVariableType(InputVariableType.INITIAL_CONDITION);
 		Map<String, String> m1a = ipn1.getProperties();
 		m1a.put("min", "0");
-		m1a.put("max", "100");
+		m1a.put("max", "50");
 		//Default
 		m1a.put("value", "10");
 		ipn1.setProperties(m1a);
@@ -89,8 +89,8 @@ public class TailorModel extends RunnableModel {
 		ipn2.setType(InputType.INTEGER);
 		ipn2.setVariableType(InputVariableType.INTERMEDIARY_VARIABLE);
 		Map<String, String> m1b = new HashMap<String, String>();
-		m1b.put("min", "0");
-		m1b.put("max", "100");
+		m1b.put("min", "10");
+		m1b.put("max", "1000");
 		//Default
 		m1b.put("value", "10");
 		ipn2.setProperties(m1b);
@@ -101,7 +101,7 @@ public class TailorModel extends RunnableModel {
 		ipn3.setVariableType(InputVariableType.COURSE_OF_ACTION);
 		Map<String, String> m3 = new HashMap<String, String>();
 		m3.put("min", "0");
-		m3.put("max", "100");
+		m3.put("max", "10000");
 		//Default
 		m3.put("value", "1");
 		ipn3.setProperties(m3);
