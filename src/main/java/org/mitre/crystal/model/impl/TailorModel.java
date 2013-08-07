@@ -11,10 +11,10 @@ import javax.annotation.PostConstruct;
 
 import org.mitre.crystal.model.InputNode;
 import org.mitre.crystal.model.InputType;
+import org.mitre.crystal.model.InputVariableType;
 import org.mitre.crystal.model.ModelRunInstance;
 import org.mitre.crystal.model.ModelSpecification;
 import org.mitre.crystal.model.RunnableModel;
-import org.mitre.crystal.model.InputVariableType;
 
 /**
  * @author tmlewis
@@ -63,7 +63,7 @@ public class TailorModel extends RunnableModel {
 	
 
 		InputNode ipn1 = new InputNode();
-		ipn1.setName("Number of units to send");
+		ipn1.setName("Miles of visibility");
 		ipn1.setType(InputType.INTEGER);
 		ipn1.setVariableType(InputVariableType.INITIAL_CONDITION);
 		Map<String, String> m1 = ipn1.getProperties();
@@ -72,18 +72,31 @@ public class TailorModel extends RunnableModel {
 		//Default
 		m1.put("value", "10");
 		ipn1.setProperties(m1);
+		
+		InputNode ipn1a = new InputNode();
+		ipn1a.setName("Wind Speed (mph)");
+		ipn1a.setType(InputType.INTEGER);
+		ipn1a.setVariableType(InputVariableType.INITIAL_CONDITION);
+		Map<String, String> m1a = ipn1.getProperties();
+		m1a.put("min", "0");
+		m1a.put("max", "100");
+		//Default
+		m1a.put("value", "10");
+		ipn1.setProperties(m1a);
 
 		InputNode ipn2 = new InputNode();
-		ipn2.setName("Type of Recovery");
-		ipn2.setType(InputType.STRING);
+		ipn2.setName("Enemy Troop Concentration");
+		ipn2.setType(InputType.INTEGER);
 		ipn2.setVariableType(InputVariableType.INTERMEDIARY_VARIABLE);
-		Map<String, String> m = new HashMap<String, String>();
-		m.put("regex", "air|ground|sea");
-		m.put("value", "ground");
-		ipn2.setProperties(m);
+		Map<String, String> m1b = new HashMap<String, String>();
+		m1b.put("min", "0");
+		m1b.put("max", "100");
+		//Default
+		m1b.put("value", "10");
+		ipn2.setProperties(m1b);
 
 		InputNode ipn3 = new InputNode();
-		ipn3.setName("How many people are stranded");
+		ipn3.setName("Available Friendly Forces");
 		ipn3.setType(InputType.INTEGER);
 		ipn3.setVariableType(InputVariableType.COURSE_OF_ACTION);
 		Map<String, String> m3 = new HashMap<String, String>();
@@ -96,7 +109,7 @@ public class TailorModel extends RunnableModel {
 		
 		
 		InputNode ipn4 = new InputNode();
-		ipn4.setName("How many beacons have locations");
+		ipn4.setName("Enemy Weapon Capability");
 		ipn4.setType(InputType.INTEGER);
 		ipn4.setVariableType(InputVariableType.INTERMEDIARY_VARIABLE);
 		Map<String, String> m4 = new HashMap<String, String>();
