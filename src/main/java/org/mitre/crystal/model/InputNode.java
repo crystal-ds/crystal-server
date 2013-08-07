@@ -44,8 +44,9 @@ public class InputNode implements Serializable{
 	// Type of displayed widget <slider, text, etc>
 	private InputType type;
 	
+	//Type of variable input represents
+	private InputVariableType variableType;
 	//name of an input property and it's corresponding value(s)
-
 	private Map<String, String> properties;
 		
 	@Id
@@ -120,6 +121,19 @@ public class InputNode implements Serializable{
 			throw new IllegalArgumentException("Property Name " + key + " not allowed for type " + type);
 		}
 		
+	}
+	/**
+	 * @return the variableType
+	 */
+	@Enumerated (EnumType.STRING)
+	public InputVariableType getVariableType() {
+		return variableType;
+	}
+	/**
+	 * @param variableType the variableType to set
+	 */
+	public void setVariableType(InputVariableType variableType) {
+		this.variableType = variableType;
 	}
 
 }
