@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.mitre.crystal.model.RunnableModel;
+import org.mitre.crystal.model.ScoringModel;
 import org.mitre.crystal.repository.ModelRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +36,12 @@ public class InMemoryModelRepository implements ModelRepository {
 
 	
 	public  void setMapOfModels(Map<Long, RunnableModel> mapOfModels) {
+		this.mapOfModels = mapOfModels;
+		
+		Set<Entry<Long,RunnableModel>> s = mapOfModels.entrySet();
+		for (Entry<Long, RunnableModel> entry : s) {
+			entry.getValue().setId(entry.getKey());
+		}
 		this.mapOfModels = mapOfModels;
 	}
 

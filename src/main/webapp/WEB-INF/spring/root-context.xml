@@ -118,9 +118,9 @@
 
 	
 	<bean id="tailorModel" class="org.mitre.crystal.model.impl.TailorModel">
-		<property name="id">
+<!-- 		<property name="id">
 			<value>4</value>
-		</property>
+		</property> -->
 	</bean>
 
 
@@ -128,11 +128,9 @@
 		<property name="description">
 			<value>This is how you set a value</value>
 		</property>
-		<property name="id">
+<!-- 		<property name="id">
 			<value>2</value>
-		</property>
-
-
+		</property> -->
 	</bean>
 <!-- 	<bean id="dummyScoringModel" class="org.mitre.crystal.model.impl.DummyScoringModelImpl">
 		<property name="resourceLocation">
