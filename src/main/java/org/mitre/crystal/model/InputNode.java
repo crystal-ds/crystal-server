@@ -1,6 +1,3 @@
-/**
- * POJO implementation of an input
- */
 package org.mitre.crystal.model;
  
 
@@ -24,28 +21,17 @@ import javax.persistence.MapKeyColumn;
  * @author tmlewis
  *
  */
-//@JsonSerialize (using = InputNodeSerializer.class)
 public class InputNode implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * 
-	 */
-	
-
+	//Unique ID of the input
 	private Long id;
-
 	// unique identifier within a particular model
 	private String name;
 	// Type of displayed widget <slider, text, etc>
 	private InputType type;
 	
 	//name of an input property and it's corresponding value(s)
-
 	private Map<String, String> properties;
 		
 	@Id
@@ -54,6 +40,7 @@ public class InputNode implements Serializable{
 	public Long getId() {
 		return id;
 	}
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -75,11 +62,13 @@ public class InputNode implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	@Enumerated (EnumType.STRING)
 	@Column(name = "type")
 	public InputType getType() {
 		return type;
 	}
+	
 	public void setType(InputType type) {
 		this.type = type;
 	}
@@ -90,13 +79,14 @@ public class InputNode implements Serializable{
 	@Column (name = "property")
 	@CollectionTable(name = "input_node_properties",
 	joinColumns=@JoinColumn(name = "input_node_id"))
-	
 	public Map<String, String> getProperties() {
 		return properties;
 	}
+	
 	public void setProperties(Map<String, String> properties) {
 		this.properties = properties;
 	}
+	
 	public String getProperty(String key) {
 		if (type.getPropertyNames().contains(key)) {
 			return properties.get(key);
@@ -105,6 +95,7 @@ public class InputNode implements Serializable{
 		}
 		
 	}
+	
 	public String putProperty(String key, String value) {
 		if (type.getPropertyNames().contains(key)) {
 			return properties.put(key, value);
@@ -113,13 +104,12 @@ public class InputNode implements Serializable{
 		}
 		
 	}
+	
 	public String removeProperty(String key) {
 		if (type.getPropertyNames().contains(key)) {
 			return properties.remove(key);
 		} else {
 			throw new IllegalArgumentException("Property Name " + key + " not allowed for type " + type);
-		}
-		
+		}	
 	}
-
 }
