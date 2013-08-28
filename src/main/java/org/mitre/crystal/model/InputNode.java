@@ -19,7 +19,8 @@ import javax.persistence.MapKeyColumn;
 
 /**
  * @author tmlewis
- *
+ *An InputNode is supplied by the model to the front end. It contains all the nessciary information
+ *for the front end to render a widget 
  */
 public class InputNode implements Serializable{
 	
@@ -51,6 +52,7 @@ public class InputNode implements Serializable{
 		properties = new HashMap<String, String>();
 		
 	}
+	
 	public InputNode(String name, InputType type, Map<String, String> properties) {
 		this.name = name;
 		this.type = type;
@@ -61,6 +63,7 @@ public class InputNode implements Serializable{
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -114,21 +117,7 @@ public class InputNode implements Serializable{
 			throw new IllegalArgumentException("Property Name " + key + " not allowed for type " + type);
 		}	
 	}
-<<<<<<< HEAD
-=======
-	/**
-	 * @return the variableType
-	 */
-	@Enumerated (EnumType.STRING)
-	public InputVariableType getVariableType() {
-		return variableType;
-	}
-	/**
-	 * @param variableType the variableType to set
-	 */
-	public void setVariableType(InputVariableType variableType) {
-		this.variableType = variableType;
-	}
+
 	/**
 	 * @return the variableType
 	 */
@@ -143,5 +132,5 @@ public class InputNode implements Serializable{
 		this.variableType = variableType;
 	}
 
->>>>>>> e8914724620a5c157ac54a5934a3811288c7f80b
+
 }
