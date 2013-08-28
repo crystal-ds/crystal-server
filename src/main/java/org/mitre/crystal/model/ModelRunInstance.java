@@ -1,10 +1,5 @@
-/**
- * POJO implementation of a run. 
- */
 package org.mitre.crystal.model;
 
-import java.io.IOException;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 
@@ -23,57 +18,44 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-
 
 /**
  * @author tmlewis
- *
+ *A model run instance contains a set of input values that the model is run against. 
+ *It may also contain a set of output values of that run
  */
 @Entity
 @Table(name = "model_run_instance")
 public class ModelRunInstance {
-	
-	
-	
-	/**
-	 * 
-	 */
-	
-	//private Long runId;
-	private Long id;
-	
-//	private ModelRunInputValues inputValues;
+
+	//Unique ID for the model run;
+	private Long id;	
 	//name to Json for model inputs
 	private Map<String,String> inputValues;
-//	private ModelRunOutputValues outputValues;
 	//String to json for output values; 
 	private Map<String, String> outputValues;
-	
+	//Timestamp the MRI was created
 	private Date timestamp;
-	
-	
+
+
 	public ModelRunInstance(){
 		setTimestamp(new Date());
 	}
 
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
 
 	/*
-	 * @return the inputValues
+	 * @return the inputValues of this ModelRunInstance
 	 */
 	@Column(name="input_json_value")
 	@ElementCollection(fetch=FetchType.EAGER)
@@ -85,12 +67,14 @@ public class ModelRunInstance {
 	public Map<String,String> getInputValues() {
 		return inputValues;
 	}
+
 	/**
 	 * @param inputValues the inputValues to set
 	 */
 	public void setInputValues(Map<String,String> inputValues) {
 		this.inputValues = inputValues;
 	}
+
 	/**
 	 * @return the outputValues
 	 */
@@ -104,6 +88,7 @@ public class ModelRunInstance {
 	public Map<String, String> getOutputValues() {
 		return outputValues;
 	}
+
 	/**
 	 * @param outputValues the outputValues to set
 	 */
@@ -130,16 +115,4 @@ public class ModelRunInstance {
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
 	}
-
-	//this makes the DB work....WHY?
-	//Work around for JPA empty object creation
-//	@Basic
-//	@Column(name = "dummy")
-//	public String getDummy(){
-//		return "dummy2";
-//	}
-//	public void setDummy(String dummy){
-//	}
-
-	
 }
