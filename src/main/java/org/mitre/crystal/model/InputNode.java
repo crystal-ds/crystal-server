@@ -129,6 +129,19 @@ public class InputNode implements Serializable{
 	public void setVariableType(InputVariableType variableType) {
 		this.variableType = variableType;
 	}
+	/**
+	 * @return the variableType
+	 */
+	@Enumerated (EnumType.STRING)
+	public InputVariableType getVariableType() {
+		return variableType;
+	}
+	/**
+	 * @param variableType the variableType to set
+	 */
+	public void setVariableType(InputVariableType variableType) {
+		this.variableType = variableType;
+	}
 
 >>>>>>> e8914724620a5c157ac54a5934a3811288c7f80b
 }
