@@ -9,6 +9,8 @@ import com.google.common.collect.ImmutableSet;
 
 /**
  * @author tmlewis
+ *This is the current set of types of input the front end and handle
+ *Each field in the InputType has a set of properties that can corrspond to that instance
  *
  */
 public enum InputType {	
