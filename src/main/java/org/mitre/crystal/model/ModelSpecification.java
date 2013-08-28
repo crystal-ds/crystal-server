@@ -1,6 +1,3 @@
-/**
- * POJO implementation of a model
- */
 package org.mitre.crystal.model;
 
 import java.io.Serializable;
@@ -30,18 +27,17 @@ import javax.persistence.Table;
 	@NamedQuery(name = "ModelSpecification.getAll", query="select m from ModelSpecification m")
 })
 public class ModelSpecification implements Serializable{
-	
-	
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -4888634159958204979L;
+	//A unique human readable name for the model
 	private String name;
+	//A human readable description for the model
 	private String description;	
+	//A unique ID for the model 
 	private Long id;
+	//The list of inputs that the model cares about
 	private List<InputNode> inputs;
-	
+
 	public ModelSpecification() {
 	}
 
@@ -50,9 +46,10 @@ public class ModelSpecification implements Serializable{
 		this.name = name;
 		this.description = description;
 		this.id = id;
-		
+
 		this.inputs = inputs;
 	}
+
 	@Column(name = "name")
 	public String getName() {
 		return name;
@@ -81,7 +78,7 @@ public class ModelSpecification implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	@ElementCollection
 	@CollectionTable(name = "model_inputs", 
 	joinColumns = @JoinColumn(name = "inputs_id"))
@@ -94,5 +91,5 @@ public class ModelSpecification implements Serializable{
 		this.inputs = inputs;
 	}
 
-	
+
 }
