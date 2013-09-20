@@ -6,8 +6,6 @@ package org.mitre.crystal.repository.batchJob.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -20,24 +18,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author tmlewis
- *
+ * This stores the batch Jobs in a JPA repository. 
  */
 @Repository("jpaBatchJobRepository")
 public class JPABatchJobRepository implements BatchJobRepository {
 
 	final Logger log = LoggerFactory.getLogger(JPABatchJobRepository.class);
-	
+
+	//Used to access the DB in a sane manner
 	@PersistenceContext
 	private EntityManager manager;
-	
-	public JPABatchJobRepository(){
-		
 
-		
+	public JPABatchJobRepository(){
+
+
+
 	}
-	/* (non-Javadoc)
-	 * @see org.mitre.crystal.repository.BatchJobRepository#save(org.mitre.crystal.model.BatchJob)
-	 */
+
 	@Override
 	@Transactional
 	public BatchJob save(BatchJob batchJob) {
@@ -48,7 +45,7 @@ public class JPABatchJobRepository implements BatchJobRepository {
 			return batchJob;
 		}
 		else{
-			BatchJob batch = manager.merge(batchJob);
+			final BatchJob batch = manager.merge(batchJob);
 			manager.flush();
 			return batch;
 		}
@@ -69,11 +66,11 @@ public class JPABatchJobRepository implements BatchJobRepository {
 	@Override
 	@Transactional
 	public void deleteBatchJob(BatchJob batchJob) {
-		BatchJob batch = getBatchJob(batchJob.getId());
+		final BatchJob batch = getBatchJob(batchJob.getId());
 		if(batch != null){
 			manager.remove(batch);
 		}
-		
+
 
 	}
 	/* (non-Javadoc)
@@ -81,8 +78,8 @@ public class JPABatchJobRepository implements BatchJobRepository {
 	 */
 	@Override
 	public List<BatchJob> getAllBatchJobs() {
-	
-		Query q =  manager.createNamedQuery("BatchJob.findAll");
+
+		final Query q =  manager.createNamedQuery("BatchJob.findAll");
 		return q.getResultList();
 	}
 
