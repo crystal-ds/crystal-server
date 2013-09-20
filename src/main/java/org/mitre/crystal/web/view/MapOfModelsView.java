@@ -32,33 +32,28 @@ public class MapOfModelsView extends AbstractView {
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model,
 			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+					throws Exception {
 		//RunnableModel m = (RunnableModel) model.get("model");
-		Map<Long, RunnableModel> map = (Map<Long, RunnableModel>) model.get("mapOfModels");
+		final Map<Long, RunnableModel> map = (Map<Long, RunnableModel>) model.get("mapOfModels");
 		if(map == null){
 			response.setStatus(HttpStatus.NOT_FOUND.value());
 		}
 		else{
 			response.setStatus(HttpStatus.OK.value());
 			response.setContentType("application/json");
+
+			final PrintWriter writer = response.getWriter();
+			final ObjectMapper mapper = new ObjectMapper();
+			final JsonGenerator jsonGenerator = mapper.getJsonFactory().createJsonGenerator(writer);
 			
-			PrintWriter writer = response.getWriter();
-			ObjectMapper mapper = new ObjectMapper();
-			
-			JsonGenerator jsonGenerator = mapper.getJsonFactory().createJsonGenerator(writer);
 			jsonGenerator.setPrettyPrinter(new DefaultPrettyPrinter());
-			
 			jsonGenerator.writeStartObject();
-			
-			Set<Entry<Long, RunnableModel>> es = map.entrySet();
-			for (Entry<Long, RunnableModel> entry : es) {
+			final Set<Entry<Long, RunnableModel>> es = map.entrySet();
+			for (final Entry<Long, RunnableModel> entry : es) {
 				jsonGenerator.writeObjectField(entry.getKey().toString(), entry.getValue());
 			}
 			jsonGenerator.writeEndObject();
 			jsonGenerator.flush();
 		}
-		
-
 	}
-
 }
