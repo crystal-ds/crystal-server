@@ -16,16 +16,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author tmlewis
- *
+ * JPA implementation of a Workspace Repo
  */
 @Repository("jpaWorkSpaceRepository")
 public class JPAWorkSpaceRepositoryImpl implements WorkSpaceRepository {
 
 	final Logger log = LoggerFactory.getLogger(JPABatchJobRepository.class);
-	
+
 	@PersistenceContext
 	private EntityManager manager;
-	
+
 	/* (non-Javadoc)
 	 * @see org.mitre.crystal.repository.WorkSpaceRepository#save(org.mitre.crystal.model.WorkSpace)
 	 */
@@ -38,7 +38,7 @@ public class JPAWorkSpaceRepositoryImpl implements WorkSpaceRepository {
 			manager.flush();
 			return ws;
 		}else{
-			WorkSpace mergedWorkSpace = manager.merge(ws);
+			final WorkSpace mergedWorkSpace = manager.merge(ws);
 			manager.flush();
 			return mergedWorkSpace;
 		}
@@ -58,9 +58,9 @@ public class JPAWorkSpaceRepositoryImpl implements WorkSpaceRepository {
 	@Override
 	@Transactional
 	public void delete(WorkSpace ws) {
-		WorkSpace check = getWorkSpace(ws.getWorkSpaceID());
-				if(check != null){     					
-					manager.remove(check);
-				}
+		final WorkSpace check = getWorkSpace(ws.getWorkSpaceID());
+		if(check != null){     					
+			manager.remove(check);
+		}
 	}
 }
