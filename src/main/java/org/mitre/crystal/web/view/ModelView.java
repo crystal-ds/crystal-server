@@ -19,7 +19,7 @@ import org.springframework.web.servlet.view.AbstractView;
 
 /**
  * @author tmlewis
- *
+ *Writes a complete model into json
  */
 @Component("modelView")
 public class ModelView extends AbstractView {
@@ -38,9 +38,7 @@ public class ModelView extends AbstractView {
 		else{
 			response.setStatus(HttpStatus.OK.value());
 			response.setContentType("application/json");
-			//List<InputNode> l = m.getInputs();
 
-			//StringWriter writer = new StringWriter();
 			PrintWriter writer = response.getWriter();
 			ObjectMapper mapper = new ObjectMapper();
 			
@@ -49,7 +47,6 @@ public class ModelView extends AbstractView {
 			
 			jsonGenerator.writeStartObject();
 			jsonGenerator.writeObjectField(m.getId().toString(), m);
-			//jsonGenerator.writeObject(m);
 			jsonGenerator.writeEndObject();
 			jsonGenerator.flush();
 		}
