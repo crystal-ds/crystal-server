@@ -25,7 +25,7 @@ import org.springframework.web.servlet.view.AbstractView;
 
 /**
  * @author tmlewis
- * 
+ *  This view gives a detailed view of a model's inputs
  */
 @Component("modelInputView")
 public class ModelInputView extends AbstractView {
@@ -47,7 +47,7 @@ public class ModelInputView extends AbstractView {
 			throws Exception {
 		
 		RunnableModel m= (RunnableModel) model.get("model");
-		if (m == null){
+		if (m == null){ //If we don't find a model clearly we have a problem
 			response.setStatus(HttpStatus.NOT_FOUND.value());
 		}
 		else{
@@ -55,28 +55,22 @@ public class ModelInputView extends AbstractView {
 			response.setContentType("application/json");
 			List<InputNode> l = m.getInputs();
 
-			//StringWriter writer = new StringWriter();
+
 			PrintWriter writer = response.getWriter();
+			//Get the object
 			ObjectMapper mapper = new ObjectMapper();
 			final JsonGenerator jsonGenerator = mapper.getJsonFactory().createJsonGenerator(writer);
 			jsonGenerator.setPrettyPrinter(new DefaultPrettyPrinter());
 			
 			jsonGenerator.writeStartObject();
-			
+			//write the inputs
 			for (Iterator<InputNode> iterator = l.iterator(); iterator.hasNext();) {
 				InputNode inputNode = (InputNode) iterator.next();
-//				jsonGenerator.writeStringField("name", inputNode.getName());
-//				jsonGenerator.writeStringField("type", inputNode.getType().toString());
-//				jsonGenerator.writeStringField("properties", inputNode.getProperties().toString());
 				jsonGenerator.writeObjectField(inputNode.getName(), inputNode);
 			
 			}
 			jsonGenerator.writeEndObject();
 			jsonGenerator.flush();
-			
-//			String inputs = mapper.writeValueAsString(m.getInputs());
-//			response.getWriter().write(inputs);
-			//response.getWriter().write(writer.toString());
 		}
 	}
 }
