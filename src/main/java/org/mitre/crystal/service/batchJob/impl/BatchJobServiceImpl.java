@@ -10,14 +10,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.mitre.crystal.model.BatchJob;
 import org.mitre.crystal.model.BatchJobStatus;
 import org.mitre.crystal.model.ModelRunInstance;
 import org.mitre.crystal.model.RunnableModel;
 import org.mitre.crystal.repository.BatchJobRepository;
 import org.mitre.crystal.service.BatchJobService;
-import org.mitre.crystal.service.InputDiversifier;
 import org.mitre.crystal.service.ModelService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +24,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author tmlewis
- * 
+ * Implementation of a batchjob service
  */
 @Service("batchJobService")
 public class BatchJobServiceImpl implements BatchJobService {
@@ -36,8 +34,6 @@ public class BatchJobServiceImpl implements BatchJobService {
 	private ModelService modelService;
 	@Autowired
 	private BatchJobRepository bjr;
-	@Autowired
-	private InputDiversifier idv;
 	@Autowired
 	private ModelService service;
 	final Logger log = LoggerFactory.getLogger(BatchJobServiceImpl.class);
@@ -50,23 +46,24 @@ public class BatchJobServiceImpl implements BatchJobService {
 	 * crystal.model.ModelSpecification,
 	 * org.mitre.crystal.model.ModelRunInputValues)
 	 */
+	@Override
 	public BatchJob createBatchJob(RunnableModel model,
 			List<Map<String, String>> vals) {
 		log.debug("Creating Batch Job");
-		BatchJob bj = new BatchJob();
+		final BatchJob bj = new BatchJob();
 		bj.setModelID(model.getId());
-		List<ModelRunInstance> instances = new ArrayList<ModelRunInstance>();
+		final List<ModelRunInstance> instances = new ArrayList<ModelRunInstance>();
 
 
 		int count = 0;
 		Map<String, String> inputs = new HashMap<String, String>();
-
-		for (Map<String, String> map : vals) {
-			Set<Entry<String, String>> s = map.entrySet();
-			for (Entry<String, String> entry : s) {
+		//Puts the front end inputs into a model run instance
+		for (final Map<String, String> map : vals) {
+			final Set<Entry<String, String>> s = map.entrySet();
+			for (final Entry<String, String> entry : s) {
 				inputs.put(entry.getKey(), entry.getValue());
 			}
-			ModelRunInstance mri = new ModelRunInstance();
+			final ModelRunInstance mri = new ModelRunInstance();
 			mri.setInputValues(inputs);
 			instances.add(mri);
 			inputs =  new HashMap<String, String>();
@@ -75,9 +72,9 @@ public class BatchJobServiceImpl implements BatchJobService {
 
 		bj.setInstances(instances);
 
-		// bj.setRuns(createInputsForBatchJob(vals));
+
 		bj.setStatus(BatchJobStatus.NOT_STARTED);
-		BatchJob saved = bjr.save(bj);
+		final BatchJob saved = bjr.save(bj);
 		log.info("batch Job created with ID " + saved.getId() + " with " + count + "runs");
 		return saved;
 
@@ -88,6 +85,7 @@ public class BatchJobServiceImpl implements BatchJobService {
 	 * 
 	 * @see org.mitre.crystal.service.BatchJobInterface#getBatchJob(long)
 	 */
+	@Override
 	public BatchJob getBatchJob(long batchJobId) {
 		return bjr.getBatchJob(batchJobId);
 
@@ -98,13 +96,14 @@ public class BatchJobServiceImpl implements BatchJobService {
 	 * 
 	 * @see org.mitre.crystal.service.BatchJobInterface#runBatchJob(long)
 	 */
+	@Override
 	public BatchJobStatus runBatchJob(long batchJobID) {
 		log.info("Checking status for batch job" + batchJobID);
-		BatchJob bj = getBatchJob(batchJobID);
-		List<ModelRunInstance> runs = bj.getInstances();
-		RunnableModel m = service.getModel(bj.getModelID());
+		final BatchJob bj = getBatchJob(batchJobID);
+		final List<ModelRunInstance> runs = bj.getInstances();
+		final RunnableModel m = service.getModel(bj.getModelID());
 		bj.setStatus(BatchJobStatus.RUNNING);
-		for (ModelRunInstance run : runs) {
+		for (final ModelRunInstance run : runs) {
 			m.runModel(run);
 		}
 		bj.setStatus(BatchJobStatus.COMPLETED);
@@ -120,10 +119,11 @@ public class BatchJobServiceImpl implements BatchJobService {
 	 * mitre.crystal.model.ModelSpecification,
 	 * org.mitre.crystal.model.ModelRunInputValues)
 	 */
+	@Override
 	public BatchJob createAndRunBatchJob(RunnableModel model,
 			List<Map<String, String >> input) {
 		log.info("create And run BatchJob");
-		BatchJob batchjob = createBatchJob(model, input);
+		final BatchJob batchjob = createBatchJob(model, input);
 		runBatchJob(batchjob.getId());
 		return batchjob;
 	}
@@ -133,6 +133,7 @@ public class BatchJobServiceImpl implements BatchJobService {
 	 * 
 	 * @see org.mitre.crystal.service.BatchJobInterface#deleteBatchJob(long)
 	 */
+	@Override
 	public void deleteBatchJob(BatchJob batchJob) {
 		log.info("removing batch job " + batchJob.getId());
 
