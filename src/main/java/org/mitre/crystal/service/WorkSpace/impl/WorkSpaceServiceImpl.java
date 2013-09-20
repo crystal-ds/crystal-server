@@ -101,8 +101,8 @@ public class WorkSpaceServiceImpl implements WorkSpaceService {
 		WorkSpace myWorkSpace = wsr.getWorkSpace(workSpaceID);
 		ArrayList<ModelRunInstance> newMask = new ArrayList<ModelRunInstance>();
 		List<ModelRunInstance> fullList = myWorkSpace.getBatchJob().getInstances();
-		for (ModelRunInstance modelRunInstance : fullList) {
-			if(mask.contains(modelRunInstance.getId())){
+		for (ModelRunInstance modelRunInstance : fullList) { 
+			if(mask.contains(modelRunInstance.getId())){ //creating a new mask with the old, and new items
 				newMask.add(modelRunInstance);
 			}
 		}
