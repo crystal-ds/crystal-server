@@ -17,7 +17,7 @@ import org.mitre.crystal.model.RunnableModel;
 
 /**
  * @author tmlewis
- * This is an example of how to create a model. Spring injects these intothe InMemoryModelRepository.
+ * This is an example of how to create a model. Spring injects these into the InMemoryModelRepository.
  */
 public class DummyModel extends RunnableModel {
 
