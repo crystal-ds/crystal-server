@@ -1,6 +1,3 @@
-/**
- * POJO implementation of an input
- */
 package org.mitre.crystal.model;
  
 
@@ -22,23 +19,14 @@ import javax.persistence.MapKeyColumn;
 
 /**
  * @author tmlewis
- *
+ *An InputNode is supplied by the model to the front end. It contains all the nessciary information
+ *for the front end to render a widget 
  */
-//@JsonSerialize (using = InputNodeSerializer.class)
 public class InputNode implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * 
-	 */
-	
-
+	//Unique ID of the input
 	private Long id;
-
 	// unique identifier within a particular model
 	private String name;
 	// Type of displayed widget <slider, text, etc>
@@ -55,6 +43,7 @@ public class InputNode implements Serializable{
 	public Long getId() {
 		return id;
 	}
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -63,6 +52,7 @@ public class InputNode implements Serializable{
 		properties = new HashMap<String, String>();
 		
 	}
+	
 	public InputNode(String name, InputType type, Map<String, String> properties) {
 		this.name = name;
 		this.type = type;
@@ -73,14 +63,17 @@ public class InputNode implements Serializable{
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	@Enumerated (EnumType.STRING)
 	@Column(name = "type")
 	public InputType getType() {
 		return type;
 	}
+	
 	public void setType(InputType type) {
 		this.type = type;
 	}
@@ -91,13 +84,14 @@ public class InputNode implements Serializable{
 	@Column (name = "property")
 	@CollectionTable(name = "input_node_properties",
 	joinColumns=@JoinColumn(name = "input_node_id"))
-	
 	public Map<String, String> getProperties() {
 		return properties;
 	}
+	
 	public void setProperties(Map<String, String> properties) {
 		this.properties = properties;
 	}
+	
 	public String getProperty(String key) {
 		if (type.getPropertyNames().contains(key)) {
 			return properties.get(key);
@@ -106,6 +100,7 @@ public class InputNode implements Serializable{
 		}
 		
 	}
+	
 	public String putProperty(String key, String value) {
 		if (type.getPropertyNames().contains(key)) {
 			return properties.put(key, value);
@@ -114,14 +109,15 @@ public class InputNode implements Serializable{
 		}
 		
 	}
+	
 	public String removeProperty(String key) {
 		if (type.getPropertyNames().contains(key)) {
 			return properties.remove(key);
 		} else {
 			throw new IllegalArgumentException("Property Name " + key + " not allowed for type " + type);
-		}
-		
+		}	
 	}
+
 	/**
 	 * @return the variableType
 	 */
@@ -135,5 +131,6 @@ public class InputNode implements Serializable{
 	public void setVariableType(InputVariableType variableType) {
 		this.variableType = variableType;
 	}
+
 
 }

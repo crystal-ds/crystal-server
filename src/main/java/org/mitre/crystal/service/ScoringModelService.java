@@ -14,18 +14,27 @@ import org.mitre.crystal.model.ScoringModel;
 public interface ScoringModelService {
 
 	/**
-	 * @return
+	 * @return All models
 	 */
 	List<ScoringModel> getAllModels();
 
 	/**
-	 * @param id
-	 * @return
+	 * @param id The id of the Scoring model you want to get
+	 * @return The requested model
 	 */
 	ScoringModel getModel(long id);
 	
+	/**
+	 * 
+	 * @param model Scoreing model you wish to remove
+	 */
 	public void removeModel(ScoringModel model);
 	
+	/**
+	 * 
+	 * @param model The model you wish to save
+	 * @return The saved model
+	 */
 	public ScoringModel saveModel(ScoringModel model);
 
 }

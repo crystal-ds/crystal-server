@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.mitre.crystal.repository.scoreingmodel.impl;
 
 import java.util.ArrayList;
@@ -23,15 +20,15 @@ import org.springframework.stereotype.Repository;
 public class InMemoryScoringModelRepository implements ScoringModelRepository {
 	final Logger log = LoggerFactory.getLogger(InMemoryScoringModelRepository.class);
 	private Map<Long, ScoringModel> mapOfModels;
-	
-	
+
+
 	public Map<Long, ScoringModel> getMapOfModels() {
 		return mapOfModels;
 	}
 
 	public void setMapOfModels(Map<Long, ScoringModel> mapOfModels) {
-		Set<Entry<Long, ScoringModel>> s = mapOfModels.entrySet();
-		for (Entry<Long, ScoringModel> entry : s) {
+		final Set<Entry<Long, ScoringModel>> s = mapOfModels.entrySet();
+		for (final Entry<Long, ScoringModel> entry : s) {
 			entry.getValue().setId(entry.getKey());
 		}
 		this.mapOfModels = mapOfModels;
@@ -43,7 +40,7 @@ public class InMemoryScoringModelRepository implements ScoringModelRepository {
 	@Override
 	public ScoringModel getModel(long id) {
 		return mapOfModels.get(id);
-		
+
 	}
 
 	/* (non-Javadoc)
@@ -51,7 +48,7 @@ public class InMemoryScoringModelRepository implements ScoringModelRepository {
 	 */
 	@Override
 	public List<ScoringModel> getAllModels() {
-		ArrayList<ScoringModel> l = new ArrayList<ScoringModel>(mapOfModels.values());
+		final ArrayList<ScoringModel> l = new ArrayList<ScoringModel>(mapOfModels.values());
 		return l;
 	}
 

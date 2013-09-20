@@ -1,5 +1,5 @@
 /**
- * 
+ * Main controller 
  */
 package org.mitre.crystal.web;
 
@@ -30,160 +30,130 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author tmlewis
- *
+ * Controller class for the Exploritory Modeling engine
  */
 @Controller
 @RequestMapping (value = "/eme")
 public class ExploratoryModelEngine {
 
 	final Logger log = LoggerFactory.getLogger(ExploratoryModelEngine.class);
-	
+
 	@Autowired 
 	private ModelService service;
-	
+
 	@Autowired
 	private BatchJobService batchJobService;
-	
+
+	/**
+	 * Requests all availbe EME models be returned
+	 * @param m
+	 * @return A string that directs to mapOfModelsView
+	 */
 	@RequestMapping(value = "/models", method=RequestMethod.GET, produces="application/json")
 	public String getAllModels(Model m){
 		log.info("Request for all Models");
-		
-		List<RunnableModel> allModels = service.getAllModels();
-		Map<Long, RunnableModel> nameToModel = new HashMap<Long, RunnableModel>();
-		
-		for (RunnableModel model : allModels) {
+		final List<RunnableModel> allModels = service.getAllModels();
+		final Map<Long, RunnableModel> nameToModel = new HashMap<Long, RunnableModel>();
+
+		for (final RunnableModel model : allModels) {
 			nameToModel.put(model.getId(), model);		
 		}
-
 		m.addAttribute("mapOfModels", nameToModel);
 		return "mapOfModelsView";		
 	}
-	
+
+	/**
+	 * Request of a speicfic model
+	 * @param id The id of the model you want
+	 * @param m 
+	 * @return directs to the modelView
+	 */
 	@RequestMapping(value = "/models/{id}", method=RequestMethod.GET, produces="application/json")
 	public String getModel(@PathVariable("id") long id, Model m){
 		log.debug("Request for model " + id);
-		
-		RunnableModel model = service.getModel(id);
+
+		final RunnableModel model = service.getModel(id);
 		m.addAttribute("model", model);
 		return "modelView";
 
 	}
 
+	/**
+	 * Gets specific inputs for a model
+	 * @param id
+	 * @param m
+	 * @return directs to model input view
+	 */
 	@RequestMapping(value = "/models/{id}/inputs", method=RequestMethod.GET, produces="application/json")
 	public String getModelInputs(@PathVariable("id") long id,  Model m){
 		log.info("Request for " + id + " inputs");
-		
-		RunnableModel model = service.getModel(id);
+		final RunnableModel model = service.getModel(id);
 		m.addAttribute("model", model);
-		
-		//return model.getInputs();
 		return "modelInputView";
 	}
-	
-	
+
+
+	/**
+	 * Creats and runs a batch job
+	 * @param id the model you want to run
+	 * @param vals The list of inputs you want to run the model with
+	 * @param m
+	 * @return directs to batcjobIDview
+	 */
 	@RequestMapping(value = "/models/{id}/run", method=RequestMethod.POST, produces="application/json", consumes="application/json")
 	public String startRun(@PathVariable("id") long id, @RequestBody String vals, Model m){
 		log.info("Running model " + id + " using inputs: " +vals );
-		RunnableModel model = service.getModel(id);
-		
-		//BatchJob job = batchJobService.createAndRunBatchJob(model, vals);		
+		final RunnableModel model = service.getModel(id);
+	
 		List<Map<String,String>> vals2 = new ArrayList<Map<String,String>>();
-		ObjectMapper mapper = new ObjectMapper();
+		final ObjectMapper mapper = new ObjectMapper();
 		try {
 			vals2 = mapper.readValue(vals, vals2.getClass());
-		} catch (JsonParseException e) {
+		} catch (final JsonParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (JsonMappingException e) {
+		} catch (final JsonMappingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		
-		
-		
-		BatchJob job= batchJobService.createAndRunBatchJob(model, vals2);
-		
+		final BatchJob job= batchJobService.createAndRunBatchJob(model, vals2);
+
 		m.addAttribute("batchJob", job);
-		
+
 		return "batchJobIdView";
 	}
-	//TEST CODE
-//	@RequestMapping(value = "/models/{id}/testrun", method=RequestMethod.GET, produces="application/json")
-//	public String startTestRun(@PathVariable("id") long id, Model m){
-//		log.info("test Running model " + id);
-//		RunnableModel model = service.getModel(id);
-//
-//		List<Map<String,InputNode>> l = new ArrayList<Map<String, InputNode>>();
-//		Map<String,InputNode> m1 = new HashMap<String, InputNode>();
-//		Map<String,String> prop = new HashMap<String, String>();
-//		InputNode i = new InputNode();
-//		i.setName("Input 1");
-//		i.setType(InputType.CHECKBOX);
-//	
-//		prop.put("checked", "True");
-//		prop.put("value", "true");
-//		i.setProperties(prop);
-//		m1.put("Input 1", i);
-//		l.add(m1);
-//		
-//		BatchJob job = batchJobService.createBatchJob(model, l);		
-//		
-//		m.addAttribute("batchJob", job);
-//		
-//		return "batchJobIdView";
-//	}
-//	@RequestMapping(value = "/models/{id}/testrun2", method=RequestMethod.GET, produces="application/json")
-//	public String startTestRun2(@PathVariable("id") long id, Model m){
-//		log.info("test Running model " + id);
-//		RunnableModel model = service.getModel(id);
-//		
-//		
-//		List<Map<String,InputNode>> l = new ArrayList<Map<String, InputNode>>();
-//		Map<String,InputNode> m1 = new HashMap<String, InputNode>();
-//		Map<String,String> prop = new HashMap<String, String>();
-//		InputNode i = new InputNode();
-//		i.setName("Input 1");
-//		i.setType(InputType.CHECKBOX);
-//	
-//		prop.put("checked", "True");
-//		prop.put("value", "true");
-//		i.setProperties(prop);
-//		m1.put("Input 1", i);
-//		l.add(m1);
-//		
-//		
-//		Map<String, String> inputs = new HashMap<String, String>();
-//		inputs.put("thing1", "thing2");
-//		BatchJob job = batchJobService.createAndRunBatchJob(model, l);		
-//		
-//		m.addAttribute("batchJob", job);
-//		
-//		return "batchJobIdView";
-//	}
+
+	/**
+	 * Check on the status of a batchJob
+	 * @param id The id of the batch job
+	 * @param m 
+	 * @return
+	 */
 	@RequestMapping(value = "/resultsets/{id}", method=RequestMethod.HEAD )
 	public String getStatus(@PathVariable("id") long id, Model m){
 		log.debug("client is checking on result status " + id);
 		//TODOcreate httpcodeview bean
-		
-		BatchJob job = batchJobService.getBatchJob(id);
-			
+
+		final BatchJob job = batchJobService.getBatchJob(id);
+
 		m.addAttribute("Status", job.getStatus());
-		
+
 		return "httpCodeView";
 	}
+	
+	/**
+	 * Get the results of running a batchjob
+	 * @param id the id of the batchjob you are looking up
+	 * @return
+	 */
 	@RequestMapping(value = "/resultsets/{id}", method=RequestMethod.GET, produces="application/json" )
 	public @ResponseBody BatchJob getModelResults(@PathVariable("id") long id){
 		log.debug("client is requesting result set for " + id);		
-		BatchJob job = batchJobService.getBatchJob(id);
-		
-		
+		final BatchJob job = batchJobService.getBatchJob(id);
 		return job;
-		
-		
 	}
-	
 }

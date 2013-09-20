@@ -1,16 +1,11 @@
-/**
- * 
- */
 package org.mitre.crystal.model;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,26 +16,26 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.eclipse.persistence.annotations.CascadeOnDelete;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-
 /**
  * @author tmlewis
- *
+ *The workspace was suppose to a quick work around to make batchjobs appear "editible"
+ *They work by adjusting a mask which is the list of runs that are NOT in the workspace
  */
 @Entity
 @Table(name = "work_space")
 public class WorkSpace{
-	
+
+	//Unique generated ID for the workspace
 	private Long workSpaceID;
+	//The mask of ModelRuns that are not in the Workspace
 	private List<ModelRunInstance> offMask;
+	//The scores assocated with the batchjob
 	private SMBatchJob smbj;
+	//The batchjob assocated with this workspace
 	private BatchJob batchJob;
 
-	
-	
+
+
 	@ManyToOne
 	@JoinColumn(name = "sm_batch_job_id", referencedColumnName = "sm_batch_job_id")
 	public SMBatchJob getSmbj() {
@@ -50,7 +45,7 @@ public class WorkSpace{
 	public void setSmbj(SMBatchJob smbj) {
 		this.smbj = smbj;
 	}
-	
+
 	@ManyToOne
 	@JoinColumn(name = "batch_job_id", referencedColumnName = "id")
 	public BatchJob getBatchJob() {
@@ -64,14 +59,14 @@ public class WorkSpace{
 
 	@OneToMany
 	@JoinTable(name="masks",
-			joinColumns={@JoinColumn(name="work_space_id")},
-			inverseJoinColumns={@JoinColumn(name="model_run_id")}
-	)
+	joinColumns={@JoinColumn(name="work_space_id")},
+	inverseJoinColumns={@JoinColumn(name="model_run_id")}
+			)
 	public List<ModelRunInstance> getOffMask() {
 		return offMask;
 	}
 
-	
+
 	public void setOffMask(List<ModelRunInstance> offMask) {
 		this.offMask = offMask;
 	}
@@ -86,39 +81,28 @@ public class WorkSpace{
 	public void setWorkSpaceID(Long workSpaceID) {
 		this.workSpaceID = workSpaceID;
 	}
-	
+
+	/**
+	 * 
+	 * @return A mapping of model Runs and their corosponding scoreing runs. This map has filtered using the 
+	 * workspace's mask. 
+	 */
 	@Transient
 	public Map<ModelRunInstance,ScoreRunInstance> getWorkSpaceMap(){
-//		Map<ModelRunInstance, ScoreRunInstance> m = new HashMap<ModelRunInstance, ScoreRunInstance>();
-//		
-//		Predicate<ModelRunInstance> isMasked = new Predicate<ModelRunInstance>(){
-//			@Override
-//			public boolean apply(ModelRunInstance m){
-//				return !offMask.contains(m);	
-//			}
-//		};
-//		
-//		Iterable<ModelRunInstance> i = Iterables.filter(batchJob.getInstances(), isMasked);
-//		for (ModelRunInstance modelRunInstance : i) {
-//			for (ScoreRunInstance runInstance : smbj.getInstances()) {
-//				if(runInstance.getMriJobInstanceID() == modelRunInstance.getId()){
-//					m.put(modelRunInstance, runInstance);
-//				}
-//					
-//			}
-//		}
-//		return m;
-		
-		
-		Map<ModelRunInstance, ScoreRunInstance> m = new HashMap<ModelRunInstance, ScoreRunInstance>();
-		List<ModelRunInstance> l = batchJob.getInstances();
-		for (ModelRunInstance modelRunInstance : l) {
-			List<ScoreRunInstance> l2 = smbj.getInstances();
-			for (ScoreRunInstance scoreRunInstance : l2) {
-				if(modelRunInstance.getId() == scoreRunInstance.getMriJobInstanceID())
+		//Map we'll eventualy return
+		final Map<ModelRunInstance, ScoreRunInstance> m = new HashMap<ModelRunInstance, ScoreRunInstance>();
+		//The full list of batch jobs
+		final List<ModelRunInstance>  l = batchJob.getInstances();
+		//Run through the list and pair it up with the score
+		for (final ModelRunInstance modelRunInstance : l) {
+			final List<ScoreRunInstance> l2 = smbj.getInstances();
+			for (final ScoreRunInstance scoreRunInstance : l2) {
+				if(modelRunInstance.getId() == scoreRunInstance.getMriJobInstanceID()) {
+					//filter it
 					if(!offMask.contains(modelRunInstance)){
 						m.put(modelRunInstance, scoreRunInstance);
 					}
+				}
 			}
 		}
 		return m;

@@ -18,21 +18,18 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @author tmlewis
- *
+ * Stores the models, complete with executable code, in memory. 
  */
 
 @Repository("inMemoryModelRepository")
 public class InMemoryModelRepository implements ModelRepository {
 
 	final Logger log = LoggerFactory.getLogger(InMemoryModelRepository.class);
-
 	private  Map <Long,RunnableModel>mapOfModels;
 
-	
 	public  Map<Long, RunnableModel> getMapOfModels() {
 		return mapOfModels;
 	}
-
 	
 	public  void setMapOfModels(Map<Long, RunnableModel> mapOfModels) {
 		this.mapOfModels = mapOfModels;
@@ -42,13 +39,11 @@ public class InMemoryModelRepository implements ModelRepository {
 		
 	}
 	
-
 	@Override
 	public RunnableModel saveModel(RunnableModel model) {
 		mapOfModels.put(model.getId(), model);
 		return model;
 	}
-
 
 	@Override
 	public RunnableModel getModel(long id) {
@@ -68,10 +63,10 @@ public class InMemoryModelRepository implements ModelRepository {
 	@Override
 	public List<RunnableModel> getAllModels() {
 
-		List<RunnableModel> modelList = new ArrayList<RunnableModel>();
-		
-		
+		//The list we will return
+		List<RunnableModel> modelList = new ArrayList<RunnableModel>();		
 		Set<Entry<Long, RunnableModel>> entrySet = mapOfModels.entrySet();
+		//this for loops changes the entry set to a list
 		for (Iterator<Entry<Long, RunnableModel>> iterator = entrySet.iterator(); iterator.hasNext();) {
 			Entry<Long, RunnableModel> entry = (Entry<Long, RunnableModel>) iterator
 					.next();
@@ -79,5 +74,4 @@ public class InMemoryModelRepository implements ModelRepository {
 		}
 		return modelList;	
 	}
-
 }

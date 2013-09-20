@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.mitre.crystal.model.impl;
 
 import java.io.BufferedReader;
@@ -31,104 +28,95 @@ import org.springframework.core.io.Resource;
 
 /**
  * @author tmlewis
- *
+ * This is a implementation of a dummy scoreing model Spring injects these into the 
+ * InMemoryScoreingModelRepository. 
+ * 
+ * This example class read scores from a file and puts them as output values. The file location i
+ * is injected on runtime.
  */
 public class DummyScoringModelImpl extends ScoringModel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1341457363059579543L;
 	private Resource resource;
-
 	private String resourceLocation;
 
+	/**
+	 * This method reads in values from a file and then puts them in the output fields. 
+	 */
 	@Override
 	public SMBatchJob score(ScoringModelInput vals, BatchJob job) {
-		
+
 		resource = new ClassPathResource(resourceLocation);
-		
-		
-		SMBatchJob sbj = new SMBatchJob();
-		ObjectMapper mapper = new ObjectMapper();
+		final SMBatchJob sbj = new SMBatchJob();
+		final ObjectMapper mapper = new ObjectMapper();
 		Map<String, List> myList = new HashMap<String, List>();
-		Map<String, String> m = new HashMap<String, String>();
+		final Map<String, String> m = new HashMap<String, String>();
 		FileInputStream fis;
 		BufferedReader br;
 		String line;
-		
+
 		try {
 			fis = new FileInputStream(resource.getFile());
 			br = new BufferedReader(new InputStreamReader(fis));
 			while ((line = br.readLine()) != null){
-			myList = 	mapper.readValue(line, myList.getClass());
-			Set<String> s = myList.keySet();
-			for (String key : s) {
-				m.put(key, myList.get(key).toString());
+				myList = 	mapper.readValue(line, myList.getClass());
+				final Set<String> s = myList.keySet();
+				for (final String key : s) {
+					m.put(key, myList.get(key).toString());
+				}
+
 			}
-			
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (final IOException e) {
 			e.printStackTrace();
 		}
-		
-		
-		//m.put("Score1", "100");
-		//m.put("Score2", "25");
-		List<ModelRunInstance> l = job.getInstances();
-		List<ScoreRunInstance> scoreList = new ArrayList<ScoreRunInstance>();
-		
-		for (ModelRunInstance modelRunInstance : l) {
-			//ModelRunInstance mri = new ModelRunInstance();
-			//match up the ids so they can be synced up
-			//mri.setId(modelRunInstance.getId());
-			//mri.);
-			//mri.setInputValues(modelRunInstance.getInputValues());
-			//mri.setOutputValues(m);
-			//scoreList.add(mri);
-			ScoreRunInstance sri = new ScoreRunInstance();
+
+		final List<ModelRunInstance> l = job.getInstances();
+		final List<ScoreRunInstance> scoreList = new ArrayList<ScoreRunInstance>();
+
+		for (final ModelRunInstance modelRunInstance : l) {
+
+			final ScoreRunInstance sri = new ScoreRunInstance();
 			sri.setMriJobInstanceID(modelRunInstance.getId());
 			sri.setOutputValues(m);
 			sri.setTimestamp(new Date());
 			scoreList.add(sri);
-			
+
 		}
 		sbj.setInstances(scoreList);
 		sbj.setScoringModelID(this.getId());
-		
-	return sbj;
+
+		return sbj;
 	}
-	
+
 	public DummyScoringModelImpl(){
 		this.setModelSpec(new ModelSpecification());
 		this.setName("DummyScoringModel");
 		this.setDescription("Example scoring model");
 	}
-	
+
 	@PostConstruct
 	public void init(){
 
-		InputNode ipn1 = new InputNode();
+		final InputNode ipn1 = new InputNode();
 		ipn1.setName("DummyScoringModelInput_1");
 		ipn1.setType(InputType.BOOLEAN);
-		Map<String, String> m1 = ipn1.getProperties();
+		final Map<String, String> m1 = ipn1.getProperties();
 		m1.put("value", "true");
 		ipn1.setProperties(m1);
 
-		InputNode ipn2 = new InputNode();
+		final InputNode ipn2 = new InputNode();
 		ipn2.setName("DummyScoringModelInput_2");
 		ipn2.setType(InputType.FLOAT);
-		Map<String, String> m = new HashMap<String, String>();
+		final Map<String, String> m = new HashMap<String, String>();
 		m.put("min", "1");
 		m.put("max", "5");
 		m.put("value", "3");
 		ipn2.setProperties(m);
 
-		InputNode ipn3 = new InputNode();
+		final InputNode ipn3 = new InputNode();
 		ipn3.setName("DummyScoringModelInput_3");
 		ipn3.setType(InputType.RANGE);
-		Map<String, String> m3 = new HashMap<String, String>();
+		final Map<String, String> m3 = new HashMap<String, String>();
 		m3.put("min", "0");
 		m3.put("max", "10");
 		m3.put("upper", "5");
@@ -136,7 +124,7 @@ public class DummyScoringModelImpl extends ScoringModel {
 		m3.put("value", "5");
 		ipn3.setProperties(m3);
 
-		ArrayList<InputNode> inputList = new ArrayList<InputNode>();
+		final ArrayList<InputNode> inputList = new ArrayList<InputNode>();
 		inputList.add(ipn1);
 		inputList.add(ipn2);
 		inputList.add(ipn3);
@@ -145,14 +133,14 @@ public class DummyScoringModelImpl extends ScoringModel {
 	public Resource getResource() {
 		return resource;
 	}
-	
+
 	public void setResource(Resource resourceLocation) {
-		this.resource = resourceLocation;
+		resource = resourceLocation;
 	}
 	public String getResourceLocation() {
 		return resourceLocation;
 	}
-	
+
 	public void setResourceLocation(String resourceLocation) {
 		this.resourceLocation = resourceLocation;
 	}

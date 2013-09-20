@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.mitre.crystal.repository.scoringBatchJob.impl;
 
 import javax.persistence.EntityManager;
@@ -14,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author tmlewis
- *
+ * JPA implementation of a ScoreingBatchJobRepository
  */
 @Repository("JPAScoreingBatchJobRepository")
 public class JPAScoreingBatchJobRepo implements ScoringBatchJobRepository {

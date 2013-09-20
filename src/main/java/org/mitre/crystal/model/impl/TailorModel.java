@@ -21,20 +21,9 @@ import org.mitre.crystal.model.InputVariableType;
  * 
  */
 public class TailorModel extends RunnableModel {
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.mitre.crystal.model.ModelSpecification#run(org.mitre.crystal.model
-	 * .ModelRunInstance)
-	 */
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 63069294821569859L;
-
+	
 	public TailorModel() {
 		this.setModelSpec(new ModelSpecification());
 		this.setName("Tailor");
@@ -54,14 +43,9 @@ public class TailorModel extends RunnableModel {
 			mri.setOutputValues(outputValues);
 	}
 
-	/**
-	 * 
-	 */
 	@PostConstruct
 	public void init() {
-
-	
-
+		
 		InputNode ipn1 = new InputNode();
 		ipn1.setName("Number of units to send");
 		ipn1.setType(InputType.INTEGER);
@@ -112,7 +96,5 @@ public class TailorModel extends RunnableModel {
 		inputList.add(ipn3);
 		inputList.add(ipn4);
 		this.setInputs(inputList);
-
 	}
-
 }

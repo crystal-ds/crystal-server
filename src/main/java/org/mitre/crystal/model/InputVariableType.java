@@ -5,6 +5,7 @@ package org.mitre.crystal.model;
 
 /**
  * @author tmlewis
+ *These are the current types of variables an InputNode to a model can have.
  *
  */
 public enum InputVariableType
