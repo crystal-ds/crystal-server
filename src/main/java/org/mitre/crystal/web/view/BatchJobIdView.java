@@ -18,37 +18,34 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.AbstractView;
 /**
  * @author tmlewis
- *
+ * Returns a json object with the batchob ID
  */
 @Component("batchJobIdView")
 public class BatchJobIdView extends AbstractView{
 
-	/* (non-Javadoc)
-	 * @see org.springframework.web.servlet.view.AbstractView#renderMergedOutputModel(java.util.Map, javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-	 */
+
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model,
 			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		
-		
-		BatchJob batchJob = (BatchJob) model.get("batchJob");
+					throws Exception {
+
+
+		final BatchJob batchJob = (BatchJob) model.get("batchJob");
 		if(batchJob == null){
 			response.setStatus(HttpStatus.NOT_FOUND.value());
 		}
-		else{
+		else{ //If we have a good batch job
 			response.setStatus(HttpStatus.OK.value());
 			response.setContentType("application/json");
+
+			final PrintWriter writer = response.getWriter();
+			final ObjectMapper mapper = new ObjectMapper();
+			final JsonGenerator jsonGenerator = mapper.getJsonFactory().createJsonGenerator(writer);
 			
-			PrintWriter writer = response.getWriter();
-			ObjectMapper mapper = new ObjectMapper();
-			
-			JsonGenerator jsonGenerator = mapper.getJsonFactory().createJsonGenerator(writer);
 			jsonGenerator.setPrettyPrinter(new DefaultPrettyPrinter());
-			
 			jsonGenerator.writeStartObject();
-			
-			jsonGenerator.writeStringField("batchJob",	 batchJob.getId().toString());
+			//add a batcJob field and put in the ID
+			jsonGenerator.writeStringField("batchJob",	 batchJob.getId().toString()); 
 			jsonGenerator.writeEndObject();
 			jsonGenerator.flush();
 		}
