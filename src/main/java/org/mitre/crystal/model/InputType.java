@@ -19,7 +19,8 @@ public enum InputType {
 	FLOAT("min","max","value"),
 	STRING("regex", "value"),
 	DATE("format", "value"),
-	BOOLEAN("value");
+	BOOLEAN("value"),
+	EXACT("value");
 	
 	
 	

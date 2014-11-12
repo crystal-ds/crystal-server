@@ -112,6 +112,18 @@
 					</key>
 					<ref bean="tailorModel" />
 				</entry>
+				<entry>
+					<key>
+						<value>4</value>
+					</key>
+					<ref bean="socomModel" />
+				</entry>
+				<entry>
+					<key>
+						<value>5</value>
+					</key>
+					<ref bean="socomFluModel" />
+				</entry>
 			</map>
 		</property>
 	</bean>
@@ -119,7 +131,20 @@
 	
 	<bean id="tailorModel" class="org.mitre.crystal.model.impl.TailorModel">
 		<property name="id">
+			<value>3</value>
+		</property>
+	</bean>
+	
+	
+	<bean id="socomModel" class="org.mitre.crystal.model.impl.SocomModel">
+		<property name="id">
 			<value>4</value>
+		</property>
+	</bean>
+	
+	<bean id="socomFluModel" class="org.mitre.crystal.model.impl.SocomFluModel">
+		<property name="id">
+			<value>5</value>
 		</property>
 	</bean>
 

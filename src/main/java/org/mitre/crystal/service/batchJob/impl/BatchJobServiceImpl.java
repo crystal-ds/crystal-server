@@ -61,7 +61,7 @@ public class BatchJobServiceImpl implements BatchJobService {
 		for (final Map<String, String> map : vals) {
 			final Set<Entry<String, String>> s = map.entrySet();
 			for (final Entry<String, String> entry : s) {
-				inputs.put(entry.getKey(), entry.getValue());
+				inputs.put(entry.getKey().toString(), entry.getValue().toString());
 			}
 			final ModelRunInstance mri = new ModelRunInstance();
 			mri.setInputValues(inputs);
